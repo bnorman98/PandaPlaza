@@ -4,10 +4,13 @@ public class SoftTile extends Tile {
 	
 	private int life;
 	
-	public SoftTile(){
+	public SoftTile() {
 		life = 20;
 	}
-	public int getlife(){return life;}
+	public SoftTile(int life) {
+		this.life = life;
+	}
+	public int getlife() {return life;}
 	
 	public void stepped() {
 		if (life > 0)
