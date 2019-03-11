@@ -17,8 +17,10 @@ public class Commands {
 							}
 							else
 								pandaStepOnSoftTile(20);
-						} else if (cmd[2].equals("endpoint")) {
-							pandaStepOnEndPoint();
+						} else if(cmd[2].equals("broken")) {
+							pandaStepOnBrokenTile();
+						} else if (cmd[2].equals("exit")) {
+							pandaStepOnExit();
 						}
 						
 					}
@@ -47,7 +49,8 @@ public class Commands {
 		}
 		
 	}
-
+	
+	
 	public void pandaStep(){
 		Panda p = new Panda();
 		p.step();
@@ -95,7 +98,50 @@ public class Commands {
 		*/
 	}
 	
-	public void pandaStepOnEndPoint(){}
+	private void pandaStepOnBrokenTile() {
+		// Creating components
+		Panda panda = new Panda();
+		Tile tile = new Tile();
+		SoftTile brokenTile = new SoftTile(0);
+		
+		// Setting values
+		tile.setAnimal(panda);
+		tile.setNeighbours(brokenTile);
+		brokenTile.setNeighbours(tile);
+		panda.setTile(tile);
+		
+		// Action
+		panda.goTo(brokenTile);
+		
+		// Reviewing results
+		if(tile.getAnimal() == panda)
+			System.out.println("Test failed - Panda did not move");
+		if(brokenTile.getAnimal() == panda)
+			System.out.println("Test failed - Panda moved, but still alive");
+		if(tile.getAnimal() == null && brokenTile.getAnimal() == null)
+			System.out.println("Test succeeded - Panda moved and died");
+		
+	}
+	
+	public void pandaStepOnExit() {
+		// Creating components
+		Panda panda = new Panda();
+		Tile start = new Tile();
+		Tile inTile = new Tile();
+		EndPoint endPoint = new EndPoint(inTile);
+		
+		// Setting values
+		panda.setTile(start);
+		start.setAnimal(panda);
+		start.setNeighbours(endPoint);
+		
+		// Action
+		panda.goTo(endPoint);
+		
+		// Reviewing results
+		// ...
+		
+	}
 	
 	/*
 	 * Insert test functions here and call them in commands(cmd:String)

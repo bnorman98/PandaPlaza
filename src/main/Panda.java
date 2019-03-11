@@ -19,8 +19,6 @@ public class Panda extends Animal {
 			System.out.println("Panda stepped.");
 		}
 
-
-
 	}
 	
 	public void follow(Tile nextTile){
@@ -52,4 +50,11 @@ public class Panda extends Animal {
 	}
 	
 	public void die(){}
+	
+	public void letGo() {
+		if(influencer != null)
+			influencer.setFollower(null);
+		if(follower != null)
+			follower.letGo();
+	}
 }

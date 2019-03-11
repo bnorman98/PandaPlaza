@@ -11,6 +11,8 @@ public abstract class Animal implements Steppable {
 	public void setDir(int newDir) {
 		dir = newDir;
 	}
+	public void setTile(Tile newTile) { tile = newTile; }
+	public void setFollower(Panda newPanda) { follower = newPanda; }
 	
 	public void getTouched(Animal toucher){}
 	
