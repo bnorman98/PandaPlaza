@@ -10,7 +10,7 @@ public class SoftTile extends Tile {
 	public SoftTile(int life) {
 		this.life = life;
 	}
-	public int getlife() {return life;}
+	public int getLife() {return life;}
 	
 	public void stepped() {
 		if (life > 0)

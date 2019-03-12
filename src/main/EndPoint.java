@@ -8,10 +8,11 @@ public class EndPoint extends Tile {
 		this.startPoint = startPoint;
 	}
 	
+	// Double check me please
 	public void stepped() {
-		// Ez ebben a formaban nem jo, mivel egy panda is ra tud lepni
-		getAnimal().goTo(startPoint);
-		//Game.getReward(getAnimal.followerCount());
-		//getAnimal.destroyFollowers();
+		Game.addScore(animal.countFollowers(), animal);
+		animal.letGo();
+		animal.goTo(startPoint);
+		// animal = null;
 	}
 }

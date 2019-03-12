@@ -4,17 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class main {
+public class Main {
 	public static void main(String[] args) throws IOException {
 		InputStreamReader isr =	new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		Commands skeleton = new Commands();
+		boolean exitCondition = false;
 		
-		while(true) {
+		while(!exitCondition) {
 			String line = br.readLine();
 			if (line == null) break;
 			String cmd[] = line.split(" ");
-			skeleton.commands(cmd);
+			exitCondition = skeleton.commands(cmd);
 		}
 		br.close();
 	}

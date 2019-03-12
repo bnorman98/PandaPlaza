@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Tile {
 	
-	private Animal animal;
-	private ArrayList<Tile> neighbours;
+	protected Animal animal;
+	private ArrayList<Tile> neighbours = new ArrayList<Tile>();
 	private Thing thing;
 	
 	// SoftTile konstruktora miatt kell elvileg

@@ -14,9 +14,9 @@ public class Panda extends Animal {
 				}
 			}
 		}
-		catch (Exception e){}
-		finally{
-			System.out.println("Panda stepped.");
+		catch(Exception e) {}
+		finally {
+			System.out.println("Panda stepped");
 		}
 
 	}
@@ -33,11 +33,6 @@ public class Panda extends Animal {
 			follower.follow(myPrevTile);
 	}
 	
-	/*
-	 * Ezt full at kell nezni!
-	 * Atirtam valahogy gyorsan, de lehet igy nem jo
-	 */
-	//Szerintem ez így jó egyébként - Norman
 	public void getTouched(Orangutan toucher){
 		if(toucher.follower != null){
 			follower = toucher.follower;
@@ -45,12 +40,15 @@ public class Panda extends Animal {
 		}
 		influencer = toucher;
 		toucher.follower = this;
+		Tile tmp = toucher.tile;
 		toucher.goTo(tile);
-		goTo(toucher.tile);
+		goTo(tmp);
 	}
 	
+	@Override
 	public void die(){}
 	
+	@Override
 	public void letGo() {
 		if(influencer != null)
 			influencer.setFollower(null);

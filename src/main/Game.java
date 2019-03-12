@@ -18,8 +18,7 @@ public class Game {
 	private Game() {}
 	public void startGame() {}
 	public void endGame() {}
-	public void setpAll() {}
-	public void addScore(int followerCount, Animal animal) {}
-	// public boolean GenerateRandom(int chance) {}	Ez kell egyaltalan? A Thingekben meg van oldva
-	/* @author bnorman		szerintem nincs rá szükség*/
+	public void stepAll() {}
+	public static void addScore(int followerCount, Animal animal) {}
+	 // public boolean GenerateRandom(int chance) {}
 }

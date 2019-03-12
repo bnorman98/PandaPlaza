@@ -2,12 +2,12 @@ package skeleton;
 import main.*;
 
 public class Commands {
-	public void commands(String cmd[]){
+	public boolean commands(String cmd[]){
 		if(cmd[0] != null) {
 			switch (cmd[0]) {
 				
 				case "panda":
-					if(cmd[1] != null) {
+					try {
 						// Panda Step Tests
 						if (cmd[1].equals("step")) {
 							
@@ -17,11 +17,7 @@ public class Commands {
 							}
 							// PandaStepOnSoftTile
 							else if (cmd[2].equals("soft")) {
-								if(cmd[3] != null) {
-									pandaStepOnSoftTile(Integer.parseInt(cmd[3]));
-								}
-								else
-									pandaStepOnSoftTile(20);
+								pandaStepOnSoftTile(Integer.parseInt(cmd[3]));
 							}
 							// PandaStepOnBrokenTile
 							else if(cmd[2].equals("broken")) {
@@ -54,11 +50,15 @@ public class Commands {
 							pandaLetGo();
 						}
 					}
+					catch(ArrayIndexOutOfBoundsException oob) {
+						System.out.println("Missing arguments");
+						oob.printStackTrace();
+					}
 					break;
 					
 				case "orangutan":
 					System.out.println("Orangutan called");
-					if(cmd[1] != null) {
+					try {
 						// Orangutan Step Tests
 						if (cmd[1].equals("step")) {
 							
@@ -85,85 +85,79 @@ public class Commands {
 						}
 						
 					}
-					break;
-					
-				case "ChocolateAutomat":
-					System.out.println("ChocolateAutomat called");
-					break;
-					
-				case "arcade":
-					System.out.println("Arcade called");
-					break;
-					
-				case "chair":
-					System.out.println("Chair called");
+					catch(ArrayIndexOutOfBoundsException oob) {
+						System.out.println("Missing arguments");
+						oob.printStackTrace();
+					}
 					break;
 				
+				case "wardrobe":
+					wardrobeStep();
+					break;
+				
+				case "arcade":
+					arcadeRing();
+					break;
+				
+				case "chocolateAutomat":
+					chocolateAutomatBeep();
+					break;
+					
+				case "exit":
+					return true;
+					
 				default:
 					System.out.println("Invalid command");
 					break;
 			}
+			
 		}
-		
+		return false;
 	}
 	
 	// Panda functions
-	
-	
 	private void pandaStepOnTile() {
 		Panda p = new Panda();
 		p.step();
 	}
 
 	private void pandaStepOnSoftTile(int life){
+		// Initialising
 		Panda p = new Panda();
-		Tile t1 = new Tile();
-		SoftTile t2 = new SoftTile(life);
-		t1.setNeighbours(t2);
-		t2.setNeighbours(t1);
-		p.step();
-
-		if (t1.getAnimal() != null) t1.stepped();
-		if(t2.getAnimal() != null) t2.stepped();
+		Tile tile = new Tile();
+		SoftTile softTile = new SoftTile(life);
+		p.setTile(tile);
+		tile.setNeighbours(softTile);
+		softTile.setNeighbours(tile);
 		
-		if (t1.getAnimal() != p)
+		// Tested action
+		p.goTo(softTile);
+		
+		// Test results
+		System.out.println("SoftTile's life = " + softTile.getLife());
+		
+		if (tile.getAnimal() == p && softTile.getAnimal() != p){
 			System.out.println("Panda stayed on Tile");
-		if (t2.getAnimal() != null) {
-			if (t2.getAnimal() == p)
-				System.out.println("Panda arrived on SoftTile");
+			System.out.println(" > Test failed");
 		}
-		else
-			System.out.println("SoftTile broke and Panda died");
-		System.out.println("SoftTile's life = " + t2.getlife());
+		else if (tile.getAnimal() != p){
+			System.out.println("Panda left Tile");
+			if(softTile.getLife() != 0 && softTile.getAnimal() == p)
+				System.out.println("Panda arrived to SoftTile\n > Test succeeded");
+			else if(softTile.getLife() == 0 && softTile.getAnimal() == null)
+				System.out.println("SoftTile broke and Panda died\nTest succeeded");
+			else System.out.println(" > Test failed");
+		}
 		
-
-		/*
-		t1.setAnimal(p);
-
-		if (t1.getAnimal() != null) t1.stepped();
-		if(t2.getAnimal() != null) t2.stepped();
-
-		t1.setAnimal(null);
-		t2.setAnimal(p);
-
-		t1.stepped();
-		t2.stepped();
-
-		System.out.println(t2.getlife());
-		if (t1.getAnimal() != p)
-			System.out.println("Panda Peter went the tile");
-		if (t2.getAnimal() == p)
-			System.out.println("Panda Peter arrived on your SoftTile");
-		*/
 	}
 	
+	// This is false correct, panda does not die since Animal.die() is not implemented yet
 	private void pandaStepOnBrokenTile() {
-		// Creating components
+		// Initialising
 		Panda panda = new Panda();
 		Tile tile = new Tile();
 		SoftTile brokenTile = new SoftTile(0);
-		
-		// Setting values
+
 		tile.setAnimal(panda);
 		tile.setNeighbours(brokenTile);
 		brokenTile.setNeighbours(tile);
@@ -172,33 +166,37 @@ public class Commands {
 		// Action
 		panda.goTo(brokenTile);
 		
-		// Reviewing results
+		// Test results
 		if(tile.getAnimal() == panda)
-			System.out.println("Test failed - Panda did not move");
+			System.out.println("Panda did not move\n > Test failed");
 		if(brokenTile.getAnimal() == panda)
-			System.out.println("Test failed - Panda moved, but still alive");
+			System.out.println("Panda moved, but still alive\n > Test failed");
 		if(tile.getAnimal() == null && brokenTile.getAnimal() == null)
-			System.out.println("Test succeeded - Panda moved and died");
+			System.out.println("Panda moved and died\n > Test succeeded");
 		
 	}
 	
 	private void pandaStepOnExit() {
-		// Creating components
+		// Initialising
 		Panda panda = new Panda();
 		Tile start = new Tile();
-		Tile inTile = new Tile();
-		EndPoint endPoint = new EndPoint(inTile);
+		Tile tile = new Tile();
+		EndPoint endPoint = new EndPoint(start);
 		
-		// Setting values
-		panda.setTile(start);
-		start.setAnimal(panda);
-		start.setNeighbours(endPoint);
+		panda.setTile(tile);
+		tile.setAnimal(panda);
+		tile.setNeighbours(endPoint);
 		
 		// Action
 		panda.goTo(endPoint);
 		
-		// Reviewing results
-		// ...
+		// Test results
+		if(tile.getAnimal() == panda)
+			System.out.println("Panda did not move\n > Test failed");
+		else if(endPoint.getAnimal() == panda)
+			System.out.println("Panda stuck az EndPoint\n > Test failed");
+		else if(start.getAnimal() == panda)
+			System.out.println("Panda got to the start\n > Test succeeded");
 		
 	}
 	
@@ -207,6 +205,27 @@ public class Commands {
 	}
 	private void pandaJump() {
 		System.out.println("pandaJump called");
+		
+		// Initialising
+		JumpyPanda jPanda = new JumpyPanda();
+		SoftTile softTile = new SoftTile();
+		jPanda.setTile(softTile);
+		softTile.setAnimal(jPanda);
+		int initLife = softTile.getLife();
+		
+		// Action
+		jPanda.scare();
+		
+		// Test results
+		if(softTile.getAnimal() == jPanda) {
+			System.out.println("JumpyPanda stayed on SoftTile");
+			
+			if(softTile.getLife() == initLife - 1)
+				System.out.println("JumpyPanda jumped\n > Test succeeded");
+			else System.out.println("JumpyPanda did not jump\n > Test failed");
+		}
+		else System.out.println("JumpyPanda left SoftTile\n > Test failed");
+		
 	}
 	private void pandaScare() {
 		System.out.println("pandaScare called");
@@ -233,9 +252,15 @@ public class Commands {
 	}
 	
 	// Thing functions
-	private void wardrobeStep() {}
-	private void arcadeRing() {}
-	private void chocolateAutomatBeep() {}
+	private void wardrobeStep() {
+		System.out.println("wardrobeStep called");
+	}
+	private void arcadeRing() {
+		System.out.println("arcadeRing called");
+	}
+	private void chocolateAutomatBeep() {
+		System.out.println("chocolateAutomatBeep called");
+	}
 	
 	/*
 	 * Insert test functions here and call them in commands(cmd:String)
