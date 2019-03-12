@@ -10,9 +10,10 @@ public class Commands {
 					if(cmd[1] != null) {
 						// Panda Step Tests
 						if (cmd[1].equals("step")) {
+							
 							// PandaStepOnTile
 							if (cmd[2].equals("hard")) {
-								pandaStep();
+								pandaStepOnTile();
 							}
 							// PandaStepOnSoftTile
 							else if (cmd[2].equals("soft")) {
@@ -57,6 +58,33 @@ public class Commands {
 					
 				case "orangutan":
 					System.out.println("Orangutan called");
+					if(cmd[1] != null) {
+						// Orangutan Step Tests
+						if (cmd[1].equals("step")) {
+							
+							// OrangutanStepOnTile
+							if (cmd[2].equals("hard")) {
+								orangutanStepOnTile();
+							}
+							// OrangutanStepOnSoftTile
+							else if (cmd[2].equals("soft")) {
+								if(cmd[3] != null) {
+									orangutanStepOnSoftTile(Integer.parseInt(cmd[3]));
+								}
+								else
+									orangutanStepOnSoftTile(20);
+							}
+							// OrangutanStepOnBrokenTile
+							else if(cmd[2].equals("broken")) {
+								orangutanStepOnBrokenTile();
+							}
+							// OrangutanStepOnExit
+							else if (cmd[2].equals("exit")) {
+								orangutanStepOnExit();
+							}
+						}
+						
+					}
 					break;
 					
 				case "ChocolateAutomat":
@@ -79,8 +107,10 @@ public class Commands {
 		
 	}
 	
-	// This is not ready
-	private void pandaStep() {
+	// Panda functions
+	
+	
+	private void pandaStepOnTile() {
 		Panda p = new Panda();
 		p.step();
 	}
@@ -172,8 +202,6 @@ public class Commands {
 		
 	}
 	
-	// Empty test functions
-	
 	private void pandaFollow() {
 		System.out.println("pandaFollow called");
 	}
@@ -189,6 +217,25 @@ public class Commands {
 	private void pandaLetGo() {
 		System.out.println("pandaLetGo called");
 	}
+	
+	// Orangutan functions
+	private  void orangutanStepOnTile() {
+		System.out.println("orangutanStepOnTile called");
+	}
+	private  void orangutanStepOnSoftTile(int life) {
+		System.out.println("orangutanStepOnSoftTile called");
+	}
+	private  void orangutanStepOnBrokenTile() {
+		System.out.println("orangutanStepOnBrokenTile called");
+	}
+	private  void orangutanStepOnExit() {
+		System.out.println("orangutanStepOnExit called");
+	}
+	
+	// Thing functions
+	private void wardrobeStep() {}
+	private void arcadeRing() {}
+	private void chocolateAutomatBeep() {}
 	
 	/*
 	 * Insert test functions here and call them in commands(cmd:String)
