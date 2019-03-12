@@ -7,39 +7,68 @@ public class Commands {
 			switch (cmd[0]) {
 				
 				case "panda":
-					// Panda Step
-					if (cmd[1] != null && cmd[1].equals("step")) {
-						if (cmd[2].equals("hard")) {
-							pandaStep();
-						} else if (cmd[2].equals("soft")) {
-							if(cmd[3] != null) {
-								pandaStepOnSoftTile(Integer.parseInt(cmd[3]));
+					if(cmd[1] != null) {
+						// Panda Step Tests
+						if (cmd[1].equals("step")) {
+							// PandaStepOnTile
+							if (cmd[2].equals("hard")) {
+								pandaStep();
 							}
-							else
-								pandaStepOnSoftTile(20);
-						} else if(cmd[2].equals("broken")) {
-							pandaStepOnBrokenTile();
-						} else if (cmd[2].equals("exit")) {
-							pandaStepOnExit();
+							// PandaStepOnSoftTile
+							else if (cmd[2].equals("soft")) {
+								if(cmd[3] != null) {
+									pandaStepOnSoftTile(Integer.parseInt(cmd[3]));
+								}
+								else
+									pandaStepOnSoftTile(20);
+							}
+							// PandaStepOnBrokenTile
+							else if(cmd[2].equals("broken")) {
+								pandaStepOnBrokenTile();
+							}
+							// PandaStepOnExit
+							else if (cmd[2].equals("exit")) {
+								pandaStepOnExit();
+							}
+							
 						}
-						
+						// PandaFollow
+						else if (cmd[1].equals("follow")) {
+							pandaFollow();
+						}
+						// PandaJump
+						else if(cmd[1].equals("jump")) {
+							pandaJump();
+						}
+						// PandaScare
+						else if(cmd[1].equals("scare")) {
+							pandaScare();
+						}
+						// PandaSleep
+						else if(cmd[1].equals("sleep")) {
+							pandaSleep();
+						}
+						// PandaLetGo
+						else if(cmd[1].equals("letgo")) {
+							pandaLetGo();
+						}
 					}
 					break;
 					
 				case "orangutan":
-					System.out.println("Leave alone that fucking Orangutan u moron");
+					System.out.println("Orangutan called");
 					break;
 					
 				case "ChocolateAutomat":
-					System.out.println("U called ChocolateAutomat BITCH");
+					System.out.println("ChocolateAutomat called");
 					break;
 					
 				case "arcade":
-					System.out.println("Arcade is before you,  dickhead. Not in the A B C");
+					System.out.println("Arcade called");
 					break;
 					
 				case "chair":
-					System.out.println("Chair would be very sick under you, fatass");
+					System.out.println("Chair called");
 					break;
 				
 				default:
@@ -50,13 +79,13 @@ public class Commands {
 		
 	}
 	
-	
-	public void pandaStep(){
+	// This is not ready
+	private void pandaStep() {
 		Panda p = new Panda();
 		p.step();
 	}
 
-	public void pandaStepOnSoftTile(int life){
+	private void pandaStepOnSoftTile(int life){
 		Panda p = new Panda();
 		Tile t1 = new Tile();
 		SoftTile t2 = new SoftTile(life);
@@ -123,7 +152,7 @@ public class Commands {
 		
 	}
 	
-	public void pandaStepOnExit() {
+	private void pandaStepOnExit() {
 		// Creating components
 		Panda panda = new Panda();
 		Tile start = new Tile();
@@ -141,6 +170,24 @@ public class Commands {
 		// Reviewing results
 		// ...
 		
+	}
+	
+	// Empty test functions
+	
+	private void pandaFollow() {
+		System.out.println("pandaFollow called");
+	}
+	private void pandaJump() {
+		System.out.println("pandaJump called");
+	}
+	private void pandaScare() {
+		System.out.println("pandaScare called");
+	}
+	private void pandaSleep() {
+		System.out.println("pandaSleep called");
+	}
+	private void pandaLetGo() {
+		System.out.println("pandaLetGo called");
 	}
 	
 	/*
