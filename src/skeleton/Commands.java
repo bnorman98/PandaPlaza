@@ -240,12 +240,66 @@ public class Commands {
 	// Orangutan functions
 	private  void orangutanStepOnTile() {
 		System.out.println("orangutanStepOnTile called");
-	}
+
+		//Init
+		Orangutan o = new Orangutan();
+		Tile actualTile = new Tile();
+		Tile nextTile = new Tile();
+		actualTile.setNeighbours(nextTile);
+		actualTile.setAnimal(o);
+		o.setTile(actualTile);
+
+		//Tested action perform
+		o.goTo(nextTile);
+
+		//Test
+		if(actualTile.getAnimal() == null && nextTile.getAnimal() == o)
+			System.out.println("Orangutan stepped \n  >Test succeeded");
+		else
+			System.out.println("Orangutan did not step(onto the right Tile) \n  >Test failed");
+	} //Done, works
 	private  void orangutanStepOnSoftTile(int life) {
 		System.out.println("orangutanStepOnSoftTile called");
-	}
-	private  void orangutanStepOnBrokenTile() {
+
+		//Initialization
+		SoftTile softtile = new SoftTile(life);
+		Tile tile = new Tile();
+		Orangutan o = new Orangutan();
+		o.setTile(tile);
+		tile.setAnimal(o);
+		tile.setNeighbours(softtile);
+
+		//Tested action
+		o.goTo(softtile);
+
+		// Test results
+		if(tile.getAnimal() == o)
+			System.out.println("Orangutan did not move\n > Test failed");
+		if(softtile.getAnimal() == o)
+			System.out.println("Orangutan moved, but still alive\n > Test succeeded");
+		if(tile.getAnimal() == null && softtile.getAnimal() == null)
+			System.out.println("Orangutan moved and died\n > Test succeeded");
+
+
+
+	} //Done, works
+	private  void orangutanStepOnBrokenTile()
+	{
 		System.out.println("orangutanStepOnBrokenTile called");
+		Orangutan o = new Orangutan();
+		Tile hard = new Tile ();
+		SoftTile broken = new SoftTile(0);
+
+		o.setTile(hard);
+		broken.setAnimal(o);
+		hard.setNeighbours(broken);
+
+		o.goTo(broken);
+
+		if(hard.getAnimal() == o)
+		    System.out.println("Step failed \n  >Test Failed");
+        if(hard.getAnimal() == null && broken.getAnimal() != o)
+            System.out.println("Step failed, Orangutan lost \n  >Test Failed");
 	}
 	private  void orangutanStepOnExit() {
 		System.out.println("orangutanStepOnExit called");
