@@ -123,26 +123,27 @@ public class Commands {
 
 	private void pandaStepOnSoftTile(int life){
 		// Initialising
-		Panda p = new Panda();
+		Panda panda = new Panda();
 		Tile tile = new Tile();
 		SoftTile softTile = new SoftTile(life);
-		p.setTile(tile);
+		panda.setTile(tile);
+		tile.setAnimal(panda);
 		tile.setNeighbours(softTile);
 		softTile.setNeighbours(tile);
 		
 		// Tested action
-		p.goTo(softTile);
+		panda.goTo(softTile);
 		
 		// Test results
 		System.out.println("SoftTile's life = " + softTile.getLife());
 		
-		if (tile.getAnimal() == p && softTile.getAnimal() != p){
+		if (tile.getAnimal() == panda && softTile.getAnimal() != panda){
 			System.out.println("Panda stayed on Tile");
 			System.out.println(" > Test failed");
 		}
-		else if (tile.getAnimal() != p){
+		else if (tile.getAnimal() != panda){
 			System.out.println("Panda left Tile");
-			if(softTile.getLife() != 0 && softTile.getAnimal() == p)
+			if(softTile.getLife() != 0 && softTile.getAnimal() == panda)
 				System.out.println("Panda arrived to SoftTile\n > Test succeeded");
 			else if(softTile.getLife() == 0 && softTile.getAnimal() == null)
 				System.out.println("SoftTile broke and Panda died\nTest succeeded");
@@ -260,6 +261,23 @@ public class Commands {
 	}
 	private void chocolateAutomatBeep() {
 		System.out.println("chocolateAutomatBeep called");
+	}
+	
+	// Not a real use case
+	// Made this just to test it
+	private void countFollowersTest(){
+		Panda p1 = new Panda();
+		Panda p2 = new Panda();
+		Panda p3 = new Panda();
+		Panda p4 = new Panda();
+		Panda p5 = new Panda();
+		Orangutan orangutan = new Orangutan();
+		orangutan.setFollower(p1);
+		p1.setFollower(p2);
+		p2.setFollower(p3);
+		p3.setFollower(p4);
+		p4.setFollower(p5);
+		System.out.println("Followers: " + orangutan.countFollowers());
 	}
 	
 	/*

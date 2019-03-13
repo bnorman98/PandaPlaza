@@ -11,7 +11,12 @@ public class Orangutan extends Animal {
 	}
 	
 	@Override
-	public void die(){}
+	public void die(){
+		if(follower != null)
+			follower.letGo();
+		tile.setAnimal(null);
+		tile = null;
+	}
 	
 	@Override
 	public void letGo(){
@@ -21,10 +26,12 @@ public class Orangutan extends Animal {
 	
 	@Override
 	public int countFollowers(){
-		/*
-		 * Returns 1 to compile
-		 * Not ready
-		 */
-		return 1;
+		int cnt = 0;
+		Panda tempFollower = follower;
+		while(tempFollower != null){
+			cnt++;
+			tempFollower = tempFollower.follower;
+		}
+		return cnt;
 	}
 }

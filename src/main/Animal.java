@@ -22,14 +22,28 @@ public abstract class Animal implements Steppable {
 		tile.stepped();
 	}
 	
+	// Returns 0 for default, overridden in Orangutan
+	public int countFollowers(){
+		return 0;
+	}
+	
+	public void killFollowers() {
+		Animal last = follower;
+		
+		while(last.follower != null) {
+			last = last.follower;
+		}
+		
+		while(last != this) {
+			Animal temp = last.influencer;
+			last.die();
+			last = temp;
+		}
+	}
 	public void die(){}
 	public void scare(){}
 	public void jump(){}
 	public void sleep(){}
-	public int countFollowers(){
-		return 0;
-	}	// Returns 0 for default, overridden in Orangutan
-	public void killFollowers(){}
 	public void addScore(int score){}	// Function body empty on purpose!
 	public void letGo(){}				// Function body empty on purpose!
 }
