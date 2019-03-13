@@ -285,8 +285,8 @@ public class Commands {
 
 
 	} //Done, works
-	private  void orangutanStepOnBrokenTile()
-	{
+	private  void orangutanStepOnBrokenTile() //Done, works
+	{	//Init
 		System.out.println("orangutanStepOnBrokenTile called");
 		Orangutan o = new Orangutan();
 		Tile hard = new Tile ();
@@ -295,17 +295,38 @@ public class Commands {
 		o.setTile(hard);
 		broken.setAnimal(o);
 		hard.setNeighbours(broken);
-
+		//Perform tested action
 		o.goTo(broken);
-
+		//Test results
 		if(hard.getAnimal() == o)
 		    System.out.println("Step failed \n  >Test Failed");
-        if(hard.getAnimal() == null && broken.getAnimal() != o)
-            System.out.println("Step failed, Orangutan lost \n  >Test Failed");
+        if(hard.getAnimal() == null && broken.getAnimal() == null)
+            System.out.println("Step completed.\nOrangutan died \n  >Test Completed");
+		if(hard.getAnimal() == null && broken.getAnimal() == o)
+			System.out.println("Step completed.\nOrangutan is still ailve \n  >Test Failed");
 	}
 	private  void orangutanStepOnExit() {
 		System.out.println("orangutanStepOnExit called");
-	}
+		Orangutan o = new Orangutan();
+		Tile start = new Tile();
+		Tile tile = new Tile();
+		EndPoint endPoint = new EndPoint(start);
+
+		o.setTile(tile);
+		tile.setAnimal(o);
+		tile.setNeighbours(endPoint);
+
+		// Action
+		o.goTo(endPoint);
+
+		// Test results
+		if(tile.getAnimal() == o)
+			System.out.println("Orangutan did not move\n > Test failed");
+		else if(endPoint.getAnimal() == o)
+			System.out.println("Orangutan stuck az EndPoint\n > Test failed");
+		else if(start.getAnimal() == o)
+			System.out.println("Orangutan got to the start\n > Test succeeded");
+	} //Dones, works
 	
 	// Thing functions
 	private void wardrobeStep() {
