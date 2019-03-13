@@ -12,10 +12,11 @@ public abstract class Animal implements Steppable {
 	}
 	public void setTile(Tile newTile) { tile = newTile; }
 	public void setFollower(Panda newPanda) { follower = newPanda; }
+	public Animal getFollower(){
+		return follower;
+	}
 	
-	public void getTouched(Animal toucher){}
-	
-	public void goTo(Tile newTile){
+	public void goTo(Tile newTile) {
 		tile.setAnimal(null);
 		tile = newTile;
 		tile.setAnimal(this);
@@ -40,10 +41,13 @@ public abstract class Animal implements Steppable {
 			last = temp;
 		}
 	}
+	
+	// Function bodies empty on purpose from here
+	public void getTouched(Animal toucher) {}
 	public void die(){}
 	public void scare(){}
 	public void jump(){}
 	public void sleep(){}
-	public void addScore(int score){}	// Function body empty on purpose!
-	public void letGo(){}				// Function body empty on purpose!
+	public void addScore(int score){}
+	public void letGo(){}
 }

@@ -33,7 +33,7 @@ public class Panda extends Animal {
 			follower.follow(myPrevTile);
 	}
 	
-	public void getTouched(Orangutan toucher){
+	public void getTouched(Orangutan toucher) {
 		if(toucher.follower != null){
 			follower = toucher.follower;
 			follower.influencer = this;
@@ -42,7 +42,9 @@ public class Panda extends Animal {
 		toucher.follower = this;
 		Tile tmp = toucher.tile;
 		toucher.goTo(tile);
-		goTo(tmp);
+		tile = tmp;
+		tile.setAnimal(this);
+		tile.stepped();
 	}
 	
 	@Override

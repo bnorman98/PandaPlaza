@@ -49,6 +49,7 @@ public class Commands {
 						else if(cmd[1].equals("letgo")) {
 							pandaLetGo();
 						}
+						else System.out.println("Invalid command");
 					}
 					catch(ArrayIndexOutOfBoundsException oob) {
 						System.out.println("Missing arguments");
@@ -82,6 +83,7 @@ public class Commands {
 							else if (cmd[2].equals("exit")) {
 								orangutanStepOnExit();
 							}
+							else System.out.println("Invalid command");
 						}
 						
 					}
