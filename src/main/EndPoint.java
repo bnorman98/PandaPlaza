@@ -10,9 +10,9 @@ public class EndPoint extends Tile {
 	
 	// Double check me please
 	public void stepped() {
-		Game.addScore(animal.countFollowers(), animal);
+		Game.addScore(animal);
 		animal.letGo();
 		animal.goTo(startPoint);
-		// animal = null;
+		
 	}
 }

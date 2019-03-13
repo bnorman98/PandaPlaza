@@ -5,12 +5,11 @@ import java.util.ArrayList;
 public class Tile {
 	
 	protected Animal animal;
-	private ArrayList<Tile> neighbours = new ArrayList<Tile>();
+	private ArrayList<Tile> neighbours = new ArrayList<>();
 	private Thing thing;
 	
 	// SoftTile konstruktora miatt kell elvileg
-	public Tile() {
-	}
+	public Tile() {}
 	
 	public Tile(ArrayList<Tile> neighbours) {
 		// Clone the list and it's contents

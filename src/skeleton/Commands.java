@@ -2,7 +2,7 @@ package skeleton;
 import main.*;
 
 public class Commands {
-	public boolean commands(String cmd[]){
+	public boolean commands(String cmd[]) {
 		if(cmd[0] != null) {
 			switch (cmd[0]) {
 				
@@ -121,7 +121,7 @@ public class Commands {
 		p.step();
 	}
 
-	private void pandaStepOnSoftTile(int life){
+	private void pandaStepOnSoftTile(int life) {
 		// Initialising
 		Panda panda = new Panda();
 		Tile tile = new Tile();
@@ -137,11 +137,11 @@ public class Commands {
 		// Test results
 		System.out.println("SoftTile's life = " + softTile.getLife());
 		
-		if (tile.getAnimal() == panda && softTile.getAnimal() != panda){
+		if (tile.getAnimal() == panda && softTile.getAnimal() != panda) {
 			System.out.println("Panda stayed on Tile");
 			System.out.println(" > Test failed");
 		}
-		else if (tile.getAnimal() != panda){
+		else if (tile.getAnimal() != panda) {
 			System.out.println("Panda left Tile");
 			if(softTile.getLife() != 0 && softTile.getAnimal() == panda)
 				System.out.println("Panda arrived to SoftTile\n > Test succeeded");
@@ -152,7 +152,6 @@ public class Commands {
 		
 	}
 	
-	// This is false correct, panda does not die since Animal.die() is not implemented yet
 	private void pandaStepOnBrokenTile() {
 		// Initialising
 		Panda panda = new Panda();

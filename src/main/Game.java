@@ -18,6 +18,7 @@ public class Game {
 	public Game() {}
 	public void startGame() {}
 	public void endGame() {}
+	
 	public void stepAll() {
 		for (Orangutan orangutan : orangutans) {
 			orangutan.step();
@@ -29,8 +30,8 @@ public class Game {
 			thing.step();
 		}
 	}
-	public static void addScore(int followerCount, Animal animal) {
-		animal.addScore(followerCount);
+	public static void addScore(Animal animal) {
+		animal.addScore(animal.countFollowers());
 	}
 	
 	public boolean generateRandom(int chance) {

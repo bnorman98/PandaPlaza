@@ -12,8 +12,11 @@ public class Orangutan extends Animal {
 	
 	@Override
 	public void die(){
+		// Letting go of pandas
 		if(follower != null)
 			follower.letGo();
+		
+		// Remove from tile
 		tile.setAnimal(null);
 		tile = null;
 	}

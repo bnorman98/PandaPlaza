@@ -12,12 +12,12 @@ public class SoftTile extends Tile {
 	}
 	public int getLife() {return life;}
 	
+	@Override
 	public void stepped() {
-		if (life > 0)
+		if(life > 0)
 			life--;
-		else{
-			getAnimal().die();
-			setAnimal(null);
-		}
+		if(life == 0)
+			animal.die();
+		
 	}
 }
