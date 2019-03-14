@@ -1,10 +1,8 @@
 package main;
 
 public class Wardrobe extends Thing{
-	
 	private Wardrobe pair;
 	
-	// Azert kell ures kostruktor és setPair, hogy elso peldanyt letre lehessen hozni a parbol
 	public Wardrobe(){}
 	
 	public Wardrobe(Wardrobe pair) {
@@ -21,4 +19,5 @@ public class Wardrobe extends Thing{
 			tile.getAnimal().goTo(pair.tile);
 		}
 	}
+	
 }

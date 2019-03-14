@@ -9,14 +9,14 @@ public class Commands {
 				case "panda":
 					try {
 						// Panda Step Tests
-						if (cmd[1].equals("step")) {
+						if(cmd[1].equals("step")) {
 							
 							// PandaStepOnTile
-							if (cmd[2].equals("hard")) {
+							if(cmd[2].equals("hard")) {
 								pandaStepOnTile();
 							}
 							// PandaStepOnSoftTile
-							else if (cmd[2].equals("soft")) {
+							else if(cmd[2].equals("soft")) {
 								pandaStepOnSoftTile(Integer.parseInt(cmd[3]));
 							}
 							// PandaStepOnBrokenTile
@@ -24,13 +24,13 @@ public class Commands {
 								pandaStepOnBrokenTile();
 							}
 							// PandaStepOnExit
-							else if (cmd[2].equals("exit")) {
+							else if(cmd[2].equals("exit")) {
 								pandaStepOnExit();
 							}
 							
 						}
 						// PandaFollow
-						else if (cmd[1].equals("follow")) {
+						else if(cmd[1].equals("follow")) {
 							pandaFollow();
 						}
 						// PandaJump
@@ -61,14 +61,14 @@ public class Commands {
 					System.out.println("Orangutan called");
 					try {
 						// Orangutan Step Tests
-						if (cmd[1].equals("step")) {
+						if(cmd[1].equals("step")) {
 							
 							// OrangutanStepOnTile
-							if (cmd[2].equals("hard")) {
+							if(cmd[2].equals("hard")) {
 								orangutanStepOnTile();
 							}
 							// OrangutanStepOnSoftTile
-							else if (cmd[2].equals("soft")) {
+							else if(cmd[2].equals("soft")) {
 								if(cmd[3] != null) {
 									orangutanStepOnSoftTile(Integer.parseInt(cmd[3]));
 								}
@@ -80,8 +80,11 @@ public class Commands {
 								orangutanStepOnBrokenTile();
 							}
 							// OrangutanStepOnExit
-							else if (cmd[2].equals("exit")) {
+							else if(cmd[2].equals("exit")) {
 								orangutanStepOnExit();
+							}
+							else if(cmd[2].equals("catch")) {
+								orangutanCatchPanda();
 							}
 							else System.out.println("Invalid command");
 						}
@@ -119,8 +122,23 @@ public class Commands {
 	
 	// Panda functions
 	private void pandaStepOnTile() {
-		Panda p = new Panda();
-		p.step();
+		// Initialising
+		Panda panda = new Panda();
+		Tile tile = new Tile();
+		Tile nextTile = new Tile();
+		tile.setNeighbours(nextTile);
+		tile.setAnimal(panda);
+		panda.setTile(tile);
+		
+		// Action
+		panda.goTo(nextTile);
+		
+		// Test results
+		if(tile.getAnimal() == null && nextTile.getAnimal() == panda)
+			System.out.println("Panda stepped\n > Test succeeded");
+		else if(tile.getAnimal() == panda)
+			System.out.println("Panda did not step\n > Test failed");
+		else System.out.println("Panda moved unexpectedly\n > Test failed");
 	}
 
 	private void pandaStepOnSoftTile(int life) {
@@ -188,6 +206,7 @@ public class Commands {
 		panda.setTile(tile);
 		tile.setAnimal(panda);
 		tile.setNeighbours(endPoint);
+		endPoint.setNeighbours(tile);
 		
 		// Action
 		panda.goTo(endPoint);
@@ -206,8 +225,6 @@ public class Commands {
 		System.out.println("pandaFollow called");
 	}
 	private void pandaJump() {
-		System.out.println("pandaJump called");
-		
 		// Initialising
 		JumpyPanda jPanda = new JumpyPanda();
 		SoftTile softTile = new SoftTile();
@@ -216,7 +233,7 @@ public class Commands {
 		int initLife = softTile.getLife();
 		
 		// Action
-		jPanda.scare();
+		jPanda.jump();
 		
 		// Test results
 		if(softTile.getAnimal() == jPanda) {
@@ -241,9 +258,7 @@ public class Commands {
 	
 	// Orangutan functions
 	private  void orangutanStepOnTile() {
-		System.out.println("orangutanStepOnTile called");
-
-		//Init
+		// Initialising
 		Orangutan o = new Orangutan();
 		Tile actualTile = new Tile();
 		Tile nextTile = new Tile();
@@ -251,43 +266,44 @@ public class Commands {
 		actualTile.setAnimal(o);
 		o.setTile(actualTile);
 
-		//Tested action perform
+		// Action
 		o.goTo(nextTile);
 
-		//Test
+		// Test results
 		if(actualTile.getAnimal() == null && nextTile.getAnimal() == o)
-			System.out.println("Orangutan stepped \n  >Test succeeded");
-		else
-			System.out.println("Orangutan did not step(onto the right Tile) \n  >Test failed");
-	} //Done, works
+			System.out.println("Orangutan stepped\n > Test succeeded");
+		else if(actualTile.getAnimal() == o)
+			System.out.println("Orangutan did not step\n > Test failed");
+		else System.out.println("Orangutan moved unexpectedly\n > Test failed");
+	}
+	
 	private  void orangutanStepOnSoftTile(int life) {
-		System.out.println("orangutanStepOnSoftTile called");
-
 		//Initialization
-		SoftTile softtile = new SoftTile(life);
+		Orangutan orangutan = new Orangutan();
 		Tile tile = new Tile();
-		Orangutan o = new Orangutan();
-		o.setTile(tile);
-		tile.setAnimal(o);
+		SoftTile softtile = new SoftTile(life);
+		orangutan.setTile(tile);
+		tile.setAnimal(orangutan);
 		tile.setNeighbours(softtile);
+		softtile.setNeighbours(tile);
 
 		//Tested action
-		o.goTo(softtile);
+		orangutan.goTo(softtile);
 
 		// Test results
-		if(tile.getAnimal() == o)
+		if(tile.getAnimal() == orangutan)
 			System.out.println("Orangutan did not move\n > Test failed");
-		if(softtile.getAnimal() == o)
+		if(softtile.getAnimal() == orangutan)
 			System.out.println("Orangutan moved, but still alive\n > Test succeeded");
 		if(tile.getAnimal() == null && softtile.getAnimal() == null)
 			System.out.println("Orangutan moved and died\n > Test succeeded");
 
 
 
-	} //Done, works
-	private  void orangutanStepOnBrokenTile() //Done, works
-	{	//Init
-		System.out.println("orangutanStepOnBrokenTile called");
+	}
+	
+	private  void orangutanStepOnBrokenTile() {
+		// Initialising
 		Orangutan o = new Orangutan();
 		Tile hard = new Tile ();
 		SoftTile broken = new SoftTile(0);
@@ -295,16 +311,20 @@ public class Commands {
 		o.setTile(hard);
 		broken.setAnimal(o);
 		hard.setNeighbours(broken);
+		broken.setNeighbours(hard);
+		
 		//Perform tested action
 		o.goTo(broken);
+		
 		//Test results
 		if(hard.getAnimal() == o)
-		    System.out.println("Step failed \n  >Test Failed");
+		    System.out.println("Step failed \n > Test Failed");
         if(hard.getAnimal() == null && broken.getAnimal() == null)
-            System.out.println("Step completed.\nOrangutan died \n  >Test Completed");
+            System.out.println("Step completed\nOrangutan died \n > Test succeeded");
 		if(hard.getAnimal() == null && broken.getAnimal() == o)
-			System.out.println("Step completed.\nOrangutan is still ailve \n  >Test Failed");
+			System.out.println("Step completed\nOrangutan is still alive \n > Test Failed");
 	}
+	
 	private  void orangutanStepOnExit() {
 		System.out.println("orangutanStepOnExit called");
 		Orangutan o = new Orangutan();
@@ -315,6 +335,7 @@ public class Commands {
 		o.setTile(tile);
 		tile.setAnimal(o);
 		tile.setNeighbours(endPoint);
+		endPoint.setNeighbours(tile);
 
 		// Action
 		o.goTo(endPoint);
@@ -326,7 +347,11 @@ public class Commands {
 			System.out.println("Orangutan stuck az EndPoint\n > Test failed");
 		else if(start.getAnimal() == o)
 			System.out.println("Orangutan got to the start\n > Test succeeded");
-	} //Dones, works
+	}
+	
+	private void orangutanCatchPanda() {
+		System.out.println("orangutanCatchPanda called");
+	}
 	
 	// Thing functions
 	private void wardrobeStep() {
