@@ -271,12 +271,42 @@ public class Commands {
 		if (orang.getFollower() != null){
 			System.out.println("Panda did not scare\n > Test failed");
 		} else {
-			System.out.println("Panda scared succesfully\n > Test succeeded");
+			System.out.println("Panda scared successfully\n > Test succeeded");
 		}
 
 	}
 	private void pandaSleep() {
-		System.out.println("pandaSleep called");
+	    // Initialise
+		SleepyPanda slPanda = new SleepyPanda();
+		Chair chair = new Chair();
+		Tile tile = new Tile();
+		Tile tile2 = new Tile();
+		Tile tileChair = new Tile();
+
+		slPanda.setTile(tile2);
+		tile2.setAnimal(slPanda);
+		tileChair.setThing(chair);
+		chair.setTile(tileChair);
+
+		tile.setNeighbours(tile2);
+		//tile.setNeighbours(tileChair);  //panda can not step to the tile of the chair
+		tileChair.setNeighbours(tile);
+		tile2.setNeighbours(tile);
+
+		// Action
+        chair.step();
+        slPanda.step();
+        chair.step();
+        slPanda.step();
+
+        // Test results
+        if (tileChair.getAnimal() == slPanda){
+            System.out.println("SleepyPanda slept well in chair\n > Test succeeded");
+        } else if (tile2.getAnimal() == slPanda) {
+            System.out.println("SleepyPanda did not sleep\n > Test failed");
+        } else if (tile.getAnimal() == slPanda) {
+            System.out.println("SleepyPanda slept but not in chair\n > Test failed");
+        }
 	}
 	private void pandaLetGo() {
 		System.out.println("pandaLetGo called");
@@ -376,7 +406,46 @@ public class Commands {
 	}
 	
 	private void orangutanCatchPanda() {
-		System.out.println("orangutanCatchPanda called");
+	    // Initialise
+		Orangutan orang = new Orangutan();
+		Panda oldPanda = new Panda();
+		Panda newPanda = new Panda();
+		Tile oTile = new Tile();
+		Tile opTile = new Tile();
+		Tile npTile = new Tile();
+
+		// setting tiles and neighbours
+		opTile.setNeighbours(oTile);
+		oTile.setNeighbours(opTile);
+		oTile.setNeighbours(npTile);
+		npTile.setNeighbours(oTile);
+
+		//setting animals on tiles
+		opTile.setAnimal(orang);
+		orang.setTile(opTile);
+		oTile.setAnimal(oldPanda);
+		oldPanda.setTile(oTile);
+		npTile.setAnimal(newPanda);
+		newPanda.setTile(npTile);
+
+		oldPanda.getTouched(orang); //sets a follower for the orangutan, they switch tiles
+
+		// Action
+        newPanda.getTouched(orang);
+
+        //Test results
+        if (orang.getFollower() == newPanda){
+            System.out.println("New panda caught");
+            if (npTile.getAnimal() == orang && oTile.getAnimal() == newPanda){
+                System.out.println("Switched tiles correctly\n > Test succeeded");
+            } else if (npTile.getAnimal() == newPanda && oTile.getAnimal() == orang){
+                System.out.println("Did not switch tiles\n > Test failed");
+            } else {
+                System.out.println("Moved somehow, not correctly\n > Test failed");
+            }
+        } else {
+            System.out.println("No new pandas caught\n > Test failed");
+        }
 	}
 	
 	// Thing functions
@@ -436,11 +505,11 @@ public class Commands {
 		chocoAutomat.step();
 
 		// Test results
-		System.out.println("ChocloateAutomat beeped succesfully");
+		System.out.println("ChocloateAutomat beeped successfully");
 		if (orang.getFollower() != null){
 			System.out.println("Panda found, could not scare\n > Test failed");
 		} else {
-			System.out.println("Panda found, scared succesfully\n > Test succeeded");
+			System.out.println("Panda found, scared successfully\n > Test succeeded");
 		}
 	}
 	
