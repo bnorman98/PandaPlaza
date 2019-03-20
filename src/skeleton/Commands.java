@@ -222,7 +222,42 @@ public class Commands {
 	}
 	
 	private void pandaFollow() {
-		System.out.println("pandaFollow called");
+		// Initialise
+	    Orangutan orang = new Orangutan();
+	    Panda panda = new Panda();
+	    Tile orangTile = new Tile();
+	    Tile pandaTile = new Tile();
+	    Tile newTile = new Tile();
+
+	    orang.setDir(0);
+
+	    //setting tiles and neighbours
+	    orangTile.setNeighbours(newTile);
+	    orangTile.setNeighbours(pandaTile);
+	    pandaTile.setNeighbours(orangTile);
+	    newTile.setNeighbours(orangTile);
+
+	    //setting animals on tiles
+	    orang.setTile(pandaTile);
+	    pandaTile.setAnimal(orang);
+	    panda.setTile(orangTile);
+	    orangTile.setAnimal(panda);
+	    panda.getTouched(orang); // catch panda and switch tiles
+
+	    // Action
+        orang.step();
+
+        // Test results
+        if (newTile.getAnimal() == orang){
+            System.out.println("Orangutan stepped");
+            if (orangTile.getAnimal() == panda){
+                System.out.println("Panda followed\n > Test succeeded");
+            } else {
+                System.out.println("Panda did not follow\n > Test failed");
+            }
+        } else {
+            System.out.println("Orangutan not stepped, Panda could not follow\n > Test failed");
+        }
 	}
 	private void pandaJump() {
 		// Initialising
