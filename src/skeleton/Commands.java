@@ -251,27 +251,21 @@ public class Commands {
 		//Initialising
 		ScaryPanda sPanda = new ScaryPanda();
 		Orangutan orang = new Orangutan();
-		ChocolateAutomat chocoAutomat = new ChocolateAutomat();
 		Tile tPanda = new Tile();
 		Tile tOrang = new Tile();
-		Tile tAutomat = new Tile();
 
 		sPanda.setTile(tOrang); //they switch tiles on getting touched
 		orang.setTile(tPanda);
-		chocoAutomat.setTile(tAutomat);
 		tOrang.setAnimal(sPanda);
 		tPanda.setAnimal(orang);
-		tAutomat.setThing(chocoAutomat);
 
 		tPanda.setNeighbours(tOrang);
-		tPanda.setNeighbours(tAutomat);
 		tOrang.setNeighbours(tPanda);
-		tAutomat.setNeighbours(tPanda);
 
 		sPanda.getTouched(orang); //sets follower and influencer, animals switch tiles
 
 		// Action
-		chocoAutomat.step();
+		sPanda.scare();
 
 		// Test results
 		if (orang.getFollower() != null){
@@ -390,10 +384,64 @@ public class Commands {
 		System.out.println("wardrobeStep called");
 	}
 	private void arcadeRing() {
-		System.out.println("arcadeRing called");
+		JumpyPanda jPanda = new JumpyPanda();
+		Arcade arc = new Arcade();
+		SoftTile softTile = new SoftTile();
+		Tile tile = new Tile();
+		jPanda.setTile(softTile);
+		softTile.setAnimal(jPanda);
+		arc.setTile(tile);
+		tile.setThing(arc);
+		tile.setNeighbours(softTile);
+		softTile.setNeighbours(tile);
+		int initLife = softTile.getLife();
+
+		// Action
+		arc.step();
+
+		// Test results
+		if (tile.getNeighbourAt(0).getAnimal() == jPanda) {
+			if (softTile.getLife() == initLife - 1)
+				System.out.println("JumpyPanda found, made it jump\n > Test succeeded");
+			else System.out.println("JumpyPanda found, could not make is jump\n > Test failed");
+		}
+		else {
+			System.out.print("Did not find JumpyPanda\n > Test failed");
+		}
 	}
 	private void chocolateAutomatBeep() {
-		System.out.println("chocolateAutomatBeep called");
+		//Initialising
+		ScaryPanda sPanda = new ScaryPanda();
+		Orangutan orang = new Orangutan();
+		ChocolateAutomat chocoAutomat = new ChocolateAutomat();
+		Tile tPanda = new Tile();
+		Tile tOrang = new Tile();
+		Tile tAutomat = new Tile();
+
+		sPanda.setTile(tOrang); //they switch tiles on getting touched
+		orang.setTile(tPanda);
+		chocoAutomat.setTile(tAutomat);
+		tOrang.setAnimal(sPanda);
+		tPanda.setAnimal(orang);
+		tAutomat.setThing(chocoAutomat);
+
+		tPanda.setNeighbours(tOrang);
+		tPanda.setNeighbours(tAutomat);
+		tOrang.setNeighbours(tPanda);
+		tAutomat.setNeighbours(tPanda);
+
+		sPanda.getTouched(orang); //sets follower and influencer, animals switch tiles
+
+		// Action
+		chocoAutomat.step();
+
+		// Test results
+		System.out.println("ChocloateAutomat beeped succesfully");
+		if (orang.getFollower() != null){
+			System.out.println("Panda found, could not scare\n > Test failed");
+		} else {
+			System.out.println("Panda found, scared succesfully\n > Test succeeded");
+		}
 	}
 	
 	// Not a real use case
