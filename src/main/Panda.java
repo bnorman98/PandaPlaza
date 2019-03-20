@@ -40,11 +40,7 @@ public class Panda extends Animal {
 		}
 		influencer = toucher;
 		toucher.follower = this;
-		Tile tmp = toucher.tile;
 		toucher.goTo(tile);
-		tile = tmp;
-		tile.setAnimal(this);
-		tile.stepped();
 	}
 	
 	@Override

@@ -215,7 +215,7 @@ public class Commands {
 		if(tile.getAnimal() == panda)
 			System.out.println("Panda did not move\n > Test failed");
 		else if(endPoint.getAnimal() == panda)
-			System.out.println("Panda stuck az EndPoint\n > Test failed");
+			System.out.println("Panda stuck at EndPoint\n > Test failed");
 		else if(start.getAnimal() == panda)
 			System.out.println("Panda got to the start\n > Test succeeded");
 		
@@ -247,7 +247,39 @@ public class Commands {
 		
 	}
 	private void pandaScare() {
-		System.out.println("pandaScare called");
+
+		//Initialising
+		ScaryPanda sPanda = new ScaryPanda();
+		Orangutan orang = new Orangutan();
+		ChocolateAutomat chocoAutomat = new ChocolateAutomat();
+		Tile tPanda = new Tile();
+		Tile tOrang = new Tile();
+		Tile tAutomat = new Tile();
+
+		sPanda.setTile(tOrang); //they switch tiles on getting touched
+		orang.setTile(tPanda);
+		chocoAutomat.setTile(tAutomat);
+		tOrang.setAnimal(sPanda);
+		tPanda.setAnimal(orang);
+		tAutomat.setThing(chocoAutomat);
+
+		tPanda.setNeighbours(tOrang);
+		tPanda.setNeighbours(tAutomat);
+		tOrang.setNeighbours(tPanda);
+		tAutomat.setNeighbours(tPanda);
+
+		sPanda.getTouched(orang); //sets follower and influencer, animals switch tiles
+
+		// Action
+		chocoAutomat.step();
+
+		// Test results
+		if (orang.getFollower() != null){
+			System.out.println("Panda did not scare\n > Test failed");
+		} else {
+			System.out.println("Panda scared succesfully\n > Test succeeded");
+		}
+
 	}
 	private void pandaSleep() {
 		System.out.println("pandaSleep called");
