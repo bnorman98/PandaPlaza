@@ -9,13 +9,15 @@ public class Game {
 	private ArrayList<Thing> things;
 	private ArrayList<Tile> tiles;
 	
-	private static Game ourInstance = new Game();
+	private static Game instance;
 	
 	public static Game getInstance() {
-		return ourInstance;
+		if (instance == null)
+			instance = new Game();
+		return instance;
 	}
 	
-	public Game() {}
+	private Game() {}
 	public void startGame() {}
 	public void endGame() {}
 	
