@@ -19,10 +19,11 @@ public class Tile {
 		neighbours.add(t);
 	}
 
+	/*
 	public void setThing(Thing thing){
 		this.thing = thing;
 	}
-
+	*/
 	public ArrayList<Tile> getNeighbours() {
 		return neighbours;
 	}

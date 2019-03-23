@@ -8,6 +8,11 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		InputStreamReader isr =	new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
+
+		//Segédlet kiírása
+		Manual man = new Manual();
+		man.showInstructions();
+
 		Commands skeleton = new Commands();
 		boolean exitCondition = false;
 		
@@ -18,6 +23,5 @@ public class Main {
 			exitCondition = skeleton.commands(cmd);
 		}
 		br.close();
-		
 	}
 }

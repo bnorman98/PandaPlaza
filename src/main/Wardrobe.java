@@ -15,9 +15,8 @@ public class Wardrobe extends Thing{
 	
 	@Override
 	public void step() {
-		if(tile.getAnimal() != null) {
+		if(tile.getAnimal() != null)
 			tile.getAnimal().goTo(pair.tile);
-		}
 	}
 	
 }

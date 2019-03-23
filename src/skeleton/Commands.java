@@ -83,10 +83,10 @@ public class Commands {
 							else if(cmd[2].equals("exit")) {
 								orangutanStepOnExit();
 							}
-							else if(cmd[2].equals("catch")) {
-								orangutanCatchPanda();
-							}
 							else System.out.println("Invalid command");
+						}
+						else if(cmd[1].equals("catch")) {
+							orangutanCatchPanda();
 						}
 						
 					}
@@ -220,7 +220,7 @@ public class Commands {
 			System.out.println("Panda got to the start\n > Test succeeded");
 		
 	}
-	
+
 	private void pandaFollow() {
 		// Initialise
 	    Orangutan orang = new Orangutan();
@@ -320,13 +320,12 @@ public class Commands {
 
 		slPanda.setTile(tile2);
 		tile2.setAnimal(slPanda);
-		tileChair.setThing(chair);
 		chair.setTile(tileChair);
 
 		tile.setNeighbours(tile2);
-		//tile.setNeighbours(tileChair);  //panda can not step to the tile of the chair
-		tileChair.setNeighbours(tile);
 		tile2.setNeighbours(tile);
+		//tile.setNeighbours(tileChair);
+		tileChair.setNeighbours(tile);
 
 		// Action
         chair.step();
@@ -485,7 +484,36 @@ public class Commands {
 	
 	// Thing functions
 	private void wardrobeStep() {
-		System.out.println("wardrobeStep called");
+		//Init
+		Wardrobe wardrobe1 = new Wardrobe();
+		Wardrobe wardrobe2 = new Wardrobe();
+
+		Tile t1 = new Tile();
+		Tile t2 = new Tile();
+		wardrobe1.setTile(t1);
+		wardrobe2.setTile(t2);
+		wardrobe1.setPair(wardrobe2);
+		wardrobe2.setPair(wardrobe1);
+
+		Tile tStartPanda = new Tile();
+		tStartPanda.setNeighbours(t1);
+		t1.setNeighbours(tStartPanda); //Not necessary
+
+		Panda p = new Panda();
+		p.setTile(tStartPanda);
+		tStartPanda.setAnimal(p);
+
+		//Action
+		p.step();
+		wardrobe1.step();
+
+		//Test results
+		if (t2.getAnimal() == p)
+			System.out.println("Panda went through the wardrobes\n > Test succeeded");
+		else
+			System.out.println("Panda didn't arrive at the end of the wardrobe\n > Test failed");
+
+		//System.out.println("wardrobeStep called");
 	}
 	private void arcadeRing() {
 		JumpyPanda jPanda = new JumpyPanda();
@@ -495,7 +523,6 @@ public class Commands {
 		jPanda.setTile(softTile);
 		softTile.setAnimal(jPanda);
 		arc.setTile(tile);
-		tile.setThing(arc);
 		tile.setNeighbours(softTile);
 		softTile.setNeighbours(tile);
 		int initLife = softTile.getLife();
@@ -527,7 +554,6 @@ public class Commands {
 		chocoAutomat.setTile(tAutomat);
 		tOrang.setAnimal(sPanda);
 		tPanda.setAnimal(orang);
-		tAutomat.setThing(chocoAutomat);
 
 		tPanda.setNeighbours(tOrang);
 		tPanda.setNeighbours(tAutomat);
