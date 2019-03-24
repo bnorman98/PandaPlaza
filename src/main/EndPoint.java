@@ -10,6 +10,8 @@ public class EndPoint extends Tile {
 	
 	// Double check me please
 	public void stepped() {
+		if(animal.countFollowers() == 0)
+			return;
 		Game.addScore(animal);
 		animal.letGo();
 		animal.goTo(startPoint);

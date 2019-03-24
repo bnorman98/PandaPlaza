@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Arcade extends Thing {
 	
-	private int chance = 100;
+	public Arcade(){chance = 100;}
 	
 	@Override
 	public void step() {

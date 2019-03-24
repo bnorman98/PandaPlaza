@@ -3,9 +3,9 @@ package main;
 import java.util.Random;
 
 public class Chair extends Thing {
-	
-	private int chance = 100;
-	
+
+	public Chair(){ chance = 100;}
+
 	@Override
 	public void step() {
 		for (Tile t: tile.getNeighbours()) {

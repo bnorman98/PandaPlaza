@@ -343,7 +343,32 @@ public class Commands {
         }
 	}
 	private void pandaLetGo() {
-		System.out.println("pandaLetGo called");
+
+		Tile tOrangutan = new Tile();
+		Tile tPanda1 = new Tile();
+		Tile tLetgoPanda = new Tile();
+
+		tOrangutan.setNeighbours(tLetgoPanda);
+		tLetgoPanda.setNeighbours(tOrangutan);
+		tPanda1.setNeighbours(tLetgoPanda);
+		tLetgoPanda.setNeighbours(tPanda1);
+
+		Orangutan orangutan = new Orangutan();
+		Panda panda1 = new Panda();
+		Panda letgoPanda = new Panda();
+
+		orangutan.setTile(tOrangutan);
+		panda1.setTile(tPanda1);
+		letgoPanda.setTile(tLetgoPanda);
+
+		orangutan.getTouched(letgoPanda);
+		orangutan.getTouched(panda1);
+		letgoPanda.letGo();
+
+		if (letgoPanda.getFollower() == null && orangutan.getFollower() == null)
+			System.out.println("Panda released paws\n >Test succeeded");
+		else
+			System.out.println("Panda didn't released paws \n >Test failed");
 	}
 	
 	// Orangutan functions
