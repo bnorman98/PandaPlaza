@@ -324,10 +324,9 @@ public class Commands {
 	 * Realises PandaScare use case
 	 * Creates 2 Tiles, an Orangutan and a ScaryPanda
 	 * Scares ScaryPanda
-	 * Checks if
+	 * Checks if ScaryPanda let go of Orangutan
 	 */
 	private void pandaScare() {
-
 		//Initialising
 		ScaryPanda sPanda = new ScaryPanda();
 		Orangutan orang = new Orangutan();
@@ -393,13 +392,14 @@ public class Commands {
         } else if (tile.getAnimal() == slPanda) {
             System.out.println("SleepyPanda slept but not in chair\n > Test failed");
         }
+        
 	}
 	
 	/*
 	 * Realises PandaLetGo use case
 	 * Creates 3 Tiles, an Orangutan and 2 Pandas in a chain
-	 *
-	 * Checks _
+	 * Letting go of influencer and follower
+	 * Checks if Panda let go of influencer and follower
 	 */
 	private void pandaLetGo() {
 		// Initialise
@@ -419,26 +419,28 @@ public class Commands {
 		orangutan.setTile(tOrangutan);
 		panda.setTile(tPanda1);
 		letgoPanda.setTile(tLetgoPanda);
-
-		// Action
+		
 		letgoPanda.getTouched(orangutan);
 		panda.getTouched(orangutan);
+		
+		// Action
 		letgoPanda.letGo();
 		
 		// Test results
 		if (letgoPanda.getFollower() == null && orangutan.getFollower() == null)
 			System.out.println("Panda released paws\n > Test succeeded");
 		else
-			System.out.println("Panda didn't released paws \n > Test failed");
+			System.out.println("Panda didn't release paws \n > Test failed");
+		
 	}
 	
 	// Orangutan functions
 	
 	/*
-	 * Realises _ use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Realises OrangutanStepOnTile use case
+	 * Creates 2 Tiles and a Orangutan
+	 * Steps Orangutan from one to the other
+	 * Checks  if Orangutan stepped successfully
 	 */
 	private  void orangutanStepOnTile() {
 		// Initialising
@@ -458,13 +460,14 @@ public class Commands {
 		else if(actualTile.getAnimal() == o)
 			System.out.println("Orangutan did not step\n > Test failed");
 		else System.out.println("Orangutan moved unexpectedly\n > Test failed");
+		
 	}
 	
 	/*
-	 * Realises _ use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Realises OrangutanStepOnSoftTile use case
+	 * Creates a Tile, a SoftTile with given life and an Orangutan
+	 * Steps Orangutan form Tile To SoftTile
+	 * Checks if SoftTile's life decreased and if Orangutan stepped successfully
 	 */
 	private  void orangutanStepOnSoftTile(int life) {
 		//Initialization
@@ -492,7 +495,7 @@ public class Commands {
 	}
 	
 	/*
-	 * Realises _ use case
+	 * Realises OrangutanStepOnBrokenTile use case
 	 * Creates
 	 * _
 	 * Checks _
@@ -521,37 +524,41 @@ public class Commands {
 	}
 	
 	/*
-	 * Realises _ use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Realises OrangutanStepOnExit use case
+	 * Creates 3 Tiles, an EndPoint and an Orangutan with a follower Panda
+	 * Steps Orangutan on Endpoint
+	 * Checks if Orangutan stepped on EndPoint and teleported to starting Tile
 	 */
 	private  void orangutanStepOnExit() {
 		System.out.println("orangutanStepOnExit called");
 		Orangutan o = new Orangutan();
-		Tile start = new Tile();
-		Tile tile = new Tile();
-		EndPoint endPoint = new EndPoint(start);
+		Panda panda = new Panda();
+		Tile inTile = new Tile();
+		Tile oTile = new Tile();
+		Tile pTile = new Tile();
+		EndPoint endPoint = new EndPoint(inTile);
 
-		o.setTile(tile);
-		tile.setAnimal(o);
-		tile.setNeighbours(endPoint);
-		endPoint.setNeighbours(tile);
+		o.setTile(oTile);
+		o.setFollower(panda);
+		panda.setTile(pTile);
+		oTile.setAnimal(o);
+		oTile.setNeighbours(endPoint);
+		endPoint.setNeighbours(oTile);
 
 		// Action
 		o.goTo(endPoint);
 
 		// Test results
-		if(tile.getAnimal() == o)
+		if(oTile.getAnimal() == o)
 			System.out.println("Orangutan did not move\n > Test failed");
 		else if(endPoint.getAnimal() == o)
 			System.out.println("Orangutan stuck az EndPoint\n > Test failed");
-		else if(start.getAnimal() == o)
+		else if(inTile.getAnimal() == o)
 			System.out.println("Orangutan got to the start\n > Test succeeded");
 	}
 	
 	/*
-	 * Realises _ use case
+	 * Realises OrangutanCatchPanda use case
 	 * Creates
 	 * _
 	 * Checks _
@@ -602,7 +609,7 @@ public class Commands {
 	// Thing functions
 	
 	/*
-	 * Realises _ use case
+	 * Realises WardrobeStep use case
 	 * Creates
 	 * _
 	 * Checks _
@@ -641,7 +648,7 @@ public class Commands {
 	}
 	
 	/*
-	 * Realises _ use case
+	 * Realises ArcadeRing use case
 	 * Creates
 	 * _
 	 * Checks _
@@ -673,7 +680,7 @@ public class Commands {
 	}
 	
 	/*
-	 * Realises _ use case
+	 * Realises ChocolateAutomatBeep use case
 	 * Creates
 	 * _
 	 * Checks _

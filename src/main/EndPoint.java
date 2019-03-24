@@ -13,7 +13,7 @@ public class EndPoint extends Tile {
 		if(animal.countFollowers() == 0)
 			return;
 		Game.addScore(animal);
-		animal.letGo();
+		animal.killFollowers();
 		animal.goTo(startPoint);
 		
 	}

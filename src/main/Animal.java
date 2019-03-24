@@ -11,7 +11,10 @@ public abstract class Animal implements Steppable {
 		dir = newDir;
 	}
 	public void setTile(Tile newTile) { tile = newTile; }
-	public void setFollower(Panda newPanda) { follower = newPanda; }
+	public void setFollower(Panda newPanda) {
+		follower = newPanda;
+		newPanda.influencer = this;
+	}
 	public Animal getFollower(){
 		return follower;
 	}
@@ -50,7 +53,7 @@ public abstract class Animal implements Steppable {
 	
 	public void letGo(){
 		if(influencer != null) {
-			influencer.setFollower(null);
+			influencer.follower = null;
 			influencer = null;
 		}
 		if(follower != null) {
