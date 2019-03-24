@@ -47,14 +47,4 @@ public class Panda extends Animal {
 		toucher.goTo(tile);
 	}
 	
-	@Override
-	public void die(){
-		// Letting go of other animals
-		letGo();
-
-		// Remove from tile
-		tile.setAnimal(null);
-		tile = null;
-	}
-	
 }

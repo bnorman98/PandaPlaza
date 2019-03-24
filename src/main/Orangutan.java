@@ -15,15 +15,8 @@ public class Orangutan extends Animal {
 		this.score += score;
 	}
 	
-	@Override
-	public void die(){
-		// Letting go of pandas
-		if(follower != null)
-			follower.letGo();
-		
-		// Remove from tile
-		tile.setAnimal(null);
-		tile = null;
+	public int getScore(){
+		return score;
 	}
 	
 }

@@ -496,9 +496,15 @@ public class Commands {
 	
 	/*
 	 * Realises OrangutanStepOnBrokenTile use case
-	 * Creates
+	 * Creates a Tile, a broken SoftTile (with a life of 0) and an Orangutan
 	 * _
 	 * Checks _
+	 */
+	/*
+	 * Realises PandaStepOnBrokenTile use case
+	 * Creates a Tile, a broken SoftTile (with a life of 0) and a Panda
+	 * Steps Panda form Tile To SoftTile
+	 * Checks if Panda moved and died
 	 */
 	private  void orangutanStepOnBrokenTile() {
 		// Initialising
@@ -531,30 +537,45 @@ public class Commands {
 	 */
 	private  void orangutanStepOnExit() {
 		System.out.println("orangutanStepOnExit called");
-		Orangutan o = new Orangutan();
+		Orangutan orangutan = new Orangutan();
 		Panda panda = new Panda();
+		Panda panda2 = new Panda();
 		Tile inTile = new Tile();
 		Tile oTile = new Tile();
 		Tile pTile = new Tile();
+		Tile p2Tile = new Tile();
 		EndPoint endPoint = new EndPoint(inTile);
 
-		o.setTile(oTile);
-		o.setFollower(panda);
+		orangutan.setTile(oTile);
+		orangutan.setFollower(panda);
+		panda.setFollower(panda2);
 		panda.setTile(pTile);
-		oTile.setAnimal(o);
+		panda2.setTile(p2Tile);
+		oTile.setAnimal(orangutan);
 		oTile.setNeighbours(endPoint);
+		pTile.setAnimal(panda);
+		p2Tile.setAnimal(panda2);
 		endPoint.setNeighbours(oTile);
+		
+		int initScore = orangutan.getScore();
+		int initFollowerCnt = orangutan.countFollowers();
 
 		// Action
-		o.goTo(endPoint);
+		orangutan.goTo(endPoint);
 
 		// Test results
-		if(oTile.getAnimal() == o)
+		if(oTile.getAnimal() == orangutan)
 			System.out.println("Orangutan did not move\n > Test failed");
-		else if(endPoint.getAnimal() == o)
+		else if(endPoint.getAnimal() == orangutan)
 			System.out.println("Orangutan stuck az EndPoint\n > Test failed");
-		else if(inTile.getAnimal() == o)
-			System.out.println("Orangutan got to the start\n > Test succeeded");
+		else if(inTile.getAnimal() == orangutan) {
+			System.out.println("Orangutan got to the start");
+			if (orangutan.getScore() == initScore + initFollowerCnt)
+				System.out.println("Orangutan got it's score\n > Test succeeded");
+			else
+				System.out.println("Orangutan didn't get it's score\n > Test failed");
+		}
+		
 	}
 	
 	/*
@@ -572,7 +593,7 @@ public class Commands {
 		Tile opTile = new Tile();
 		Tile npTile = new Tile();
 
-		// setting tiles and neighbours
+		// Setting tiles and neighbours
 		opTile.setNeighbours(oTile);
 		oTile.setNeighbours(opTile);
 		oTile.setNeighbours(npTile);
@@ -591,7 +612,7 @@ public class Commands {
 		// Action
         newPanda.getTouched(orang);
 
-        //Test results
+        // Test results
         if (orang.getFollower() == newPanda){
             System.out.println("New panda caught");
             if (npTile.getAnimal() == orang && oTile.getAnimal() == newPanda){
@@ -615,7 +636,7 @@ public class Commands {
 	 * Checks _
 	 */
 	private void wardrobeStep() {
-		//Init
+		// Initialise
 		Wardrobe wardrobe1 = new Wardrobe();
 		Wardrobe wardrobe2 = new Wardrobe();
 
@@ -634,11 +655,11 @@ public class Commands {
 		p.setTile(tStartPanda);
 		tStartPanda.setAnimal(p);
 
-		//Action
+		// Action
 		p.step();
 		wardrobe1.step();
 
-		//Test results
+		// Test results
 		if (t2.getAnimal() == p)
 			System.out.println("Panda went through the wardrobes\n > Test succeeded");
 		else

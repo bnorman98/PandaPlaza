@@ -38,6 +38,10 @@ public abstract class Animal implements Steppable {
 	}
 	
 	public void killFollowers() {
+		if(follower == null) {
+			return;
+		}
+		
 		Animal last = follower;
 		
 		while(last.follower != null) {
@@ -62,9 +66,17 @@ public abstract class Animal implements Steppable {
 		}
 	}
 	
+	public void die(){
+		// Letting go of other animals
+		letGo();
+		
+		// Remove from tile
+		tile.setAnimal(null);
+		tile = null;
+	}
+	
 	// Function bodies empty on purpose from here
 	public void getTouched(Orangutan toucher) {}
-	public void die(){}
 	public void scare(){}
 	public void jump(){}
 	public void sleep(){}
