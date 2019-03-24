@@ -121,6 +121,13 @@ public class Commands {
 	}
 	
 	// Panda functions
+	
+	/*
+	 * Realizes PandaStepOnTile use case
+	 * Creates 2 Tiles and a Panda
+	 * Steps Panda from one to the other
+	 * Checks if Panda stepped successfully
+	 */
 	private void pandaStepOnTile() {
 		// Initialising
 		Panda panda = new Panda();
@@ -141,6 +148,12 @@ public class Commands {
 		else System.out.println("Panda moved unexpectedly\n > Test failed");
 	}
 
+	/*
+	 * Realizes PandaStepOnSoftTile use case
+	 * Creates a Tile, a SoftTile with given life and a Panda
+	 * Steps Panda form Tile To SoftTile
+	 * Checks if SoftTile's life decreased and if Panda stepped successfully
+	 */
 	private void pandaStepOnSoftTile(int life) {
 		// Initialising
 		Panda panda = new Panda();
@@ -166,12 +179,18 @@ public class Commands {
 			if(softTile.getLife() != 0 && softTile.getAnimal() == panda)
 				System.out.println("Panda arrived to SoftTile\n > Test succeeded");
 			else if(softTile.getLife() == 0 && softTile.getAnimal() == null)
-				System.out.println("SoftTile broke and Panda died\nTest succeeded");
+				System.out.println("SoftTile broke and Panda died\n > Test succeeded");
 			else System.out.println(" > Test failed");
 		}
 		
 	}
 	
+	/*
+	 * Realises PandaStepOnBrokenTile use case
+	 * Creates a Tile, a broken SoftTile (with a life of 0) and a Panda
+	 * Steps Panda form Tile To SoftTile
+	 * Checks if Panda moved and died
+	 */
 	private void pandaStepOnBrokenTile() {
 		// Initialising
 		Panda panda = new Panda();
@@ -196,6 +215,12 @@ public class Commands {
 		
 	}
 	
+	/*
+	 * Realises PandaStepOnExit use case
+	 * Creates 2 Tiles, an EndPoint and a Panda
+	 * Steps Panda on Endpoint
+	 * Checks if Panda stepped on EndPoint and teleported to starting Tile
+	 */
 	private void pandaStepOnExit() {
 		// Initialising
 		Panda panda = new Panda();
@@ -220,35 +245,41 @@ public class Commands {
 			System.out.println("Panda got to the start\n > Test succeeded");
 		
 	}
-
+	
+	/*
+	 * Realises PandaFollow use case
+	 * Creates 3 Tiles, an Orangutan and a Panda following it
+	 * Steppes the Orangutan
+	 * Checks if the Panda followed the Orangutan
+	 */
 	private void pandaFollow() {
 		// Initialise
-	    Orangutan orang = new Orangutan();
+	    Orangutan orangutan = new Orangutan();
 	    Panda panda = new Panda();
 	    Tile orangTile = new Tile();
 	    Tile pandaTile = new Tile();
 	    Tile newTile = new Tile();
 
-	    orang.setDir(0);
+	    orangutan.setDir(0);
 
-	    //setting tiles and neighbours
+	    // Setting tiles and neighbours
 	    orangTile.setNeighbours(newTile);
 	    orangTile.setNeighbours(pandaTile);
 	    pandaTile.setNeighbours(orangTile);
 	    newTile.setNeighbours(orangTile);
 
-	    //setting animals on tiles
-	    orang.setTile(pandaTile);
-	    pandaTile.setAnimal(orang);
+	    // Setting animals on tiles
+	    orangutan.setTile(pandaTile);
+	    pandaTile.setAnimal(orangutan);
 	    panda.setTile(orangTile);
 	    orangTile.setAnimal(panda);
-	    panda.getTouched(orang); // catch panda and switch tiles
+	    panda.getTouched(orangutan); // Catch panda and switch tiles
 
 	    // Action
-        orang.step();
+        orangutan.step();
 
         // Test results
-        if (newTile.getAnimal() == orang){
+        if (newTile.getAnimal() == orangutan){
             System.out.println("Orangutan stepped");
             if (orangTile.getAnimal() == panda){
                 System.out.println("Panda followed\n > Test succeeded");
@@ -259,6 +290,13 @@ public class Commands {
             System.out.println("Orangutan not stepped, Panda could not follow\n > Test failed");
         }
 	}
+	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private void pandaJump() {
 		// Initialising
 		JumpyPanda jPanda = new JumpyPanda();
@@ -281,6 +319,13 @@ public class Commands {
 		else System.out.println("JumpyPanda left SoftTile\n > Test failed");
 		
 	}
+	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private void pandaScare() {
 
 		//Initialising
@@ -310,20 +355,27 @@ public class Commands {
 		}
 
 	}
+	
+	/*
+	 * Realises PandaSleep use case
+	 * Creates 3 Tiles, a Chair and a Panda
+	 * Steps Panda next to Chair
+	 * Checks if Panda was slept and whether it stepped while sleeping
+	 */
 	private void pandaSleep() {
 	    // Initialise
 		SleepyPanda slPanda = new SleepyPanda();
 		Chair chair = new Chair();
 		Tile tile = new Tile();
-		Tile tile2 = new Tile();
+		Tile startTile = new Tile();
 		Tile tileChair = new Tile();
 
-		slPanda.setTile(tile2);
-		tile2.setAnimal(slPanda);
+		slPanda.setTile(startTile);
+		startTile.setAnimal(slPanda);
 		chair.setTile(tileChair);
 
-		tile.setNeighbours(tile2);
-		tile2.setNeighbours(tile);
+		tile.setNeighbours(startTile);
+		startTile.setNeighbours(tile);
 		//tile.setNeighbours(tileChair);
 		tileChair.setNeighbours(tile);
 
@@ -336,14 +388,21 @@ public class Commands {
         // Test results
         if (tileChair.getAnimal() == slPanda){
             System.out.println("SleepyPanda slept well in chair\n > Test succeeded");
-        } else if (tile2.getAnimal() == slPanda) {
+        } else if (startTile.getAnimal() == slPanda) {
             System.out.println("SleepyPanda did not sleep\n > Test failed");
         } else if (tile.getAnimal() == slPanda) {
             System.out.println("SleepyPanda slept but not in chair\n > Test failed");
         }
 	}
+	
+	/*
+	 * Realises PandaLetGo use case
+	 * Creates 3 Tiles, an Orangutan and 2 Pandas in a chain
+	 *
+	 * Checks _
+	 */
 	private void pandaLetGo() {
-
+		// Initialise
 		Tile tOrangutan = new Tile();
 		Tile tPanda1 = new Tile();
 		Tile tLetgoPanda = new Tile();
@@ -354,24 +413,33 @@ public class Commands {
 		tLetgoPanda.setNeighbours(tPanda1);
 
 		Orangutan orangutan = new Orangutan();
-		Panda panda1 = new Panda();
+		Panda panda = new Panda();
 		Panda letgoPanda = new Panda();
 
 		orangutan.setTile(tOrangutan);
-		panda1.setTile(tPanda1);
+		panda.setTile(tPanda1);
 		letgoPanda.setTile(tLetgoPanda);
 
-		orangutan.getTouched(letgoPanda);
-		orangutan.getTouched(panda1);
+		// Action
+		letgoPanda.getTouched(orangutan);
+		panda.getTouched(letgoPanda);
 		letgoPanda.letGo();
-
+		
+		// Test results
 		if (letgoPanda.getFollower() == null && orangutan.getFollower() == null)
-			System.out.println("Panda released paws\n >Test succeeded");
+			System.out.println("Panda released paws\n > Test succeeded");
 		else
-			System.out.println("Panda didn't released paws \n >Test failed");
+			System.out.println("Panda didn't released paws \n > Test failed");
 	}
 	
 	// Orangutan functions
+	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private  void orangutanStepOnTile() {
 		// Initialising
 		Orangutan o = new Orangutan();
@@ -392,6 +460,12 @@ public class Commands {
 		else System.out.println("Orangutan moved unexpectedly\n > Test failed");
 	}
 	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private  void orangutanStepOnSoftTile(int life) {
 		//Initialization
 		Orangutan orangutan = new Orangutan();
@@ -417,6 +491,12 @@ public class Commands {
 
 	}
 	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private  void orangutanStepOnBrokenTile() {
 		// Initialising
 		Orangutan o = new Orangutan();
@@ -440,6 +520,12 @@ public class Commands {
 			System.out.println("Step completed\nOrangutan is still alive \n > Test Failed");
 	}
 	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private  void orangutanStepOnExit() {
 		System.out.println("orangutanStepOnExit called");
 		Orangutan o = new Orangutan();
@@ -464,6 +550,12 @@ public class Commands {
 			System.out.println("Orangutan got to the start\n > Test succeeded");
 	}
 	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private void orangutanCatchPanda() {
 	    // Initialise
 		Orangutan orang = new Orangutan();
@@ -508,6 +600,13 @@ public class Commands {
 	}
 	
 	// Thing functions
+	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private void wardrobeStep() {
 		//Init
 		Wardrobe wardrobe1 = new Wardrobe();
@@ -540,6 +639,13 @@ public class Commands {
 
 		//System.out.println("wardrobeStep called");
 	}
+	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private void arcadeRing() {
 		JumpyPanda jPanda = new JumpyPanda();
 		Arcade arc = new Arcade();
@@ -565,6 +671,13 @@ public class Commands {
 			System.out.print("Did not find JumpyPanda\n > Test failed");
 		}
 	}
+	
+	/*
+	 * Realises _ use case
+	 * Creates
+	 * _
+	 * Checks _
+	 */
 	private void chocolateAutomatBeep() {
 		//Initialising
 		ScaryPanda sPanda = new ScaryPanda();
