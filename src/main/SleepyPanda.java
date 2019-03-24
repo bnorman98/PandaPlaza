@@ -15,12 +15,7 @@ public class SleepyPanda extends Panda {
 	public void sleep(){
 		isSleeping = true;
 		
-		if(influencer != null) {
-			influencer.follower = null;
-			influencer = null;
-		}
-		if(follower != null)
-			letGo();
+		letGo();
 	}
 	
 }

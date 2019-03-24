@@ -26,20 +26,4 @@ public class Orangutan extends Animal {
 		tile = null;
 	}
 	
-	@Override
-	public void letGo(){
-		if(follower != null)
-			follower.letGo();
-	}
-	
-	@Override
-	public int countFollowers(){
-		int cnt = 0;
-		Panda tempFollower = follower;
-		while(tempFollower != null){
-			cnt++;
-			tempFollower = tempFollower.follower;
-		}
-		return cnt;
-	}
 }

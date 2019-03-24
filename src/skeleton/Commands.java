@@ -292,10 +292,10 @@ public class Commands {
 	}
 	
 	/*
-	 * Realises _ use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Realises PandaJump use case
+	 * Creates a SoftTile and a JumpyPanda on it
+	 * Makes JumpyPanda jump
+	 * Checks if softTile's life decreased and JumpyPanda stayed on it
 	 */
 	private void pandaJump() {
 		// Initialising
@@ -321,10 +321,10 @@ public class Commands {
 	}
 	
 	/*
-	 * Realises _ use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Realises PandaScare use case
+	 * Creates 2 Tiles, an Orangutan and a ScaryPanda
+	 * Scares ScaryPanda
+	 * Checks if
 	 */
 	private void pandaScare() {
 
@@ -348,7 +348,7 @@ public class Commands {
 		sPanda.scare();
 
 		// Test results
-		if (orang.getFollower() != null){
+		if (orang.getFollower() != null) {
 			System.out.println("Panda did not scare\n > Test failed");
 		} else {
 			System.out.println("Panda scared successfully\n > Test succeeded");

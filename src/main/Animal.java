@@ -24,8 +24,14 @@ public abstract class Animal implements Steppable {
 	}
 	
 	// Returns 0 for default, overridden in Orangutan
-	public int countFollowers(){
-		return 0;
+	public int countFollowers() {
+		int cnt = 0;
+		Panda tempFollower = follower;
+		while(tempFollower != null) {
+			cnt++;
+			tempFollower = tempFollower.follower;
+		}
+		return cnt;
 	}
 	
 	public void killFollowers() {
@@ -42,6 +48,17 @@ public abstract class Animal implements Steppable {
 		}
 	}
 	
+	public void letGo(){
+		if(influencer != null) {
+			influencer.setFollower(null);
+			influencer = null;
+		}
+		if(follower != null) {
+			follower.letGo();
+			follower = null;
+		}
+	}
+	
 	// Function bodies empty on purpose from here
 	public void getTouched(Orangutan toucher) {}
 	public void die(){}
@@ -49,5 +66,5 @@ public abstract class Animal implements Steppable {
 	public void jump(){}
 	public void sleep(){}
 	public void addScore(int score){}
-	public void letGo(){}
+	
 }

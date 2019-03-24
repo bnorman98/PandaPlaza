@@ -6,7 +6,6 @@ public class Tile {
 	
 	protected Animal animal;
 	private ArrayList<Tile> neighbours = new ArrayList<>();
-	private Thing thing;
 	
 	// SoftTile konstruktora miatt kell elvileg
 	public Tile() {}

@@ -57,11 +57,4 @@ public class Panda extends Animal {
 		tile = null;
 	}
 	
-	@Override
-	public void letGo() {
-		if(influencer != null)
-			influencer.setFollower(null);
-		if(follower != null)
-			follower.letGo();
-	}
 }
