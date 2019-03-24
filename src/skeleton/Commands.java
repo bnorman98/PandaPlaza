@@ -422,7 +422,7 @@ public class Commands {
 
 		// Action
 		letgoPanda.getTouched(orangutan);
-		panda.getTouched(letgoPanda);
+		panda.getTouched(orangutan);
 		letgoPanda.letGo();
 		
 		// Test results

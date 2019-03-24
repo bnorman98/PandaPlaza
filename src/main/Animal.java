@@ -43,7 +43,7 @@ public abstract class Animal implements Steppable {
 	}
 	
 	// Function bodies empty on purpose from here
-	public void getTouched(Animal toucher) {}
+	public void getTouched(Orangutan toucher) {}
 	public void die(){}
 	public void scare(){}
 	public void jump(){}
