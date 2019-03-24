@@ -469,8 +469,8 @@ public class Commands {
 	 * Steps Orangutan form Tile To SoftTile
 	 * Checks if SoftTile's life decreased and if Orangutan stepped successfully
 	 */
-	private  void orangutanStepOnSoftTile(int life) {
-		//Initialization
+	private  void orangutanStepOnSoftTile(int life) {	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ E R R O R  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		// Initialise
 		Orangutan orangutan = new Orangutan();
 		Tile tile = new Tile();
 		SoftTile softtile = new SoftTile(life);
@@ -479,7 +479,7 @@ public class Commands {
 		tile.setNeighbours(softtile);
 		softtile.setNeighbours(tile);
 
-		//Tested action
+		// Tested action
 		orangutan.goTo(softtile);
 
 		// Test results
@@ -489,25 +489,17 @@ public class Commands {
 			System.out.println("Orangutan moved, but still alive\n > Test succeeded");
 		if(tile.getAnimal() == null && softtile.getAnimal() == null)
 			System.out.println("Orangutan moved and died\n > Test succeeded");
-
-
-
+		
 	}
 	
 	/*
 	 * Realises OrangutanStepOnBrokenTile use case
 	 * Creates a Tile, a broken SoftTile (with a life of 0) and an Orangutan
-	 * _
-	 * Checks _
-	 */
-	/*
-	 * Realises PandaStepOnBrokenTile use case
-	 * Creates a Tile, a broken SoftTile (with a life of 0) and a Panda
-	 * Steps Panda form Tile To SoftTile
-	 * Checks if Panda moved and died
+	 * Steps Orangutan form Tile To SoftTile
+	 * Checks if Orangutan moved and died
 	 */
 	private  void orangutanStepOnBrokenTile() {
-		// Initialising
+		// Initialise
 		Orangutan o = new Orangutan();
 		Tile hard = new Tile ();
 		SoftTile broken = new SoftTile(0);
@@ -531,9 +523,10 @@ public class Commands {
 	
 	/*
 	 * Realises OrangutanStepOnExit use case
-	 * Creates 3 Tiles, an EndPoint and an Orangutan with a follower Panda
+	 * Creates 4 Tiles, an EndPoint and an Orangutan with 2 follower Pandas
 	 * Steps Orangutan on Endpoint
 	 * Checks if Orangutan stepped on EndPoint and teleported to starting Tile
+	 * Checks if Orangutan got equal amount of score to the number of its followers
 	 */
 	private  void orangutanStepOnExit() {
 		System.out.println("orangutanStepOnExit called");
@@ -570,10 +563,10 @@ public class Commands {
 			System.out.println("Orangutan stuck az EndPoint\n > Test failed");
 		else if(inTile.getAnimal() == orangutan) {
 			System.out.println("Orangutan got to the start");
-			if (orangutan.getScore() == initScore + initFollowerCnt)
-				System.out.println("Orangutan got it's score\n > Test succeeded");
+			if(orangutan.getScore() == initScore + initFollowerCnt)
+				System.out.println("Orangutan got its score\n > Test succeeded");
 			else
-				System.out.println("Orangutan didn't get it's score\n > Test failed");
+				System.out.println("Orangutan didn't get its score\n > Test failed");
 		}
 		
 	}
@@ -589,25 +582,25 @@ public class Commands {
 		Orangutan orang = new Orangutan();
 		Panda oldPanda = new Panda();
 		Panda newPanda = new Panda();
-		Tile oTile = new Tile();
-		Tile opTile = new Tile();
-		Tile npTile = new Tile();
+		Tile orangTile = new Tile();
+		Tile oldpTile = new Tile();
+		Tile newpTile = new Tile();
 
 		// Setting tiles and neighbours
-		opTile.setNeighbours(oTile);
-		oTile.setNeighbours(opTile);
-		oTile.setNeighbours(npTile);
-		npTile.setNeighbours(oTile);
+		oldpTile.setNeighbours(orangTile);
+		orangTile.setNeighbours(oldpTile);
+		orangTile.setNeighbours(newpTile);
+		newpTile.setNeighbours(orangTile);
 
-		//setting animals on tiles
-		opTile.setAnimal(orang);
-		orang.setTile(opTile);
-		oTile.setAnimal(oldPanda);
-		oldPanda.setTile(oTile);
-		npTile.setAnimal(newPanda);
-		newPanda.setTile(npTile);
+		// Setting animals on tiles
+		oldpTile.setAnimal(orang);
+		orang.setTile(oldpTile);
+		orangTile.setAnimal(oldPanda);
+		oldPanda.setTile(orangTile);
+		newpTile.setAnimal(newPanda);
+		newPanda.setTile(newpTile);
 
-		oldPanda.getTouched(orang); //sets a follower for the orangutan, they switch tiles
+		oldPanda.getTouched(orang); // Sets a follower for the orangutan, they switch tiles
 
 		// Action
         newPanda.getTouched(orang);
@@ -615,9 +608,9 @@ public class Commands {
         // Test results
         if (orang.getFollower() == newPanda){
             System.out.println("New panda caught");
-            if (npTile.getAnimal() == orang && oTile.getAnimal() == newPanda){
+            if (newpTile.getAnimal() == orang && orangTile.getAnimal() == newPanda){
                 System.out.println("Switched tiles correctly\n > Test succeeded");
-            } else if (npTile.getAnimal() == newPanda && oTile.getAnimal() == orang){
+            } else if (newpTile.getAnimal() == newPanda && orangTile.getAnimal() == orang){
                 System.out.println("Did not switch tiles\n > Test failed");
             } else {
                 System.out.println("Moved somehow, not correctly\n > Test failed");
