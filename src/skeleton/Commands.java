@@ -58,7 +58,6 @@ public class Commands {
 					break;
 					
 				case "orangutan":
-					System.out.println("Orangutan called");
 					try {
 						// Orangutan Step Tests
 						if(cmd[1].equals("step")) {
@@ -593,24 +592,24 @@ public class Commands {
 		newpTile.setNeighbours(orangTile);
 
 		// Setting animals on tiles
-		oldpTile.setAnimal(orang);
-		orang.setTile(oldpTile);
-		orangTile.setAnimal(oldPanda);
-		oldPanda.setTile(orangTile);
+		orangTile.setAnimal(orang);
+		orang.setTile(orangTile);
+		oldpTile.setAnimal(oldPanda);
+		oldPanda.setTile(oldpTile);
 		newpTile.setAnimal(newPanda);
 		newPanda.setTile(newpTile);
 
-		oldPanda.getTouched(orang); // Sets a follower for the orangutan, they switch tiles
+		orang.setFollower(oldPanda);
 
 		// Action
         newPanda.getTouched(orang);
 
         // Test results
-        if (orang.getFollower() == newPanda){
+        if (orang.getFollower() == newPanda) {
             System.out.println("New panda caught");
-            if (newpTile.getAnimal() == orang && orangTile.getAnimal() == newPanda){
+            if (newpTile.getAnimal() == orang && orangTile.getAnimal() == newPanda) {
                 System.out.println("Switched tiles correctly\n > Test succeeded");
-            } else if (newpTile.getAnimal() == newPanda && orangTile.getAnimal() == orang){
+            } else if (newpTile.getAnimal() == newPanda && orangTile.getAnimal() == orang) {
                 System.out.println("Did not switch tiles\n > Test failed");
             } else {
                 System.out.println("Moved somehow, not correctly\n > Test failed");

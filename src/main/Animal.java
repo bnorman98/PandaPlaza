@@ -20,7 +20,7 @@ public abstract class Animal implements Steppable {
 	}
 	
 	public void goTo(Tile newTile) {
-		tile.setAnimal(newTile.getAnimal());
+		tile.setAnimal(null);
 		newTile.setAnimal(this);
 		tile = newTile;
 		tile.stepped();

@@ -38,13 +38,21 @@ public class Panda extends Animal {
 	}
 	
 	public void getTouched(Orangutan toucher) {
-		if(toucher.follower != null){
+		// Releasing paws if the Panda held any
+		letGo();
+		
+		// Holding paws
+		if(toucher.follower != null) {
 			follower = toucher.follower;
 			follower.influencer = this;
 		}
 		influencer = toucher;
 		toucher.follower = this;
+		
+		// Changing place
+		Tile temp = toucher.tile;
 		toucher.goTo(tile);
+		goTo(temp);
 	}
 	
 }
