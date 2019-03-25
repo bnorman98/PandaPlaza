@@ -8,18 +8,25 @@ public abstract class Animal implements Steppable {
 	protected Animal influencer;
 	
 	public void setDir(int newDir) {
+		System.out.println("Animal.setDir called");
 		dir = newDir;
 	}
-	public void setTile(Tile newTile) { tile = newTile; }
+	public void setTile(Tile newTile) {
+		System.out.println("Animal.setTile called");
+		tile = newTile;
+	}
 	public void setFollower(Panda newPanda) {
+		System.out.println("Animal.setFollower called");
 		follower = newPanda;
 		newPanda.influencer = this;
 	}
-	public Animal getFollower(){
+	public Animal getFollower() {
+		System.out.println("Animal.getFollower called");
 		return follower;
 	}
 	
 	public void goTo(Tile newTile) {
+		System.out.println("Animal.goTo called");
 		tile.setAnimal(null);
 		newTile.setAnimal(this);
 		tile = newTile;
@@ -28,6 +35,7 @@ public abstract class Animal implements Steppable {
 	
 	// Returns 0 for default, overridden in Orangutan
 	public int countFollowers() {
+		System.out.println("Animal.countFollowers called");
 		int cnt = 0;
 		Panda tempFollower = follower;
 		while(tempFollower != null) {
@@ -38,6 +46,7 @@ public abstract class Animal implements Steppable {
 	}
 	
 	public void killFollowers() {
+		System.out.println("Animal.killFollowers called");
 		if(follower == null) {
 			return;
 		}
@@ -55,7 +64,8 @@ public abstract class Animal implements Steppable {
 		}
 	}
 	
-	public void letGo(){
+	public void letGo() {
+		System.out.println("Animal.letGo called");
 		if(influencer != null) {
 			influencer.follower = null;
 			influencer = null;
@@ -66,7 +76,8 @@ public abstract class Animal implements Steppable {
 		}
 	}
 	
-	public void die(){
+	public void die() {
+		System.out.println("Animal.die called");
 		// Letting go of other animals
 		letGo();
 		

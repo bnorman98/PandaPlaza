@@ -10,6 +10,7 @@ public class EndPoint extends Tile {
 	
 	// Double check me please
 	public void stepped() {
+		System.out.println("Endpoint.stepped called");
 		if(animal.countFollowers() == 0)
 			return;
 		Game.addScore(animal);

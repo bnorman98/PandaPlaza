@@ -16,6 +16,7 @@ public class ChocolateAutomat extends Thing {
 	
 	@Override
 	public void step() {
+		System.out.println("ChocolateAutomat.step called");
 		Random r = new Random();
 		for (Tile t: tile.getNeighbours()) {
 			if(t.getAnimal() != null && r.nextInt() % 100 <= chance)

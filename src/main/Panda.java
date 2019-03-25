@@ -7,6 +7,7 @@ public class Panda extends Animal {
 	
 	@Override
 	public void step() {
+		System.out.println("Panda.step called");
 		try {
 			if(influencer!= null)
 				return;
@@ -25,7 +26,8 @@ public class Panda extends Animal {
 
 	}
 	
-	public void follow(Tile nextTile){
+	public void follow(Tile nextTile) {
+		System.out.println("Panda.follow called");
 		if(influencer == null)
 		{
 			System.out.println("Error: No one to follow.");
@@ -38,6 +40,7 @@ public class Panda extends Animal {
 	}
 	
 	public void getTouched(Orangutan toucher) {
+		System.out.println("Panda.getTouched called");
 		// Releasing paws if the Panda held any
 		letGo();
 		
@@ -50,19 +53,12 @@ public class Panda extends Animal {
 		toucher.follower = this;
 		
 		// Changing place
-
-		//New version?
 		Tile temp = new Tile();
 		Tile myTile = tile;
 		goTo(temp);
 		Tile toucherTile = toucher.tile;
 		toucher.goTo(myTile);
 		goTo(toucherTile);
-
-		//Old version
-		//Tile temp = tile;
-		//goTo(toucher.tile);
-		//temp.setAnimal(toucher);
 		
 	}
 	

@@ -15,6 +15,7 @@ public class Tile {
 	}
 
 	public void setNeighbours(Tile t) {
+		System.out.println("Tile.setNeighbour called");
 		neighbours.add(t);
 	}
 
@@ -24,24 +25,29 @@ public class Tile {
 	}
 	*/
 	public ArrayList<Tile> getNeighbours() {
+		System.out.println("Tile.getNeighbours called");
 		return neighbours;
 	}
 	
 	public Tile getNeighbourAt(int idx) {
+		System.out.println("Tile.getNeighbourAt called");
 		return neighbours.get(idx);
 	}
 	
-	public void setAnimal(Animal value){
+	public void setAnimal(Animal value) {
+		System.out.println("Tile.setAnimal called");
 		animal = value;
 	}
 	
-	public Animal getAnimal(){
+	public Animal getAnimal() {
+		System.out.println("Tile.getAnimal called");
 		return animal;
 	}
 	
 	public void stepped(){}
 	
-	public boolean canMove(){
+	public boolean canMove() {
+		System.out.println("Tile.canMove called");
 		for (Tile tile : neighbours) {
 			if(tile.getAnimal() == null)
 				return true;

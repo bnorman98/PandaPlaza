@@ -22,6 +22,7 @@ public class Game {
 	public void endGame() {}
 	
 	public void stepAll() {
+		System.out.println("Game.stepAll called");
 		for (Orangutan orangutan : orangutans) {
 			orangutan.step();
 		}
@@ -32,11 +33,14 @@ public class Game {
 			thing.step();
 		}
 	}
+	
 	public static void addScore(Animal animal) {
+		System.out.println("Game.addScore called");
 		animal.addScore(animal.countFollowers());
 	}
 	
 	public boolean generateRandom(int chance) {
+		System.out.println("Game.generateRandom called");
 		int rand = (int) (Math.random() * 100);
 		System.out.println("Randomised: " + rand);
 		return rand > chance;

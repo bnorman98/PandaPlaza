@@ -134,6 +134,7 @@ public class Commands {
 	 * Checks if Panda stepped successfully
 	 */
 	private void pandaStepOnTile() {
+		System.out.println("Commands.pandaStepOnTile called");
 		// Initialise
 		Panda panda = new Panda();
 		Tile tile = new Tile();
@@ -160,6 +161,7 @@ public class Commands {
 	 * Checks if SoftTile's life decreased and if Panda stepped successfully
 	 */
 	private void pandaStepOnSoftTile(int life) {
+		System.out.println("CommandsPandaStepOnSoftTile. called");
 		// Initialise
 		Panda panda = new Panda();
 		Tile tile = new Tile();
@@ -227,6 +229,7 @@ public class Commands {
 	 * Checks if Panda stepped on EndPoint and teleported to starting Tile
 	 */
 	private void pandaStepOnExit() {
+		System.out.println("Commands.pandaStepOnExit called");
 		// Initialise
 		Panda panda = new Panda();
 		Tile start = new Tile();
@@ -258,6 +261,7 @@ public class Commands {
 	 * Checks if the Panda followed the Orangutan
 	 */
 	private void pandaFollow() {
+		System.out.println("Commands.pandaFollow called");
 		// Initialise
 	    Orangutan orangutan = new Orangutan();
 	    Panda panda = new Panda();
@@ -303,6 +307,7 @@ public class Commands {
 	 * Checks if softTile's life decreased and JumpyPanda stayed on it
 	 */
 	private void pandaJump() {
+		System.out.println("Commands.pandaJump called");
 		// Initialise
 		JumpyPanda jPanda = new JumpyPanda();
 		SoftTile softTile = new SoftTile();
@@ -332,6 +337,7 @@ public class Commands {
 	 * Checks if ScaryPanda let go of Orangutan
 	 */
 	private void pandaScare() {
+		System.out.println("Commands.pandaScare called");
 		//Initialise
 		ScaryPanda sPanda = new ScaryPanda();
 		Orangutan orang = new Orangutan();
@@ -367,6 +373,7 @@ public class Commands {
 	 * Checks if Panda was slept and whether it stepped while sleeping
 	 */
 	private void pandaSleep() {
+		System.out.println("Commands.pandaSleep called");
 	    // Initialise
 		SleepyPanda slPanda = new SleepyPanda();
 		Chair chair = new Chair();
@@ -407,6 +414,7 @@ public class Commands {
 	 * Checks if Panda let go of influencer and follower
 	 */
 	private void pandaLetGo() {
+		System.out.println("Commands.pandaLetGo called");
 		// Initialise
 		Tile tOrangutan = new Tile();
 		Tile tPanda1 = new Tile();
@@ -448,6 +456,7 @@ public class Commands {
 	 * Checks  if Orangutan stepped successfully
 	 */
 	private  void orangutanStepOnTile() {
+		System.out.println("Commands.orangutanStepOnTile called");
 		// Initialise
 		Orangutan o = new Orangutan();
 		Tile actualTile = new Tile();
@@ -475,6 +484,7 @@ public class Commands {
 	 * Checks if SoftTile's life decreased and if Orangutan stepped successfully
 	 */
 	private  void orangutanStepOnSoftTile(int life) {
+		System.out.println("Commands.orangutanStepOnSoftTile called");
 		// Initialise
 		Orangutan orangutan = new Orangutan();
 		Tile tile = new Tile();
@@ -512,6 +522,7 @@ public class Commands {
 	 * Checks if Orangutan moved and died
 	 */
 	private  void orangutanStepOnBrokenTile() {
+		System.out.println("Commands.orangutanStepOnBrokenTile called");
 		// Initialise
 		Orangutan o = new Orangutan();
 		Tile hard = new Tile ();
@@ -542,7 +553,7 @@ public class Commands {
 	 * Checks if Orangutan got equal amount of score to the number of its followers
 	 */
 	private  void orangutanStepOnExit() {
-		System.out.println("orangutanStepOnExit called");
+		System.out.println("Commands.orangutanStepOnExit called");
 		Orangutan orangutan = new Orangutan();
 		Panda panda = new Panda();
 		Panda panda2 = new Panda();
@@ -591,6 +602,7 @@ public class Commands {
 	 * Checks _
 	 */
 	private void orangutanCatchPanda() {
+		System.out.println("Commands.orangutanCatchPanda called");
 	    // Initialise
 		Orangutan orang = new Orangutan();
 		Panda oldPanda = new Panda();
@@ -642,6 +654,7 @@ public class Commands {
 	 * Checks if Panda went through the wardrobes
 	 */
 	private void wardrobeStep() {
+		System.out.println("Commands.wardrobeStep called");
 		// Initialise
 		Wardrobe wardrobe1 = new Wardrobe();
 		Wardrobe wardrobe2 = new Wardrobe();
@@ -680,6 +693,7 @@ public class Commands {
 	 * Checks if Arcade rang and made JumpyPanda jump
 	 */
 	private void arcadeRing() {
+		System.out.println("Commands.arcadeRing called");
 		// Initialise
 		JumpyPanda jPanda = new JumpyPanda();
 		Arcade arcade = new Arcade();
@@ -713,6 +727,7 @@ public class Commands {
 	 * Checks if ChocolateAutomat beeped and ScaryPanda scared
 	 */
 	private void chocolateAutomatBeep() {
+		System.out.println("Commands.chocolateAutomatBeep called");
 		// Initialise
 		ScaryPanda sPanda = new ScaryPanda();
 		Orangutan orang = new Orangutan();
