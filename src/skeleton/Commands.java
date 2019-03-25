@@ -2,6 +2,8 @@ package skeleton;
 import main.*;
 
 public class Commands {
+	private Manual manual = new Manual();
+	
 	public boolean commands(String cmd[]) {
 		if(cmd[0] != null) {
 			switch (cmd[0]) {
@@ -105,6 +107,10 @@ public class Commands {
 				
 				case "chocolateAutomat":
 					chocolateAutomatBeep();
+					break;
+					
+				case "help":
+					manual.showInstructions();
 					break;
 					
 				case "exit":

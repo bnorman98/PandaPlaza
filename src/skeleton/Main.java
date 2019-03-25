@@ -9,9 +9,9 @@ public class Main {
 		InputStreamReader isr =	new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 
-		//Segédlet kiírása
-		Manual man = new Manual();
-		man.showInstructions();
+		// Printing basic commands
+		System.out.println("Welcome to PandaPlaza");
+		System.out.println("Type command:\n > help - to open user manual\n > exit - to close the program");
 
 		Commands skeleton = new Commands();
 		boolean exitCondition = false;
