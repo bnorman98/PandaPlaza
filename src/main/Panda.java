@@ -50,9 +50,19 @@ public class Panda extends Animal {
 		toucher.follower = this;
 		
 		// Changing place
-		Tile temp = tile;
-		goTo(toucher.tile);
-		temp.setAnimal(toucher);
+
+		//New version?
+		Tile temp = new Tile();
+		Tile myTile = tile;
+		goTo(temp);
+		Tile toucherTile = toucher.tile;
+		toucher.goTo(myTile);
+		goTo(toucherTile);
+
+		//Old version
+		//Tile temp = tile;
+		//goTo(toucher.tile);
+		//temp.setAnimal(toucher);
 		
 	}
 	

@@ -239,9 +239,9 @@ public class Commands {
 		if(tile.getAnimal() == panda)
 			System.out.println("Panda did not move\n > Test failed");
 		else if(endPoint.getAnimal() == panda)
-			System.out.println("Panda stuck at EndPoint\n > Test failed");
+			System.out.println("Panda stuck at EndPoint\n > Test succeeded");
 		else if(start.getAnimal() == panda)
-			System.out.println("Panda got to the start\n > Test succeeded");
+			System.out.println("Panda got to the start\n > Test failed");
 		
 	}
 	
@@ -418,9 +418,9 @@ public class Commands {
 		orangutan.setTile(tOrangutan);
 		panda.setTile(tPanda1);
 		letgoPanda.setTile(tLetgoPanda);
-		
-		letgoPanda.getTouched(orangutan);
+
 		panda.getTouched(orangutan);
+		letgoPanda.getTouched(orangutan);
 		
 		// Action
 		letgoPanda.letGo();

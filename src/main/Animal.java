@@ -62,7 +62,7 @@ public abstract class Animal implements Steppable {
 		}
 		if(follower != null) {
 			follower.letGo();
-			follower = null;
+			//follower = null; Ez nem kell, mert az influencer.follower = null-ban már beállítjuk
 		}
 	}
 	
