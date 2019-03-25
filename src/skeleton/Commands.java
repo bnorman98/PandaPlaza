@@ -27,6 +27,7 @@ public class Commands {
 							else if(cmd[2].equals("exit")) {
 								pandaStepOnExit();
 							}
+							else System.out.println("Invalid command - Problem with argument 3");
 							
 						}
 						// PandaFollow
@@ -49,7 +50,7 @@ public class Commands {
 						else if(cmd[1].equals("letgo")) {
 							pandaLetGo();
 						}
-						else System.out.println("Invalid command");
+						else System.out.println("Invalid command - Problem with argument 2");
 					}
 					catch(ArrayIndexOutOfBoundsException oob) {
 						System.out.println("Missing arguments");
@@ -71,8 +72,6 @@ public class Commands {
 								if(cmd[3] != null) {
 									orangutanStepOnSoftTile(Integer.parseInt(cmd[3]));
 								}
-								else
-									orangutanStepOnSoftTile(20);
 							}
 							// OrangutanStepOnBrokenTile
 							else if(cmd[2].equals("broken")) {
@@ -82,11 +81,12 @@ public class Commands {
 							else if(cmd[2].equals("exit")) {
 								orangutanStepOnExit();
 							}
-							else System.out.println("Invalid command");
+							else System.out.println("Invalid command - Problem with argument 3");
 						}
 						else if(cmd[1].equals("catch")) {
 							orangutanCatchPanda();
 						}
+						else System.out.println("Invalid command - Problem with argument 2");
 						
 					}
 					catch(ArrayIndexOutOfBoundsException oob) {
@@ -128,7 +128,7 @@ public class Commands {
 	 * Checks if Panda stepped successfully
 	 */
 	private void pandaStepOnTile() {
-		// Initialising
+		// Initialise
 		Panda panda = new Panda();
 		Tile tile = new Tile();
 		Tile nextTile = new Tile();
@@ -154,7 +154,7 @@ public class Commands {
 	 * Checks if SoftTile's life decreased and if Panda stepped successfully
 	 */
 	private void pandaStepOnSoftTile(int life) {
-		// Initialising
+		// Initialise
 		Panda panda = new Panda();
 		Tile tile = new Tile();
 		SoftTile softTile = new SoftTile(life);
@@ -179,7 +179,7 @@ public class Commands {
 				System.out.println("Panda arrived to SoftTile\n > Test succeeded");
 			else if(softTile.getLife() == 0 && softTile.getAnimal() == null)
 				System.out.println("SoftTile broke and Panda died\n > Test succeeded");
-			else System.out.println(" > Test failed");
+			else System.out.println("Unexpected behaviour\n > Test failed");
 		}
 		
 	}
@@ -191,7 +191,7 @@ public class Commands {
 	 * Checks if Panda moved and died
 	 */
 	private void pandaStepOnBrokenTile() {
-		// Initialising
+		// Initialise
 		Panda panda = new Panda();
 		Tile tile = new Tile();
 		SoftTile brokenTile = new SoftTile(0);
@@ -221,7 +221,7 @@ public class Commands {
 	 * Checks if Panda stepped on EndPoint and teleported to starting Tile
 	 */
 	private void pandaStepOnExit() {
-		// Initialising
+		// Initialise
 		Panda panda = new Panda();
 		Tile start = new Tile();
 		Tile tile = new Tile();
@@ -297,7 +297,7 @@ public class Commands {
 	 * Checks if softTile's life decreased and JumpyPanda stayed on it
 	 */
 	private void pandaJump() {
-		// Initialising
+		// Initialise
 		JumpyPanda jPanda = new JumpyPanda();
 		SoftTile softTile = new SoftTile();
 		jPanda.setTile(softTile);
@@ -326,7 +326,7 @@ public class Commands {
 	 * Checks if ScaryPanda let go of Orangutan
 	 */
 	private void pandaScare() {
-		//Initialising
+		//Initialise
 		ScaryPanda sPanda = new ScaryPanda();
 		Orangutan orang = new Orangutan();
 		Tile tPanda = new Tile();
@@ -442,7 +442,7 @@ public class Commands {
 	 * Checks  if Orangutan stepped successfully
 	 */
 	private  void orangutanStepOnTile() {
-		// Initialising
+		// Initialise
 		Orangutan o = new Orangutan();
 		Tile actualTile = new Tile();
 		Tile nextTile = new Tile();
@@ -468,26 +468,34 @@ public class Commands {
 	 * Steps Orangutan form Tile To SoftTile
 	 * Checks if SoftTile's life decreased and if Orangutan stepped successfully
 	 */
-	private  void orangutanStepOnSoftTile(int life) {	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ E R R O R  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private  void orangutanStepOnSoftTile(int life) {
 		// Initialise
 		Orangutan orangutan = new Orangutan();
 		Tile tile = new Tile();
-		SoftTile softtile = new SoftTile(life);
+		SoftTile softTile = new SoftTile(life);
 		orangutan.setTile(tile);
 		tile.setAnimal(orangutan);
-		tile.setNeighbours(softtile);
-		softtile.setNeighbours(tile);
+		tile.setNeighbours(softTile);
+		softTile.setNeighbours(tile);
 
 		// Tested action
-		orangutan.goTo(softtile);
+		orangutan.goTo(softTile);
 
 		// Test results
-		if(tile.getAnimal() == orangutan)
-			System.out.println("Orangutan did not move\n > Test failed");
-		if(softtile.getAnimal() == orangutan)
-			System.out.println("Orangutan moved, but still alive\n > Test succeeded");
-		if(tile.getAnimal() == null && softtile.getAnimal() == null)
-			System.out.println("Orangutan moved and died\n > Test succeeded");
+		System.out.println("SoftTile's life = " + softTile.getLife());
+		
+		if (tile.getAnimal() == orangutan && softTile.getAnimal() != orangutan) {
+			System.out.println("Orangutan stayed on Tile");
+			System.out.println(" > Test failed");
+		}
+		else if (tile.getAnimal() != orangutan) {
+			System.out.println("Orangutan left Tile");
+			if(softTile.getLife() != 0 && softTile.getAnimal() == orangutan)
+				System.out.println("Orangutan arrived to SoftTile\n > Test succeeded");
+			else if(softTile.getLife() == 0 && softTile.getAnimal() == null)
+				System.out.println("SoftTile broke and Orangutan died\n > Test succeeded");
+			else System.out.println("Unexpected behaviour\n > Test failed");
+		}
 		
 	}
 	
@@ -586,8 +594,8 @@ public class Commands {
 		Tile newpTile = new Tile();
 
 		// Setting tiles and neighbours
-		oldpTile.setNeighbours(orangTile);
 		orangTile.setNeighbours(oldpTile);
+		oldpTile.setNeighbours(orangTile);
 		orangTile.setNeighbours(newpTile);
 		newpTile.setNeighbours(orangTile);
 
@@ -612,10 +620,10 @@ public class Commands {
             } else if (newpTile.getAnimal() == newPanda && orangTile.getAnimal() == orang) {
                 System.out.println("Did not switch tiles\n > Test failed");
             } else {
-                System.out.println("Moved somehow, not correctly\n > Test failed");
+                System.out.println("Animals moved unexpectedly\n > Test failed");
             }
         } else {
-            System.out.println("No new pandas caught\n > Test failed");
+            System.out.println("No pandas caught\n > Test failed");
         }
 	}
 	
@@ -623,9 +631,9 @@ public class Commands {
 	
 	/*
 	 * Realises WardrobeStep use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Creates 2 Wardrobes, 3 Tiles, and a Panda
+	 * Steps Panda on Wardrobe's Tile and tries to teleport it
+	 * Checks if Panda went through the wardrobes
 	 */
 	private void wardrobeStep() {
 		// Initialise
@@ -641,51 +649,51 @@ public class Commands {
 
 		Tile tStartPanda = new Tile();
 		tStartPanda.setNeighbours(t1);
-		t1.setNeighbours(tStartPanda); //Not necessary
+		t1.setNeighbours(tStartPanda);
 
 		Panda p = new Panda();
 		p.setTile(tStartPanda);
 		tStartPanda.setAnimal(p);
 
 		// Action
-		p.step();
+		p.goTo(t1);
 		wardrobe1.step();
 
 		// Test results
 		if (t2.getAnimal() == p)
 			System.out.println("Panda went through the wardrobes\n > Test succeeded");
 		else
-			System.out.println("Panda didn't arrive at the end of the wardrobe\n > Test failed");
-
-		//System.out.println("wardrobeStep called");
+			System.out.println("Panda didn't arrive at the other end of the wardrobe\n > Test failed");
+		
 	}
 	
 	/*
 	 * Realises ArcadeRing use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Creates a Tile, a softTile, an Arcade and a JumpyPanda
+	 * Rings Arcade
+	 * Checks if Arcade rang and made JumpyPanda jump
 	 */
 	private void arcadeRing() {
+		// Initialise
 		JumpyPanda jPanda = new JumpyPanda();
-		Arcade arc = new Arcade();
+		Arcade arcade = new Arcade();
 		SoftTile softTile = new SoftTile();
 		Tile tile = new Tile();
 		jPanda.setTile(softTile);
 		softTile.setAnimal(jPanda);
-		arc.setTile(tile);
+		arcade.setTile(tile);
 		tile.setNeighbours(softTile);
 		softTile.setNeighbours(tile);
 		int initLife = softTile.getLife();
 
 		// Action
-		arc.step();
+		arcade.step();
 
 		// Test results
-		if (tile.getNeighbourAt(0).getAnimal() == jPanda) {
+		if (softTile.getAnimal() == jPanda) {
 			if (softTile.getLife() == initLife - 1)
-				System.out.println("JumpyPanda found, made it jump\n > Test succeeded");
-			else System.out.println("JumpyPanda found, could not make is jump\n > Test failed");
+				System.out.println("JumpyPanda jumped\n > Test succeeded");
+			else System.out.println("JumpyPanda did not jump\n > Test failed");
 		}
 		else {
 			System.out.print("Did not find JumpyPanda\n > Test failed");
@@ -694,12 +702,12 @@ public class Commands {
 	
 	/*
 	 * Realises ChocolateAutomatBeep use case
-	 * Creates
-	 * _
-	 * Checks _
+	 * Creates 3 Tiles, a ChocolateAutomat, an Orangutan and a ScaryPanda
+	 * Beeps ChocolateAutomat
+	 * Checks if ChocolateAutomat beeped and ScaryPanda scared
 	 */
 	private void chocolateAutomatBeep() {
-		//Initialising
+		// Initialise
 		ScaryPanda sPanda = new ScaryPanda();
 		Orangutan orang = new Orangutan();
 		ChocolateAutomat chocoAutomat = new ChocolateAutomat();
@@ -724,32 +732,12 @@ public class Commands {
 		chocoAutomat.step();
 
 		// Test results
-		System.out.println("ChocloateAutomat beeped successfully");
+		System.out.println("ChocolateAutomat beeped");
 		if (orang.getFollower() != null){
-			System.out.println("Panda found, could not scare\n > Test failed");
+			System.out.println("Panda did not scare\n > Test failed");
 		} else {
-			System.out.println("Panda found, scared successfully\n > Test succeeded");
+			System.out.println("Panda scared\n > Test succeeded");
 		}
 	}
 	
-	// Not a real use case
-	// Made this just to test it
-	private void countFollowersTest(){
-		Panda p1 = new Panda();
-		Panda p2 = new Panda();
-		Panda p3 = new Panda();
-		Panda p4 = new Panda();
-		Panda p5 = new Panda();
-		Orangutan orangutan = new Orangutan();
-		orangutan.setFollower(p1);
-		p1.setFollower(p2);
-		p2.setFollower(p3);
-		p3.setFollower(p4);
-		p4.setFollower(p5);
-		System.out.println("Followers: " + orangutan.countFollowers());
-	}
-	
-	/*
-	 * Insert test functions here and call them in commands(cmd:String)
-	 */
 }
