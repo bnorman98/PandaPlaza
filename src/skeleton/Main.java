@@ -10,7 +10,7 @@ public class Main {
 		BufferedReader br = new BufferedReader(isr);
 
 		// Printing basic commands
-		System.out.println("Welcome to PandaPlaza");
+		System.out.println("Welcome to PandaPlaza Prototype");
 		System.out.println("Type command:\n > help - to open user manual\n > exit - to close the program");
 
 		Commands skeleton = new Commands();

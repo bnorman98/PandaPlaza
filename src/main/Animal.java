@@ -7,6 +7,15 @@ public abstract class Animal implements Steppable {
 	protected Panda follower;
 	protected Animal influencer;
 	
+	// Made for Prototype
+	protected int ID;
+	public void setID(int id) {
+		ID = id;
+	}
+	public int getID() {
+		return ID;
+	}
+	
 	public void setDir(int newDir) {
 		System.out.println("Animal.setDir called");
 		dir = newDir;

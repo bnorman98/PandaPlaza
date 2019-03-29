@@ -20,7 +20,7 @@ public class Tile {
 	}
 
 	/*
-	public void setThing(Thing thing){
+	public void setThing(Thing thing) {
 		this.thing = thing;
 	}
 	*/
