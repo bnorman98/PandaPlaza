@@ -22,4 +22,8 @@ public class Orangutan extends Animal {
 		return score;
 	}
 	
+	@Override
+	public String toString() {
+		return "Orangutan\n\tTile: " + tile.toString();	// Itt még a behúzást meg kell javítani
+	}
 }

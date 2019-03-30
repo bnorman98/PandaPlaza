@@ -18,7 +18,9 @@ public class Game {
 	}
 	
 	private Game() {}
-	public void startGame() {}
+	public void startGame() {
+		stepAll();
+	}
 	public void endGame() {}
 	
 	public void stepAll() {

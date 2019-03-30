@@ -22,6 +22,10 @@ public class SoftTile extends Tile {
 			life--;
 		if(life == 0)
 			animal.die();
-		
+	}
+	
+	@Override
+	public String toString() {
+		return "SoftTile\n\tID: " + ID + "\n\tlife: " + life;
 	}
 }

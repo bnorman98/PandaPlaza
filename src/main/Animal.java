@@ -82,6 +82,7 @@ public abstract class Animal implements Steppable {
 		if(follower != null) {
 			follower.letGo();
 			//follower = null; Ez nem kell, mert az influencer.follower = null-ban már beállítjuk
+			
 		}
 	}
 	
@@ -101,5 +102,8 @@ public abstract class Animal implements Steppable {
 	public void jump(){}
 	public void sleep(){}
 	public void addScore(int score){}
+	public String toString(){
+		return "Animal";
+	}
 	
 }

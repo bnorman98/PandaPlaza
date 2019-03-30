@@ -7,6 +7,15 @@ public class Tile {
 	protected Animal animal;
 	private ArrayList<Tile> neighbours = new ArrayList<>();
 	
+	// Made for Prototype
+	protected int ID;
+	public void setID(int id) {
+		ID = id;
+	}
+	public int getID() {
+		return ID;
+	}
+	
 	// SoftTile konstruktora miatt kell elvileg
 	public Tile() {}
 	
@@ -54,4 +63,9 @@ public class Tile {
 		}
 		return false;
 	}
+	
+	public String toString() {
+		return "Tile\n\tID: " + ID;
+	}
+	
 }
