@@ -23,9 +23,10 @@ public class Tile {
 		// Clone the list and it's contents
 	}
 
-	public void setNeighbours(Tile t) {
+	public void addNeighbour(Tile tile) {
 		System.out.println("Tile.setNeighbour called");
-		neighbours.add(t);
+		neighbours.add(tile);
+		tile.neighbours.add(this);
 	}
 
 	/*

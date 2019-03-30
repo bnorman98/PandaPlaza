@@ -1,27 +1,33 @@
 package skeleton;
 import main.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.text.ParseException;
 
 public class Commands {
+	private Game game;
 	private Manual manual = new Manual();
 	
-	public boolean commands(String cmd[]) {
+	public boolean commands(String[] cmd) {
 		
 		switch(cmd[0]) {
 			// Creating parts of the game
 			case "create":
 				switch(cmd[1]) {
+					case "game":
+						game = Game.getInstance();
 					
 					// create tile [ID] [type] [life]
 					// life is optional
 					case "tile":
+						// Creating Tile
 						Tile newTile = createTile(cmd);
 						
-						// Testing creation
+						// (Testing creation) and Adding Tile to the Game
 						try {
 							System.out.println(newTile.toString());
+							game.addTile(newTile);
 						}
 						catch (NullPointerException e) {
 							System.out.println("Creation failed");
@@ -29,36 +35,29 @@ public class Commands {
 						
 						break;
 						
+					// TODO Implement creations below
 					case "orangutan":
-						
 						break;
 						
 					case "sleepy":
-						
 						break;
 						
 					case "scary":
-						
 						break;
 						
 					case "jumpy":
-						
 						break;
 						
 					case "wardrobes":
-						
 						break;
 						
 					case "chair":
-						
 						break;
 						
 					case "automat":
-						
 						break;
 						
 					case "arcade":
-						
 						break;
 					
 					default:
@@ -67,19 +66,37 @@ public class Commands {
 				}
 				break;
 				
+			// Modifying object details
+			case "mod":
+				switch(cmd[1]) {
+					// mod tile [ID] [property] [value]*
+					case "tile":
+						modifyTile(cmd);
+						break;
+						
+					// TODO Implement modifications below
+					case "orangutan":
+						break;
+						
+					case "panda":
+						break;
+						
+					default:
+						System.out.println("Invalid argument [object name]");
+				}
+				break;
+				
 			// Deleting parts of the game
+			// TODO Implement deletions below
 			case "delete":
 				switch (cmd[1]) {
 					case "tile":
-						
 						break;
 						
 					case "animal":
-						
 						break;
 						
 					case "thing":
-						
 						break;
 					
 					default:
@@ -89,17 +106,19 @@ public class Commands {
 				break;
 				
 			case "startgame":
-				
+				game.startGame();
 				break;
 			
 			case "endgame":
-				
+				game.endGame();
 				break;
 			
+			// Printing the current state of the game
+			// Probably after game ended
 			case "results":
-				
 				break;
 			
+			// TODO Update manual - LAST STEP!
 			case "help":
 				manual.showInstructions();
 				break;
@@ -114,6 +133,7 @@ public class Commands {
 		return false;
 	}
 	
+	@Nullable
 	private Tile createTile(String cmd[]){
 		boolean isCreated = false;
 		boolean idSet = false;
@@ -153,4 +173,50 @@ public class Commands {
 		else
 			return null;
 	}
+	
+	private void modifyTile(String[] cmd) {
+		// Finding Tile which is to be modified
+		Tile modTile;
+		int modID;
+		try {
+			// Checking if the Game contains the Tile
+			modID = Integer.parseInt(cmd[2]);
+			if(game.isContained(modID)) {
+				// Storing the Tile for further usages
+				modTile = game.getTileContained(modID);
+			}
+			else {
+				System.out.println("No Tile found in Game with given ID");
+				return;
+			}
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Invalid argument [ID]");
+			return;
+		}
+		
+		if(cmd[3].equals("neighbours")) {
+			// Counting argument list length
+			int argCnt;
+			for(argCnt = 4; cmd[argCnt] != null; argCnt++);
+			
+			// Adding neighbours to Tile
+			for(int i = 4; i < argCnt; i++) {
+				int neighbourID = Integer.parseInt(cmd[i]);
+				
+				// Checking if the Game contains the neighbour Tile
+				if(game.isContained(neighbourID)) {
+					// Creating neighbour connection
+					modTile.addNeighbour(game.getTileContained(neighbourID));
+				}
+			}
+			
+		}
+		else if(cmd[3].equals("life")) {
+			// TODO Implement changing tile's life
+		}
+		else
+			System.out.println("Invalid argument [property]");
+	}
+	
 }

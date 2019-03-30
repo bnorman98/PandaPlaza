@@ -8,7 +8,7 @@ public abstract class Animal implements Steppable {
 	protected Animal influencer;
 	
 	// Made for Prototype
-	protected int ID;
+	private int ID;
 	public void setID(int id) {
 		ID = id;
 	}

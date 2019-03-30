@@ -1,10 +1,15 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Orangutan extends Animal {
 	
 	@Override
 	public void step() {
 		System.out.println("Orangutan.step called");
+		
 		Tile myPrevTile = tile;
 		goTo(tile.getNeighbourAt(dir));
 		if(follower != null)

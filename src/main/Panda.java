@@ -2,26 +2,27 @@ package main;
 
 import java.util.Random;
 
-//TODO: This is an abstract class!
-public class Panda extends Animal {
+public abstract class Panda extends Animal {
 	
 	@Override
 	public void step() {
 		System.out.println("Panda.step called");
 		try {
+			// Checking if Panda can move
 			if(influencer!= null)
 				return;
+			
+			// Randomising direction
 			Random rand = new Random();
 			dir = rand.nextInt(tile.getNeighbours().size());
+			
+			// Moving Panda
 			if(tile.getNeighbourAt(dir).getAnimal() == null)
 				goTo(tile.getNeighbourAt(dir));
 			else step();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-		}
-		finally {
-			System.out.println("Panda stepped");
 		}
 
 	}
