@@ -17,6 +17,8 @@ public class Commands {
 				switch(cmd[1]) {
 					case "game":
 						game = Game.getInstance();
+						System.out.println("Game created");
+						break;
 					
 					// create tile [ID] [type] [life]
 					// life is optional
@@ -30,6 +32,7 @@ public class Commands {
 							game.addTile(newTile);
 						}
 						catch (NullPointerException e) {
+							e.printStackTrace();
 							System.out.println("Creation failed");
 						}
 						

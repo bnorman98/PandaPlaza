@@ -64,7 +64,12 @@ public class Game {
 		return instance;
 	}
 	
-	private Game() {}
+	private Game() {
+		orangutans = new ArrayList<>();
+		pandas = new ArrayList<>();
+		things = new ArrayList<>();
+		tiles = new ArrayList<>();
+	}
 	public void startGame() {
 		stepAll();
 	}
