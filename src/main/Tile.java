@@ -23,10 +23,10 @@ public class Tile {
 		// Clone the list and it's contents
 	}
 
-	public void addNeighbour(Tile tile) {
+	public void addNeighbour(Tile neighbour) {
 		System.out.println("Tile.setNeighbour called");
-		neighbours.add(tile);
-		tile.neighbours.add(this);
+		neighbours.add(neighbour);
+		neighbour.neighbours.add(this);
 	}
 
 	/*
@@ -47,6 +47,7 @@ public class Tile {
 	public void setAnimal(Animal value) {
 		System.out.println("Tile.setAnimal called");
 		animal = value;
+		animal.setTile(this);
 	}
 	
 	public Animal getAnimal() {

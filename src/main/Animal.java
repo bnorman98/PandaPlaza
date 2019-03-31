@@ -23,11 +23,13 @@ public abstract class Animal implements Steppable {
 	public void setTile(Tile newTile) {
 		System.out.println("Animal.setTile called");
 		tile = newTile;
+		tile.setAnimal(this);
 	}
 	public void setFollower(Panda newPanda) {
 		System.out.println("Animal.setFollower called");
 		follower = newPanda;
-		newPanda.influencer = this;
+		if(newPanda != null)
+			newPanda.influencer = this;
 	}
 	public Animal getFollower() {
 		System.out.println("Animal.getFollower called");
@@ -36,13 +38,13 @@ public abstract class Animal implements Steppable {
 	
 	public void goTo(Tile newTile) {
 		System.out.println("Animal.goTo called");
+		
 		tile.setAnimal(null);
 		newTile.setAnimal(this);
 		tile = newTile;
 		tile.stepped();
 	}
 	
-	// Returns 0 for default, overridden in Orangutan
 	public int countFollowers() {
 		System.out.println("Animal.countFollowers called");
 		int cnt = 0;

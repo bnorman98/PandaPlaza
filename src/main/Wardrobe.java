@@ -9,9 +9,10 @@ public class Wardrobe extends Thing{
 		this.pair = pair;
 	}
 	
-	public void setPair(Wardrobe pair) {
+	public void setPair(Wardrobe newPair) {
 		System.out.println("Wardrobe.setPair called");
-		this.pair = pair;
+		this.pair = newPair;
+		newPair.pair = this;
 	}
 	
 	@Override

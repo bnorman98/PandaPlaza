@@ -2,9 +2,6 @@ package skeleton;
 import main.*;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-import java.text.ParseException;
-
 public class Commands {
 	private Game game;
 	private Manual manual = new Manual();
@@ -40,15 +37,11 @@ public class Commands {
 						
 					// TODO Implement creations below
 					case "orangutan":
+						Orangutan newOrang = createOrangutan(cmd);
 						break;
 						
-					case "sleepy":
-						break;
-						
-					case "scary":
-						break;
-						
-					case "jumpy":
+					case "panda":
+						Panda newpanda = createPanda(cmd);
 						break;
 						
 					case "wardrobes":
@@ -79,9 +72,11 @@ public class Commands {
 						
 					// TODO Implement modifications below
 					case "orangutan":
+						// putOnTile()
 						break;
 						
 					case "panda":
+						// putOnTile
 						break;
 						
 					default:
@@ -91,7 +86,7 @@ public class Commands {
 				
 			// Deleting parts of the game
 			// TODO Implement deletions below
-			case "delete":
+			case "del":
 				switch (cmd[1]) {
 					case "tile":
 						break;
@@ -220,6 +215,14 @@ public class Commands {
 		}
 		else
 			System.out.println("Invalid argument [property]");
+	}
+	
+	private Orangutan createOrangutan(String[] cmd) {
+		return null;
+	}
+	
+	private Panda createPanda(String[] cmd) {
+		return null;
 	}
 	
 }
