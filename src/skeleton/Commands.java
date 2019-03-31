@@ -1,4 +1,5 @@
 package skeleton;
+
 import main.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -217,10 +218,12 @@ public class Commands {
 			System.out.println("Invalid argument [property]");
 	}
 	
+	// TODO Implement createOrangutan
 	private Orangutan createOrangutan(String[] cmd) {
 		return null;
 	}
 	
+	// TODO Implement createPanda
 	private Panda createPanda(String[] cmd) {
 		return null;
 	}

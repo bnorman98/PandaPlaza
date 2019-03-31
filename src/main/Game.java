@@ -11,6 +11,7 @@ public class Game {
 	private ArrayList<Panda> pandas;
 	private ArrayList<Thing> things;
 	private ArrayList<Tile> tiles;
+	private boolean running = false;
 	
 	private static Game instance;
 	
@@ -71,9 +72,25 @@ public class Game {
 		tiles = new ArrayList<>();
 	}
 	public void startGame() {
+		running = true;
 		stepAll();
 	}
-	public void endGame() {}
+	public void endGame() {
+		running = false;
+		String input = "none";
+		try {
+			InputStreamReader isr =	new InputStreamReader(System.in);
+			BufferedReader br = new BufferedReader(isr);
+			input = br.readLine();
+			br.close();
+		}
+		catch(IOException ioe) {
+			System.out.println("IO error occurred");
+		}
+		
+		// What to do?
+		
+	}
 	
 	public void stepAll() {
 		System.out.println("Game.stepAll called");
@@ -81,21 +98,22 @@ public class Game {
 		// Stepping Orangutans
 		for (Orangutan orangutan : orangutans) {
 			// Reading user input
-			String input = readInput();
+			String input = readInput(orangutan);
 			
 			// Setting direction
-			try {
-				if(input.equals("IOError"))
-					System.out.println("Read error occurred");
-				else
-					orangutan.setDir(Integer.parseInt(input));
-			}
-			catch(NumberFormatException e) {
-				System.out.println("Invalid number format for [direction]");
+			if(input.equals("IOError"))
+				System.out.println("IO error occurred");
+			else if(input.equals("endgame"))
+				endGame();
+			else if(input.equals("letgo"))
+				orangutan.letGo();
+			else {
+				// Setting direction
+				orangutan.setDir(input);
+				// Moving Orangutan
+				orangutan.step();
 			}
 			
-			// Moving Orangutan
-			orangutan.step();
 		}
 		
 		// Stepping Pandas
@@ -109,13 +127,27 @@ public class Game {
 		}
 	}
 	
-	private String readInput() {
-		System.out.println("What direction do you want to go?");
+	private String readInput(Orangutan orangutan) {
+		// User interaction
+		System.out.println("What tile do you want to go?");
+		String line = "Enter a number from 0 to ";
+		int dirMax = orangutan.getTile().getNeighbours().size()-1;
+		line += dirMax;
+		System.out.println(line);
+		// Print neighbours
+		int i = 0;
+		for(Tile neighbour: orangutan.getTile().getNeighbours()) {
+			System.out.println("\t" + i + ": " + neighbour.getID());
+		}
 		
+		// Reading input
 		try {
+			String input;
 			InputStreamReader isr =	new InputStreamReader(System.in);
 			BufferedReader br = new BufferedReader(isr);
-			return br.readLine();
+			input = br.readLine();
+			br.close();
+			return input;
 		}
 		catch(IOException ioe) {
 			ioe.printStackTrace();
@@ -124,12 +156,10 @@ public class Game {
 	}
 	
 	public static void addScore(Animal animal) {
-		System.out.println("Game.addScore called");
 		animal.addScore(animal.countFollowers());
 	}
 	
 	public boolean generateRandom(int chance) {
-		System.out.println("Game.generateRandom called");
 		int rand = (int) (Math.random() * 100);
 		System.out.println("Randomised: " + rand);
 		return rand > chance;

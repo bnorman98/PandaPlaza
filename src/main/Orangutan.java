@@ -10,11 +10,7 @@ public class Orangutan extends Animal {
 	@Override
 	public void step() {
 		System.out.println("Orangutan.step called");
-		// Can't step if penalized
-		if(penalty > 0) {
-			penalty--;
-			return;
-		}
+		
 		Tile myPrevTile = tile;
 		goTo(tile.getNeighbourAt(dir));
 		if(follower != null)
@@ -47,7 +43,7 @@ public class Orangutan extends Animal {
 		int followerCnt = this.countFollowers();
 		
 		// Switching place
-		
+		switchPlace(toucher);
 		
 		// Giving Pandas to toucher
 		toucher.setFollower(follower);
@@ -63,13 +59,20 @@ public class Orangutan extends Animal {
 	public void goTo(Tile newTile) {
 		System.out.println("Orangutan.goTo called");
 		
-		// Touching Animal found in moving direction
-		newTile.getAnimal().getTouched(this);
+		// Touching Animal found in moving direction if not penalized
+		if(newTile.getAnimal() != null) {
+			if(penalty != 0)
+				return;
+			else
+				newTile.getAnimal().getTouched(this);
+		}
+		else {
+			tile.setAnimal(null);
+			newTile.setAnimal(this);
+			tile = newTile;
+			tile.stepped();
+		}
 		
-		tile.setAnimal(null);
-		newTile.setAnimal(this);
-		tile = newTile;
-		tile.stepped();
 	}
 	
 }

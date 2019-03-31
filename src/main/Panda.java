@@ -42,6 +42,7 @@ public abstract class Panda extends Animal {
 	
 	public void getTouched(Orangutan toucher) {
 		System.out.println("Panda.getTouched called");
+		
 		// Releasing paws if the Panda held any
 		letGo();
 		
@@ -53,13 +54,8 @@ public abstract class Panda extends Animal {
 		influencer = toucher;
 		toucher.follower = this;
 		
-		// Changing place
-		Tile temp = new Tile();
-		Tile myTile = tile;
-		goTo(temp);
-		Tile toucherTile = toucher.tile;
-		toucher.goTo(myTile);
-		goTo(toucherTile);
+		// Switching place
+		switchPlace(toucher);
 		
 	}
 	

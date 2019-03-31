@@ -16,9 +16,15 @@ public abstract class Animal implements Steppable {
 		return ID;
 	}
 	
-	public void setDir(int newDir) {
+	public void setDir(String newDir) {
 		System.out.println("Animal.setDir called");
-		dir = newDir;
+		try {
+			dir = Integer.parseInt(newDir);
+		}
+		catch(NumberFormatException e) {
+			System.out.println("Invalid number format for [direction]");
+		}
+		
 	}
 	public void setTile(Tile newTile) {
 		System.out.println("Animal.setTile called");
@@ -34,6 +40,9 @@ public abstract class Animal implements Steppable {
 	public Animal getFollower() {
 		System.out.println("Animal.getFollower called");
 		return follower;
+	}
+	public Tile getTile() {
+		return tile;
 	}
 	
 	public void goTo(Tile newTile) {
@@ -96,6 +105,15 @@ public abstract class Animal implements Steppable {
 		// Remove from tile
 		tile.setAnimal(null);
 		tile = null;
+	}
+	
+	protected void switchPlace(Orangutan toucher) {
+		Tile temp = new Tile();
+		Tile myTile = tile;
+		goTo(temp);
+		Tile toucherTile = toucher.tile;
+		toucher.goTo(myTile);
+		goTo(toucherTile);
 	}
 	
 	// Function bodies empty on purpose from here
