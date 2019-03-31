@@ -1,4 +1,4 @@
-package skeleton;
+package prototype;
 
 import main.*;
 import org.jetbrains.annotations.Nullable;

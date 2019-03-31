@@ -1,11 +1,11 @@
-package skeleton;
+package prototype;
 
 public class Manual {
 
     public void showInstructions() {
         System.out.println("Manual.showInstructions called");
         
-        System.out.println("A skeleton működésének bemutatására használt parancsok leírása itt található");
+        System.out.println("A prototype működésének bemutatására használt parancsok leírása itt található");
         System.out.println("A '>' jel után található szavak jelentik a parancsot, amit ellenőrizni szeretnénk, ");
         System.out.println("ezeket a szavakat kell szóközzel elválasztva a konzolra beírni, majd Enter megnyomásával a parancsot ellenőrizni");
         System.out.println("A '[szám]' helyére bármilyen egész számot be lehet írni");
