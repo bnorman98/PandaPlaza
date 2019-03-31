@@ -122,8 +122,5 @@ public abstract class Animal implements Steppable {
 	public void jump(){}
 	public void sleep(){}
 	public void addScore(int score){}
-	public String toString(){
-		return "Animal";
-	}
 	
 }

@@ -18,4 +18,9 @@ public class EndPoint extends Tile {
 		animal.goTo(startPoint);
 		
 	}
+	
+	// TODO EndPoint.toString
+	public String toString() {
+		return "TODO";
+	}
 }

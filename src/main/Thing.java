@@ -18,4 +18,5 @@ public abstract class Thing implements Steppable {
 		System.out.println("Thing.setTile called");
 		this.tile = tile;
 	}
+	
 }
