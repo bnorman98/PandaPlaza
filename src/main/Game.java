@@ -133,7 +133,7 @@ public class Game {
 				else if(input.equals("file")) {
 					System.out.println("Enter path to file");
 					input = br.readLine();
-					fileOutput(input);
+					serialize(input);
 				}
 				else
 					System.out.println("Invalid input");
@@ -189,7 +189,7 @@ public class Game {
 	
 	private String readInput(Orangutan orangutan) {
 		// User interaction
-		System.out.println("What tile do you want to go?");
+		System.out.println("What tile do you want to go to?");
 		String line = "Enter a number from 0 to ";
 		int dirMax = orangutan.getTile().getNeighbours().size()-1;
 		line += dirMax;
@@ -220,11 +220,11 @@ public class Game {
 		// TODO consoleOutput
 	}
 	
-	public void fileOutput(String path) {
+	public void serialize(String path) {
 		// TODO Serialization
 	}
 	
-	public void fileInput(String path) {
+	public void deserialize(String path) {
 		// TODO Deserialization
 	}
 	
