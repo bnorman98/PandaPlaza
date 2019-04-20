@@ -1,8 +1,6 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -147,8 +145,6 @@ public class Game {
 			System.out.println("IO error occurred");
 		}
 		
-		
-		
 	}
 	
 	public void stepAll() {
@@ -216,17 +212,82 @@ public class Game {
 		}
 	}
 	
+	// Print current state to console
 	public void consoleOutput() {
 		// TODO consoleOutput
 	}
 	
 	public void serialize(String path) {
 		// TODO Serialization
+		try {
+			FileWriter fw = new FileWriter(path);
+			PrintWriter pw = new PrintWriter(fw);
+			
+			// Printing Tiles
+			for(Tile tile : tiles) {
+				if(tile.getLife() >= 0) {
+					pw.println("SoftTile");
+					pw.println("-life: " + tile.getLife());
+				}
+				else
+					pw.println("Tile");
+				pw.println("-ID: " + tile.getID());
+				if(tile.getAnimal() != null)
+					pw.println("-animalID: " + tile.getAnimal().getID());
+				if(tile.getThing() != null)
+					pw.println("-thingID: " + tile.getThing().getID());
+				if(tile.getNeighbours() != null) {
+					for(Tile neighbour : tile.getNeighbours()) {
+						pw.println("-neighbourID: " + neighbour.getID());
+					}
+				}
+			}
+			// Printing Orangutans
+			for(Orangutan orang : orangutans) {
+				pw.println("Orangutan");
+				pw.println(orang.getID());
+				pw.println("-penalty: " + orang.getPenalty());
+				if(orang.getTile() != null)
+					pw.println("-tileID: " + orang.getTile());
+				if(orang.getFollower() != null)
+					pw.println("-followerID: " + orang.getFollower());
+			}
+			// Printing Pandas
+			for(Panda panda : pandas) {
+			
+			}
+			// Printing Things
+			for(Thing thing : things) {
+			
+			}
+			
+			pw.close();
+		} catch (IOException e) {
+			System.out.println("Probably incorrect path");
+			e.printStackTrace();
+		}
 	}
 	
 	public void deserialize(String path) {
 		// TODO Deserialization
+		ArrayList<String> lines = new ArrayList<>();
+		
+		try {
+			FileReader fr = new FileReader(path);
+			BufferedReader br = new BufferedReader(fr);
+			while (true) {
+				String line = br.readLine();
+				if (line == null) break;
+				
+				// Saving lines
+				lines.add(line);
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+	
 	
 	public static void addScore(Animal animal) {
 		animal.addScore(animal.countFollowers());

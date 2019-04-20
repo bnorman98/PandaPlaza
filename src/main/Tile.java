@@ -3,8 +3,10 @@ package main;
 import java.util.ArrayList;
 
 public class Tile {
-	
 	protected Animal animal;
+	protected Thing thing;
+	// Life is -1 if tile is hard, >=0 if soft
+	protected int life;
 	private ArrayList<Tile> neighbours = new ArrayList<>();
 	
 	// Made for Prototype
@@ -15,12 +17,18 @@ public class Tile {
 	public int getID() {
 		return ID;
 	}
+	public int getLife() {
+		return life;
+	}
 	
-	// SoftTile konstruktora miatt kell elvileg
-	public Tile() {}
+	public Tile() {
+		life = -1;
+	}
 	
 	public Tile(ArrayList<Tile> neighbours) {
+		life = -1;
 		// Clone the list and it's contents
+		// Set neighbour connection
 	}
 
 	public void addNeighbour(Tile neighbour) {
@@ -28,12 +36,11 @@ public class Tile {
 		neighbours.add(neighbour);
 		neighbour.neighbours.add(this);
 	}
-
-	/*
-	public void setThing(Thing thing) {
-		this.thing = thing;
+	
+	public Thing getThing() {
+		return thing;
 	}
-	*/
+	
 	public ArrayList<Tile> getNeighbours() {
 		return neighbours;
 	}

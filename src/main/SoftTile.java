@@ -2,8 +2,6 @@ package main;
 
 public class SoftTile extends Tile {
 	
-	private int life;
-	
 	public SoftTile() {
 		life = 20;
 	}

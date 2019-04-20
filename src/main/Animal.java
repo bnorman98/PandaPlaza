@@ -2,7 +2,6 @@ package main;
 
 public abstract class Animal implements Steppable {
 	protected int dir = 0;
-	protected int score = 0;
 	protected Tile tile;
 	protected Panda follower;
 	protected Animal influencer;

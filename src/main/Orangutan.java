@@ -1,11 +1,12 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class Orangutan extends Animal {
+	private int score = 0;
 	private int penalty = 0;
+	
+	public int getPenalty() {
+		return penalty;
+	}
 	
 	@Override
 	public void step() {
