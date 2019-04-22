@@ -1,5 +1,7 @@
 package main;
 
+import java.io.PrintWriter;
+
 public class SleepyPanda extends Panda {
 	
 	private boolean isSleeping = false;
@@ -20,5 +22,18 @@ public class SleepyPanda extends Panda {
 		isSleeping = true;
 		letGo();
 	}
-	
+
+	public void writeOut(PrintWriter pw){
+		pw.println("SleepyPanda");
+		pw.println("-ID:" + this.getID());
+		if (this.getTile() != null){
+			pw.println("-tileID: " + this.getTile().getID());
+		}
+		if (this.getInfluencer() != null){
+			pw.println("-influencerID: " + this.getInfluencer().getID());
+		}
+		if (this.getFollower() != null){
+			pw.println("-followerID: " + this.getFollower().getID());
+		}
+	}
 }

@@ -1,5 +1,6 @@
 package main;
 
+import java.io.PrintWriter;
 import java.util.Random;
 
 public abstract class Panda extends Animal {
@@ -58,5 +59,4 @@ public abstract class Panda extends Animal {
 		switchPlace(toucher);
 		
 	}
-	
 }

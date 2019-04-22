@@ -1,5 +1,7 @@
 package main;
 
+import java.io.PrintWriter;
+
 public class Wardrobe extends Thing{
 	private Wardrobe pair;
 	
@@ -21,5 +23,12 @@ public class Wardrobe extends Thing{
 		if(tile.getAnimal() != null)
 			tile.getAnimal().goTo(pair.tile);
 	}
-	
+	public void writeOut(PrintWriter pw){
+		pw.println("Wardrobe");
+		pw.println("-ID: " + this.getID());
+		pw.println("-chance: " + this.getChance());
+		if (this.getTile() != null){
+			pw.println("-tileID: " + this.getID());
+		}
+	}
 }

@@ -1,5 +1,7 @@
 package main;
 
+import java.io.PrintWriter;
+
 public abstract class Thing implements Steppable {
 	
 	protected Tile tile;
@@ -25,5 +27,6 @@ public abstract class Thing implements Steppable {
 		System.out.println("Thing.setTile called");
 		this.tile = tile;
 	}
-	
+
+	public void writeOut(PrintWriter pw){}
 }

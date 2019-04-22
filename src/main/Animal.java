@@ -1,5 +1,7 @@
 package main;
 
+import java.io.PrintWriter;
+
 public abstract class Animal implements Steppable {
 	protected int dir = 0;
 	protected Tile tile;
@@ -125,5 +127,7 @@ public abstract class Animal implements Steppable {
 	public void jump(){}
 	public void sleep(){}
 	public void addScore(int score){}
+
+	public void writeOut(PrintWriter pw){}
 	
 }

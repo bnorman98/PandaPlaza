@@ -1,5 +1,6 @@
 package main;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Tile {
@@ -74,5 +75,19 @@ public class Tile {
 	public String toString() {
 		return "Tile\n\tID: " + ID;
 	}
-	
+
+	public void writeOut(PrintWriter pw){
+			pw.println("Tile");
+			pw.println("-ID: " + this.getID());
+			for (int i=0;i<this.getNumOfNeighbours();i++){
+				pw.println("-NeighbourID: " + this.getNeighbourAt(i).getID());
+			}
+			if (this.getAnimal() != null){
+				pw.println("-AnimalID: " + this.getAnimal().getID());
+			}
+			if (this.getThing() != null){
+				pw.println("-ThingID: " + this.getThing().getID());
+			}
+			pw.println("-life: " + this.getLife());
+	}
 }

@@ -1,5 +1,7 @@
 package main;
 
+import java.io.PrintWriter;
+
 public class Orangutan extends Animal {
 	private int score = 0;
 	private int penalty = 0;
@@ -75,5 +77,15 @@ public class Orangutan extends Animal {
 		}
 		
 	}
-	
+
+	public void writeOut(PrintWriter pw){
+		pw.println("Orangutan");
+		pw.println("-ID: " + this.getID());
+		pw.println("-score: " + this.getScore());
+		pw.println("-penalty: " + this.getPenalty());
+		if(this.getTile() != null)
+			pw.println("-tileID: " + this.getTile().getID());
+		if(this.getFollower() != null)
+			pw.println("-followerID: " + this.getFollower().getID());
+	}
 }

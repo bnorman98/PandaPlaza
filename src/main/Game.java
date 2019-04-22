@@ -226,73 +226,22 @@ public class Game {
 			FileWriter fw = new FileWriter(path);
 			PrintWriter pw = new PrintWriter(fw);
 
-			// Printing Tiles
-			for(Tile tile : tiles) {
-				if(tile.getLife() >= 0) {
-					pw.println("SoftTile");
-					pw.println("-life: " + tile.getLife());
-				}
-				else
-					pw.println("Tile");
-				pw.println("-ID: " + tile.getID());
-				if(tile.getAnimal() != null)
-					pw.println("-animalID: " + tile.getAnimal().getID());
-				if(tile.getThing() != null)
-					pw.println("-thingID: " + tile.getThing().getID());
-				if(tile.getNeighbours() != null) {
-					for(Tile neighbour : tile.getNeighbours()) {
-						pw.println("-neighbourID: " + neighbour.getID());
-					}
-				}
-			}
+
 			// Printing Orangutans
 			for(Orangutan orang : orangutans) {
-				pw.println("Orangutan");
-				pw.println("-ID: " + orang.getID());
-				pw.println("-score: " + orang.getScore());
-				pw.println("-penalty: " + orang.getPenalty());
-				if(orang.getTile() != null)
-					pw.println("-tileID: " + orang.getTile().getID());
-				if(orang.getFollower() != null)
-					pw.println("-followerID: " + orang.getFollower().getID());
+				orang.writeOut(pw);
 			}
 			// Printing Pandas
 			for(Panda panda : pandas) {
-				pw.println("Panda"); // How to differenciate pandas?
-				pw.println("-ID:" + panda.getID());
-				if (panda.getTile() != null){
-					pw.println("-tileID: " + panda.getTile().getID());
-				}
-				if (panda.getInfluencer() != null){
-					pw.println("-influencerID: " + panda.getInfluencer().getID());
-				}
-				if (panda.getFollower() != null){
-					pw.println("-followerID: " + panda.getFollower().getID());
-				}
+				panda.writeOut(pw);
 			}
 			// Printing Things
 			for(Thing thing : things) {
-				pw.println("Thing");
-				pw.println("-ID: " + thing.getID());
-				pw.println("-chance: " + thing.getChance());
-				if (thing.getTile() != null){
-					pw.println("-tileID: " + thing.getID());
-				}
+				thing.writeOut(pw);
 			}
 			// Printing Tiles
 			for (Tile tile : tiles){
-				pw.println("Tile");
-				pw.println("-ID: " + tile.getID());
-				for (int i=0;i<tile.getNumOfNeighbours();i++){
-					pw.println("-NeighbourID: " + tile.getNeighbourAt(i).getID());
-				}
-				if (tile.getAnimal() != null){
-					pw.println("-AnimalID: " + tile.getAnimal().getID());
-				}
-				if (tile.getThing() != null){
-					pw.println("-ThingID: " + tile.getThing().getID());
-				}
-				pw.println("-life: " + tile.getLife());
+				tile.writeOut(pw);
 			}
 
 			pw.close();

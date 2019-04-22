@@ -1,5 +1,6 @@
 package main;
 
+import java.io.PrintWriter;
 import java.util.Random;
 
 public class Arcade extends Thing {
@@ -15,5 +16,13 @@ public class Arcade extends Thing {
 				t.getAnimal().jump();
 		}
 	}
-	
+
+	public void writeOut(PrintWriter pw){
+		pw.println("Arcade");
+		pw.println("-ID: " + this.getID());
+		pw.println("-chance: " + this.getChance());
+		if (this.getTile() != null){
+			pw.println("-tileID: " + this.getID());
+		}
+	}
 }

@@ -1,5 +1,6 @@
 package main;
 
+import java.io.PrintWriter;
 import java.util.Random;
 
 public class ChocolateAutomat extends Thing {
@@ -23,5 +24,12 @@ public class ChocolateAutomat extends Thing {
 				t.getAnimal().scare();
 		}
 	}
-	
+	public void writeOut(PrintWriter pw){
+		pw.println("ChocolateAutomat");
+		pw.println("-ID: " + this.getID());
+		pw.println("-chance: " + this.getChance());
+		if (this.getTile() != null){
+			pw.println("-tileID: " + this.getID());
+		}
+	}
 }
