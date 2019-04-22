@@ -102,7 +102,7 @@ public class Game {
 	}
 
 	private boolean isAlive(){
-		return (!(orangutans == null) || !(pandas == null));
+		return (!(orangutans == null) && !(pandas == null));
 	}
 	
 	public void endGame() {
