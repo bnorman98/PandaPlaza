@@ -5,6 +5,7 @@ public abstract class Animal implements Steppable {
 	protected Tile tile;
 	protected Panda follower;
 	protected Animal influencer;
+	protected int k;
 	
 	// Made for Prototype
 	private int ID;
