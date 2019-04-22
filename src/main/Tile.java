@@ -53,7 +53,10 @@ public class Tile {
 		animal = value;
 		animal.setTile(this);
 	}
-	
+
+	public int getNumOfNeighbours(){
+		return neighbours.size();
+	}
 	public Animal getAnimal() {
 		return animal;
 	}

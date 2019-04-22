@@ -25,6 +25,10 @@ public abstract class Animal implements Steppable {
 		}
 		
 	}
+	public Animal getInfluencer(){
+		System.out.println("Animal.getInfluencer called");
+		return influencer;
+	}
 	public void setTile(Tile newTile) {
 		System.out.println("Animal.setTile called");
 		tile = newTile;

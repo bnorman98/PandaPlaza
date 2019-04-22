@@ -13,7 +13,14 @@ public abstract class Thing implements Steppable {
 	public int getID() {
 		return ID;
 	}
-	
+
+
+	public int getChance(){
+		return chance;
+	}
+	public Tile getTile(){
+		return tile;
+	}
 	public void setTile(Tile tile) {
 		System.out.println("Thing.setTile called");
 		this.tile = tile;
