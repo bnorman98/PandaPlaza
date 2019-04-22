@@ -97,9 +97,12 @@ public class Game {
 	}
 	
 	public void startGame() {
-		running = true;
-		while(running)
+		while(isAlive())
 			stepAll();
+	}
+
+	private boolean isAlive(){
+		return (!(orangutans == null) || !(pandas == null));
 	}
 	
 	public void endGame() {
