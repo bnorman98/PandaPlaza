@@ -2,7 +2,6 @@ package main;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game {
 	private ArrayList<Orangutan> orangutans;
@@ -74,19 +73,21 @@ public class Game {
 			tiles.add(newTile);
 	}
 	
-	// Returns if Tile with given ID is contained in tiles
+	/**
+	 * True if a Tile with the given ID is a part of the game
+	 */
 	public boolean isContained(int ID) {
 		for(Tile gameTile : tiles) {
-			if(gameTile.getID() == ID) {
+			if(gameTile.getID() == ID)
 				return true;
-			}
 		}
 		return false;
 	}
 	
-	/*
+	/**
 	  * Getting a Tile by it's ID
 	  * Tile must be contained in tiles
+	  * else returns null
 	  */
 	public Tile getTileContained(int ID) {
 		for(Tile tile : tiles) {
@@ -96,20 +97,32 @@ public class Game {
 		return null;
 	}
 	
+	/**
+	 * The main cycle of the game
+	 * Moves the animals while game is running
+	 * Then ends the game
+	 */
 	public void startGame() {
-		while(isAlive())
+		// Play the game while possible
+		while(isAlive()) {
 			stepAll();
+		}
+		// End the game
+		endGame();
 	}
-
+	
+	/**
+	 * Checks if there is any animal alive in game
+	 */
 	private boolean isAlive(){
 		return (!(orangutans == null) && !(pandas == null));
 	}
 	
 	public void endGame() {
-		running = false;
-		String input = "none";
+		String input;
 		
 		// Asking user to save game's state
+		System.out.println("Game over");
 		System.out.println("Do you want to save the game's current state?");
 		try {
 			InputStreamReader isr =	new InputStreamReader(System.in);
@@ -150,9 +163,13 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Steps all steppable objects in the following order:
+	 * orangutans, pandas, things
+	 * When stepping orangutans asks for user input
+	 * User can also let go of followers or end the game
+	 */
 	public void stepAll() {
-		System.out.println("Game.stepAll called");
-		
 		// Stepping Orangutans
 		for (Orangutan orangutan : orangutans) {
 			// Reading user input
@@ -171,7 +188,6 @@ public class Game {
 				// Moving Orangutan
 				orangutan.step();
 			}
-			
 		}
 		
 		// Stepping Pandas
@@ -186,6 +202,13 @@ public class Game {
 		
 	}
 	
+	/**
+	 * Reads user input from console
+	 * User can set orangutan's direction,
+	 * let go of followers or end the game
+	 * @param orangutan This is the orangutan whose direction can be set
+	 * @return User's input
+	 */
 	private String readInput(Orangutan orangutan) {
 		// User interaction
 		System.out.println("What tile do you want to go to?");

@@ -1,7 +1,6 @@
 package prototype;
 
 import main.*;
-import org.jetbrains.annotations.Nullable;
 
 public class Commands {
 	private Game game = Game.getInstance();
