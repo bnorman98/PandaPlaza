@@ -95,7 +95,31 @@ public class Game {
 		}
 		return null;
 	}
-	
+
+	public Orangutan getOrangutanContained(int ID) {
+		for(Orangutan orang : orangutans) {
+			if(orang.getID() == ID)
+				return orang;
+		}
+		return null;
+	}
+
+	public Panda getPandaContained(int ID) {
+		for(Panda panda : pandas) {
+			if(panda.getID() == ID)
+				return panda;
+		}
+		return null;
+	}
+
+	public Thing getThingContained(int ID) {
+		for(Thing thing : things) {
+			if(thing.getID() == ID)
+				return thing;
+		}
+		return null;
+	}
+
 	/**
 	 * The main cycle of the game
 	 * Moves the animals while game is running
@@ -306,8 +330,6 @@ public class Game {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		int idx = 0;
-		int numofobjects = 0;
 		for (int i = 0; i < lines.size() - 1; i++) {
 			if (lines.get(i).charAt(0) != '-') {
 				String[] parts = lines.get(i+1).split(" ");
@@ -371,9 +393,48 @@ public class Game {
 					default: break;
 				}
 			}
-
 		}
-
+		for (int i = 0; i < lines.size() - 1; i++) {
+			if (lines.get(i).charAt(0) != '-') {
+				String[] parts = lines.get(i+1).split(" ");
+				switch (lines.get(i)) {
+					case "ScaryPanda":
+						getPandaContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "JumpyPanda":
+						getPandaContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "SleepyPanda":
+						getPandaContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Arcade":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Chair":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "ChocolateAutomat":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "EndPoint":
+						getTileContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Orangutan":
+						getOrangutanContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "SoftTile":
+						getTileContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Tile":
+						getTileContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Wardrobe":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					default: break;
+				}
+			}
+		}
 	}
 	
 	public boolean generateRandom(int chance) {

@@ -1,6 +1,7 @@
 package main;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public abstract class Animal implements Steppable {
 	protected int dir = 0;
@@ -33,6 +34,12 @@ public abstract class Animal implements Steppable {
 	public Animal getInfluencer(){
 		System.out.println("Animal.getInfluencer called");
 		return influencer;
+	}
+	public void setInfluencer(Orangutan o){
+		influencer = o;
+	}
+	public void setInfluencer(Panda p){
+		influencer = p;
 	}
 	public void setTile(Tile newTile) {
 		System.out.println("Animal.setTile called");
@@ -131,5 +138,6 @@ public abstract class Animal implements Steppable {
 	public void sleep(){}
 	public void addScore(int score){}
 	public void writeOut(PrintWriter pw){}
+	public void readIn(ArrayList<String> lines, int idx){}
 	
 }

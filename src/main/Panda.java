@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Panda extends Animal {
@@ -56,5 +57,32 @@ public abstract class Panda extends Animal {
 		// Switching place
 		switchPlace(toucher);
 	}
-	
+	public void readIn(ArrayList<String> lines, int idx){
+		for (int i=idx+1;i<lines.size();i++){
+			String[] parts = lines.get(i).split(" ");
+			if (parts[0].charAt(0) != '-'){
+				i = lines.size();
+			}
+			switch (parts[0]){
+				case "-tileID:":
+					this.setTile(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
+					break;
+				case "-followerID:":
+					this.setFollower(Game.getInstance().getPandaContained(Integer.parseInt(parts[1])));
+					break;
+				case "-influencerID:":
+					Orangutan o = Game.getInstance().getOrangutanContained(Integer.parseInt(parts[1]));
+					if (o != null){
+						this.setInfluencer(o);
+						break;
+					}
+					Panda p = Game.getInstance().getPandaContained(Integer.parseInt(parts[1]));
+					if (p != null){
+						this.setInfluencer(p);
+					}
+					break;
+				default: break;
+			}
+		}
+	}
 }
