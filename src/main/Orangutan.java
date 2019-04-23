@@ -22,12 +22,10 @@ public class Orangutan extends Animal {
 	
 	@Override
 	public void addScore(int score) {
-		System.out.println("Orangutan.addScore called");
 		this.score += score;
 	}
 	
 	public int getScore() {
-		System.out.println("Orangutan.addScore called");
 		return score;
 	}
 	

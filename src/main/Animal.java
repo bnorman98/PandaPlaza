@@ -130,7 +130,6 @@ public abstract class Animal implements Steppable {
 	public void jump(){}
 	public void sleep(){}
 	public void addScore(int score){}
-
 	public void writeOut(PrintWriter pw){}
 	
 }
