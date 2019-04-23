@@ -1,6 +1,7 @@
 package main;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class Orangutan extends Animal {
 	private int score = 0;
@@ -29,7 +30,7 @@ public class Orangutan extends Animal {
 		return score;
 	}
 	
-	@Override
+	//@Override
 	public String toString() {
 		return "Orangutan\n\tTile: " + tile.toString();	// Itt még a behúzást meg kell javítani
 	}
@@ -85,5 +86,28 @@ public class Orangutan extends Animal {
 			pw.println("-tileID: " + this.getTile().getID());
 		if(this.getFollower() != null)
 			pw.println("-followerID: " + this.getFollower().getID());
+	}
+
+	public void readIn(ArrayList<String> lines, int idx){
+		for (int i=idx+1;i<lines.size();i++){
+			String[] parts = lines.get(i).split(" ");
+			if (parts[0].charAt(0) != '-'){
+				i = lines.size();
+			}
+			switch (parts[0]){
+				case "-tileID:":
+					this.setTile(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
+					break;
+				case "-followerID:":
+					this.setFollower(Game.getInstance().getPandaContained(Integer.parseInt(parts[1])));
+					break;
+				case "-score:":
+					this.score = Integer.parseInt(parts[1]);
+				case "-penalty:":
+					this.penalty = Integer.parseInt(parts[1]);
+					break;
+				default: break;
+			}
+		}
 	}
 }

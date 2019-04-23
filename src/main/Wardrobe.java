@@ -1,6 +1,7 @@
 package main;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * Represents a wardrobe in the game
@@ -51,9 +52,31 @@ public class Wardrobe extends Thing{
 	public void writeOut(PrintWriter pw){
 		pw.println("Wardrobe");
 		pw.println("-ID: " + this.getID());
+		pw.println("-pairID: " + pair.getID());
 		pw.println("-chance: " + this.getChance());
 		if (this.getTile() != null){
 			pw.println("-tileID: " + this.getID());
+		}
+	}
+
+	public void readIn(ArrayList<String> lines, int idx){
+		for (int i=idx+1;i<lines.size();i++){
+			String[] parts = lines.get(i).split(" ");
+			if (parts[0].charAt(0) != '-'){
+				i = lines.size();
+			}
+			switch (parts[0]){
+				case "-tileID:":
+					this.setTile(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
+					break;
+				case "-chance:":
+					this.chance = Integer.parseInt(parts[1]);
+					break;
+				case "-pairID:":
+					this.setPair((Wardrobe)Game.getInstance().getThingContained(Integer.parseInt(parts[1]))); //szavamat adom, hogy az
+					break;
+				default: break;
+			}
 		}
 	}
 }
