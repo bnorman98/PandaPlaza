@@ -6,8 +6,15 @@ public class EndPoint extends Tile {
 	
 	private Tile startPoint;
 	
+	public EndPoint() {
+		startPoint = null;
+	}
 	public EndPoint(Tile startPoint) {
 		this.startPoint = startPoint;
+	}
+	
+	public Tile getStartPoint() {
+		return startPoint;
 	}
 	
 	// Double check me please
@@ -19,11 +26,6 @@ public class EndPoint extends Tile {
 		animal.killFollowers();
 		animal.goTo(startPoint);
 		
-	}
-	
-	// TODO EndPoint.toString
-	public String toString() {
-		return "TODO";
 	}
 
 	public void writeOut(PrintWriter pw){
@@ -37,6 +39,9 @@ public class EndPoint extends Tile {
 		}
 		if (this.getThing() != null){
 			pw.println("-ThingID: " + this.getThing().getID());
+		}
+		if (this.getStartPoint() != null){
+			pw.println("-startID: " + startPoint.getID());
 		}
 		pw.println("-life: " + this.getLife());
 	}
