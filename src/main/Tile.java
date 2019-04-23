@@ -92,6 +92,10 @@ public class Tile {
 		return thing;
 	}
 	
+	public void setThing(Thing thing) {
+		this.thing = thing;
+	}
+	
 	/**
 	 * Returns the list of neighbouring tiles
 	 */
@@ -146,4 +150,37 @@ public class Tile {
 			}
 			pw.println("-life: " + this.getLife());
 	}
+	
+	public void readIn(ArrayList<String> lines, int idx){
+		for (int i=idx+1;i<lines.size();i++){
+			String[] parts = lines.get(i).split(" ");
+			if (parts[0].charAt(0) != '-'){
+				i = lines.size();
+			}
+			switch (parts[0]){
+				case "-NeighbourID:":
+					this.addNeighbour(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
+					break;
+				case "-ThingID:":
+					this.setThing(Game.getInstance().getThingContained(Integer.parseInt(parts[1])));
+					break;
+				case "-AnimalID:":
+					Orangutan o = Game.getInstance().getOrangutanContained(Integer.parseInt(parts[1]));
+					if (o != null){
+						this.setAnimal(o);
+						break;
+					}
+					Panda p = Game.getInstance().getPandaContained(Integer.parseInt(parts[1]));
+					if (p != null){
+						this.setAnimal(p);
+					}
+					break;
+				case "-life:":
+					this.life = Integer.parseInt(parts[1]);
+					break;
+				default: break;
+			}
+		}
+	}
+	
 }

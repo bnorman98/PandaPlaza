@@ -79,6 +79,10 @@ public abstract class Animal implements Steppable {
 		return influencer;
 	}
 	
+	public void setInfluencer(Animal influencer) {
+		this.influencer = influencer;
+	}
+	
 	/**
 	 * Tile attribute's setter method
 	 * Works both ways

@@ -43,4 +43,6 @@ public class SoftTile extends Tile {
 		}
 		pw.println("-life: " + this.getLife());
 	}
+	
+	
 }
