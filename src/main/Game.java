@@ -286,11 +286,11 @@ public class Game {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void deserialize(String path) {
-		// TODO Deserialization's second half
+		// TODO Deserialization
 		ArrayList<String> lines = new ArrayList<>();
-		
+
 		try {
 			FileReader fr = new FileReader(path);
 			BufferedReader br = new BufferedReader(fr);
@@ -298,64 +298,82 @@ public class Game {
 				String line = br.readLine();
 				if (line == null) break; //Ennek
 				//	|
-				// Saving lines
-				lines.add(line);
-				
+				// Saving lines				v
+				lines.add(line);        // meg ennek a sorrendj»t nem k»ne felcser»lni?
+
 			}
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		int idx = 0;
+		int numofobjects = 0;
 		for (int i = 0; i < lines.size() - 1; i++) {
 			if (lines.get(i).charAt(0) != '-') {
+				String[] parts = lines.get(i+1).split(" ");
 				switch (lines.get(i)) {
 					case "ScaryPanda":
 						ScaryPanda sp = new ScaryPanda();
-						sp.setID(Integer.parseInt(lines.get(i + 1)));
+						sp.setID(Integer.parseInt(parts[1]));
 						pandas.add(sp);
+						break;
 					case "JumpyPanda":
 						JumpyPanda jp = new JumpyPanda();
-						jp.setID(Integer.parseInt(lines.get(i + 1)));
+						jp.setID(Integer.parseInt(parts[1]));
 						pandas.add(jp);
+
+						break;
 					case "SleepyPanda":
 						SleepyPanda slp = new SleepyPanda();
-						slp.setID(Integer.parseInt(lines.get(i + 1)));
+						slp.setID(Integer.parseInt(parts[1]));
 						pandas.add(slp);
+						break;
 					case "Arcade":
 						Arcade a = new Arcade();
-						a.setID(Integer.parseInt(lines.get(i + 1)));
+						a.setID(Integer.parseInt(parts[1]));
 						things.add(a);
+						break;
 					case "Chair":
 						Chair c = new Chair();
-						c.setID(Integer.parseInt(lines.get(i + 1)));
+						c.setID(Integer.parseInt(parts[1]));
 						things.add(c);
+						break;
 					case "ChocolateAutomat":
 						ChocolateAutomat ca = new ChocolateAutomat();
-						ca.setID(Integer.parseInt(lines.get(i + 1)));
+						ca.setID(Integer.parseInt(parts[1]));
 						things.add(ca);
+						break;
 					case "EndPoint":
 						EndPoint ep = new EndPoint();
-						ep.setID(Integer.parseInt(lines.get(i + 1)));
+						ep.setID(Integer.parseInt(parts[1]));
+						tiles.add(ep);
+						break;
 					case "Orangutan":
 						Orangutan o = new Orangutan();
-						o.setID(Integer.parseInt(lines.get(i + 1)));
+						o.setID(Integer.parseInt(parts[1]));
 						orangutans.add(o);
+						break;
 					case "SoftTile":
 						SoftTile st = new SoftTile();
-						st.setID(Integer.parseInt(lines.get(i + 1)));
+						st.setID(Integer.parseInt(parts[1]));
 						tiles.add(st);
+						break;
 					case "Tile":
 						Tile t = new Tile();
-						t.setID(Integer.parseInt(lines.get(i + 1)));
+						t.setID(Integer.parseInt(parts[1]));
 						tiles.add(t);
+						break;
 					case "Wardrobe":
 						Wardrobe w = new Wardrobe();
-						w.setID(Integer.parseInt(lines.get(i + 1)));
+						w.setID(Integer.parseInt(parts[1]));
 						things.add(w);
+						break;
+					default: break;
 				}
 			}
-			
+
 		}
+
 	}
 	
 	public boolean generateRandom(int chance) {
