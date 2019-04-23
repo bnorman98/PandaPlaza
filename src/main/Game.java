@@ -277,7 +277,32 @@ public class Game {
 	
 	// Print current state to console
 	public void consoleOutput() {
-		// TODO consoleOutput
+		try {
+			PrintWriter pw = new PrintWriter(System.out);
+			// Printing Orangutans
+			for (Orangutan orang : orangutans) {
+				orang.writeOut(pw);
+			}
+			// Printing Pandas
+			for (Panda panda : pandas) {
+				panda.writeOut(pw);
+			}
+			// Printing Things
+			for (Thing thing : things) {
+				thing.writeOut(pw);
+			}
+			// Printing Tiles
+			for (Tile tile : tiles) {
+				tile.writeOut(pw);
+			}
+
+			pw.close();
+		} catch (Exception e) {
+			System.out.println("Failed to create PrintWriter");
+			e.printStackTrace();
+		}
+
+
 	}
 
 	public void serialize(String path) {
