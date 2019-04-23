@@ -8,93 +8,114 @@ public class Game {
 	private ArrayList<Panda> pandas;
 	private ArrayList<Thing> things;
 	private ArrayList<Tile> tiles;
-
+	
 	private static Game instance;
-
+	
 	private Game() {
 		orangutans = new ArrayList<>();
 		pandas = new ArrayList<>();
 		things = new ArrayList<>();
 		tiles = new ArrayList<>();
 	}
-
+	
 	public static Game getInstance() {
 		if (instance == null)
 			instance = new Game();
 		return instance;
 	}
-
+	
 	// Adding elements to the lists
 	public void addOrangutan(Orangutan newOrangutan) {
 		boolean isNew = true;
-		for (Orangutan orangutan : orangutans) {
-			if (orangutan.getID() == orangutan.getID()) {
+		for(Orangutan orangutan : orangutans) {
+			if(orangutan.getID() == orangutan.getID()) {
 				isNew = false;
 				break;
 			}
 		}
-		if (isNew)
+		if(isNew)
 			orangutans.add(newOrangutan);
 	}
-
 	public void addPanda(Panda newPanda) {
 		boolean isNew = true;
-		for (Panda panda : pandas) {
-			if (panda.getID() == panda.getID()) {
+		for(Panda panda : pandas) {
+			if(panda.getID() == panda.getID()) {
 				isNew = false;
 				break;
 			}
 		}
-		if (isNew)
+		if(isNew)
 			pandas.add(newPanda);
 	}
-
 	public void addThing(Thing newThing) {
 		boolean isNew = true;
-		for (Thing thing : things) {
-			if (thing.getID() == newThing.getID()) {
+		for(Thing thing : things) {
+			if(thing.getID() == newThing.getID()) {
 				isNew = false;
 				break;
 			}
 		}
-		if (isNew)
+		if(isNew)
 			things.add(newThing);
 	}
-
 	public void addTile(Tile newTile) {
 		// Checking if the new Tile is really new
 		boolean isNew = true;
-		for (Tile tile : tiles) {
-			if (tile.getID() == newTile.getID()) {
+		for(Tile tile : tiles) {
+			if(tile.getID() == newTile.getID()) {
 				isNew = false;
 				break;
 			}
 		}
 		// Adding tile if it's new
-		if (isNew)
+		if(isNew)
 			tiles.add(newTile);
 	}
-
+	
 	/**
 	 * True if a Tile with the given ID is a part of the game
 	 */
 	public boolean isContained(int ID) {
-		for (Tile gameTile : tiles) {
-			if (gameTile.getID() == ID)
+		for(Tile gameTile : tiles) {
+			if(gameTile.getID() == ID)
 				return true;
 		}
 		return false;
 	}
-
+	
 	/**
-	 * Getting a Tile by it's ID
-	 * Tile must be contained in tiles
-	 * else returns null
-	 */
+	  * Getting a Tile by it's ID
+	  * Tile must be contained in tiles
+	  * else returns null
+	  */
 	public Tile getTileContained(int ID) {
-		for (Tile tile : tiles) {
-			if (tile.getID() == ID)
+		for(Tile tile : tiles) {
+			if(tile.getID() == ID)
 				return tile;
+		}
+		return null;
+	}
+
+	public Orangutan getOrangutanContained(int ID) {
+		for(Orangutan orang : orangutans) {
+			if(orang.getID() == ID)
+				return orang;
+		}
+		return null;
+	}
+
+	public Panda getPandaContained(int ID) {
+		for(Panda panda : pandas) {
+			if(panda.getID() == ID)
+				return panda;
+		}
+		return null;
+	}
+
+	public Thing getThingContained(int ID) {
+		for(Thing thing : things) {
+			if(thing.getID() == ID)
+				return thing;
 		}
 		return null;
 	}
@@ -106,61 +127,65 @@ public class Game {
 	 */
 	public void runGame() {
 		// Play the game while possible
-		while (isAlive()) {
+		while(isAlive()) {
 			stepAll();
 		}
 		// End the game
 		endGame();
 	}
-
+	
 	/**
 	 * Checks if there is any animal alive in game
 	 */
-	private boolean isAlive() {
+	private boolean isAlive(){
 		return (!(orangutans == null) && !(pandas == null));
 	}
-
+	
 	public void endGame() {
 		String input;
-
+		
 		// Asking user to save game's state
 		System.out.println("Game over");
 		System.out.println("Do you want to save the game's current state?");
 		try {
-			InputStreamReader isr = new InputStreamReader(System.in);
+			InputStreamReader isr =	new InputStreamReader(System.in);
 			BufferedReader br = new BufferedReader(isr);
 			input = br.readLine();
-
-
+			
+			
 			// Printing state if user asks to
-			if (input.equals("no")) {
+			if(input.equals("no")) {
 				// Do nothing
-			} else if (input.equals("yes")) {
+			}
+			else if(input.equals("yes")) {
 				System.out.println("Write \"console\" or \"file\" to choose where to write game's state");
-
+				
 				// Reading users answer
 				input = br.readLine();
-
+				
 				// Write state to console
-				if (input.equals("console"))
+				if(input.equals("console"))
 					consoleOutput();
-					// Writing state to file
-				else if (input.equals("file")) {
+				// Writing state to file
+				else if(input.equals("file")) {
 					System.out.println("Enter path to file");
 					input = br.readLine();
 					serialize(input);
-				} else
+				}
+				else
 					System.out.println("Invalid input");
-			} else
+			}
+			else
 				System.out.println("Invalid input");
-
+			
 			br.close();
-		} catch (IOException ioe) {
+		}
+		catch(IOException ioe) {
 			System.out.println("IO error occurred");
 		}
-
+		
 	}
-
+	
 	/**
 	 * Steps all steppable objects in the following order:
 	 * orangutans, pandas, things
@@ -172,13 +197,13 @@ public class Game {
 		for (Orangutan orangutan : orangutans) {
 			// Reading user input
 			String input = readInput(orangutan);
-
+			
 			// Setting direction
-			if (input.equals("IOError") || input.equals("ParseError"))
+			if(input.equals("IOError") || input.equals("ParseError"))
 				System.out.println("Error occurred");
-			else if (input.equals("endgame"))
+			else if(input.equals("endgame"))
 				endGame();
-			else if (input.equals("letgo"))
+			else if(input.equals("letgo"))
 				orangutan.letGo();
 			else {
 				// Setting direction
@@ -187,24 +212,23 @@ public class Game {
 				orangutan.step();
 			}
 		}
-
+		
 		// Stepping Pandas
-		for (Panda panda : pandas) {
+		for(Panda panda : pandas) {
 			panda.step();
 		}
-
+		
 		// Stepping Things
-		for (Thing thing : things) {
+		for(Thing thing : things) {
 			thing.step();
 		}
-
+		
 	}
-
+	
 	/**
 	 * Reads user input from console
 	 * User can set orangutan's direction,
 	 * let go of followers or end the game
-	 *
 	 * @param orangutan This is the orangutan whose direction can be set
 	 * @return User's input or error message
 	 */
@@ -212,36 +236,37 @@ public class Game {
 		// User interaction
 		System.out.println("What tile do you want to go to?");
 		String line = "Enter a number from 0 to ";
-		int dirMax = orangutan.getTile().getNeighbours().size() - 1;
+		int dirMax = orangutan.getTile().getNeighbours().size()-1;
 		line += dirMax;
 		System.out.println(line);
 		System.out.println("or enter \"letgo\" to let go of followers.");
 		// Print neighbours
 		int i = 0;
-		for (Tile neighbour : orangutan.getTile().getNeighbours()) {
+		for(Tile neighbour: orangutan.getTile().getNeighbours()) {
 			System.out.println("\t" + i + ": " + neighbour.getID());
 		}
-
+		
 		// Reading input
 		try {
 			String input;
-			InputStreamReader isr = new InputStreamReader(System.in);
+			InputStreamReader isr =	new InputStreamReader(System.in);
 			BufferedReader br = new BufferedReader(isr);
 			input = br.readLine();
-
+			
 			// Testing direction number
-			if (!(input.equals("letgo") || input.equals("exit"))) {
+			if( !(input.equals("letgo") || input.equals("exit"))) {
 				int dir = Integer.parseInt(input);
 				// Read input again if needed
-				if (dir < 0 || dir > dirMax) {
+				if(dir < 0 || dir > dirMax) {
 					System.out.println("Incorrect direction");
 					readInput(orangutan);
 				}
 			}
-
+			
 			br.close();
 			return input;
-		} catch (IOException ioe) {
+		}
+		catch (IOException ioe) {
 			ioe.printStackTrace();
 			return "IOError";
 		} catch (NumberFormatException nfe) {
@@ -249,44 +274,18 @@ public class Game {
 			return "ParseError";
 		}
 	}
-
+	
 	// Print current state to console
 	public void consoleOutput() {
-		try {
-			PrintWriter pw = new PrintWriter(System.out);
-			// Printing Orangutans
-			for (Orangutan orang : orangutans) {
-				orang.writeOut(pw);
-			}
-			// Printing Pandas
-			for (Panda panda : pandas) {
-				panda.writeOut(pw);
-			}
-			// Printing Things
-			for (Thing thing : things) {
-				thing.writeOut(pw);
-			}
-			// Printing Tiles
-			for (Tile tile : tiles) {
-				tile.writeOut(pw);
-			}
-
-			pw.close();
-		} catch (Exception e) {
-			System.out.println("Failed to create PrintWriter");
-			e.printStackTrace();
-		}
-
-
+		// TODO consoleOutput
 	}
-
-
 
 	public void serialize(String path) {
 		// TODO Serialization
 		try {
 			FileWriter fw = new FileWriter(path);
 			PrintWriter pw = new PrintWriter(fw);
+
 
 			// Printing Orangutans
 			for(Orangutan orang : orangutans) {
@@ -331,8 +330,6 @@ public class Game {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		int idx = 0;
-		int numofobjects = 0;
 		for (int i = 0; i < lines.size() - 1; i++) {
 			if (lines.get(i).charAt(0) != '-') {
 				String[] parts = lines.get(i+1).split(" ");
@@ -396,11 +393,48 @@ public class Game {
 					default: break;
 				}
 			}
-
 		}
-
-
-
+		for (int i = 0; i < lines.size() - 1; i++) {
+			if (lines.get(i).charAt(0) != '-') {
+				String[] parts = lines.get(i+1).split(" ");
+				switch (lines.get(i)) {
+					case "ScaryPanda":
+						getPandaContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "JumpyPanda":
+						getPandaContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "SleepyPanda":
+						getPandaContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Arcade":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Chair":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "ChocolateAutomat":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "EndPoint":
+						getTileContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Orangutan":
+						getOrangutanContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "SoftTile":
+						getTileContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Tile":
+						getTileContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					case "Wardrobe":
+						getThingContained(Integer.parseInt(parts[1])).readIn(lines, i);
+						break;
+					default: break;
+				}
+			}
+		}
 	}
 	
 	public boolean generateRandom(int chance) {
