@@ -283,7 +283,6 @@ public class Game {
 
 
 	public void serialize(String path) {
-		// TODO Serialization
 		try {
 			FileWriter fw = new FileWriter(path);
 			PrintWriter pw = new PrintWriter(fw);
@@ -313,7 +312,7 @@ public class Game {
 	}
 
 	public void deserialize(String path) {
-		// TODO Deserialization
+		// TODO Deserialization's 2n part
 		ArrayList<String> lines = new ArrayList<>();
 
 		try {
@@ -321,18 +320,15 @@ public class Game {
 			BufferedReader br = new BufferedReader(fr);
 			while (true) {
 				String line = br.readLine();
-				if (line == null) break; //Ennek
-				//	|
-				// Saving lines				v
-				lines.add(line);        // meg ennek a sorrendj»t nem k»ne felcser»lni?
-
+				if (line == null) break;
+				
+				lines.add(line);
 			}
 			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		int idx = 0;
-		int numofobjects = 0;
+		// Creating objects and adding them to the game
 		for (int i = 0; i < lines.size() - 1; i++) {
 			if (lines.get(i).charAt(0) != '-') {
 				String[] parts = lines.get(i+1).split(" ");
@@ -398,8 +394,6 @@ public class Game {
 			}
 
 		}
-
-
 
 	}
 	
