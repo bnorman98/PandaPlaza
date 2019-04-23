@@ -22,10 +22,9 @@ public class EndPoint extends Tile {
 		System.out.println("Endpoint.stepped called");
 		if(animal.countFollowers() == 0)
 			return;
-		Game.addScore(animal);
+		animal.addScore(animal.countFollowers());
 		animal.killFollowers();
 		animal.goTo(startPoint);
-		
 	}
 
 	public void writeOut(PrintWriter pw){
