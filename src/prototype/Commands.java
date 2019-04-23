@@ -20,6 +20,7 @@ public class Commands {
 			
 			case "startgame":
 				game.runGame();
+				System.out.println("The program is empty. StartGame executed.");
 				break;
 			
 			case "endgame":
