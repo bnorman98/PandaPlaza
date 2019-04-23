@@ -25,8 +25,11 @@ public abstract class Animal implements Steppable {
 		catch(NumberFormatException e) {
 			System.out.println("Invalid number format for [direction]");
 		}
-		
 	}
+	public void setDir(int newDir) {
+		dir = newDir;
+	}
+	
 	public Animal getInfluencer(){
 		System.out.println("Animal.getInfluencer called");
 		return influencer;

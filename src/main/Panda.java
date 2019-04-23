@@ -1,6 +1,5 @@
 package main;
 
-import java.io.PrintWriter;
 import java.util.Random;
 
 public abstract class Panda extends Animal {
@@ -22,10 +21,9 @@ public abstract class Panda extends Animal {
 				goTo(tile.getNeighbourAt(dir));
 			else step();
 		}
-		catch(Exception e) {
+		catch(IllegalArgumentException e) {
 			e.printStackTrace();
 		}
-
 	}
 	
 	public void follow(Tile nextTile) {
@@ -57,6 +55,6 @@ public abstract class Panda extends Animal {
 		
 		// Switching place
 		switchPlace(toucher);
-		
 	}
+	
 }

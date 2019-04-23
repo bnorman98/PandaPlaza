@@ -102,7 +102,7 @@ public class Game {
 	 * Moves the animals while game is running
 	 * Then ends the game
 	 */
-	public void startGame() {
+	public void runGame() {
 		// Play the game while possible
 		while(isAlive()) {
 			stepAll();
@@ -176,8 +176,8 @@ public class Game {
 			String input = readInput(orangutan);
 			
 			// Setting direction
-			if(input.equals("IOError"))
-				System.out.println("IO error occurred");
+			if(input.equals("IOError") || input.equals("ParseError"))
+				System.out.println("Error occurred");
 			else if(input.equals("endgame"))
 				endGame();
 			else if(input.equals("letgo"))
@@ -207,7 +207,7 @@ public class Game {
 	 * User can set orangutan's direction,
 	 * let go of followers or end the game
 	 * @param orangutan This is the orangutan whose direction can be set
-	 * @return User's input
+	 * @return User's input or error message
 	 */
 	private String readInput(Orangutan orangutan) {
 		// User interaction
@@ -229,12 +229,26 @@ public class Game {
 			InputStreamReader isr =	new InputStreamReader(System.in);
 			BufferedReader br = new BufferedReader(isr);
 			input = br.readLine();
+			
+			// Testing direction number
+			if( !(input.equals("letgo") || input.equals("exit"))) {
+				int dir = Integer.parseInt(input);
+				// Read input again if needed
+				if(dir < 0 || dir > dirMax) {
+					System.out.println("Incorrect direction");
+					readInput(orangutan);
+				}
+			}
+			
 			br.close();
 			return input;
 		}
-		catch(IOException ioe) {
+		catch (IOException ioe) {
 			ioe.printStackTrace();
 			return "IOError";
+		} catch (NumberFormatException nfe) {
+			nfe.printStackTrace();
+			return "ParseError";
 		}
 	}
 	

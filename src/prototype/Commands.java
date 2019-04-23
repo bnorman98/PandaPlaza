@@ -19,7 +19,7 @@ public class Commands {
 				break;
 			
 			case "startgame":
-				game.startGame();
+				game.runGame();
 				break;
 			
 			case "endgame":
