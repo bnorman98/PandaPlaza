@@ -24,6 +24,19 @@ public class Game {
 		return instance;
 	}
 	
+	public ArrayList<Orangutan> getOrangutans() {
+		return orangutans;
+	}
+	public ArrayList<Panda> getPandas() {
+		return pandas;
+	}
+	public ArrayList<Thing> getThings() {
+		return things;
+	}
+	public ArrayList<Tile> getTiles() {
+		return tiles;
+	}
+	
 	// Adding elements to the lists
 	public void addOrangutan(Orangutan newOrangutan) {
 		boolean isNew = true;
