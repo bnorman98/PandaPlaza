@@ -14,11 +14,12 @@ public class Orangutan extends Animal {
 	@Override
 	public void step() {
 		System.out.println("Orangutan.step called");
-		
-		Tile myPrevTile = tile;
-		goTo(tile.getNeighbourAt(dir));
-		if(follower != null)
-			follower.follow(myPrevTile);
+		if (tile != null && tile.getNumOfNeighbours() != 0) {
+			Tile myPrevTile = tile;
+			goTo(tile.getNeighbourAt(dir));
+			if (follower != null)
+				follower.follow(myPrevTile);
+		}
 	}
 	
 	@Override
@@ -80,12 +81,12 @@ public class Orangutan extends Animal {
 	public void writeOut(PrintWriter pw){
 		pw.println("Orangutan");
 		pw.println("-ID: " + this.getID());
-		pw.println("-score: " + this.getScore());
-		pw.println("-penalty: " + this.getPenalty());
+		pw.println("-Score: " + this.getScore());
+		pw.println("-Penalty: " + this.getPenalty());
 		if(this.getTile() != null)
-			pw.println("-tileID: " + this.getTile().getID());
+			pw.println("-TileID: " + this.getTile().getID());
 		if(this.getFollower() != null)
-			pw.println("-followerID: " + this.getFollower().getID());
+			pw.println("-FollowerID: " + this.getFollower().getID());
 	}
 
 	public void readIn(ArrayList<String> lines, int idx){
@@ -95,19 +96,30 @@ public class Orangutan extends Animal {
 				i = lines.size();
 			}
 			switch (parts[0]){
-				case "-tileID:":
+				case "-TileID:":
 					this.setTile(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
 					break;
-				case "-followerID:":
+				case "-FollowerID:":
 					this.setFollower(Game.getInstance().getPandaContained(Integer.parseInt(parts[1])));
 					break;
-				case "-score:":
+				case "-Score:":
 					this.score = Integer.parseInt(parts[1]);
-				case "-penalty:":
+				case "-Penalty:":
 					this.penalty = Integer.parseInt(parts[1]);
 					break;
 				default: break;
 			}
 		}
+	}
+
+	public void die(){
+		System.out.println("Orangutan.die called");
+		// Letting go of other animals
+		letGo();
+
+		// Remove from tile
+		tile.setAnimal(null);
+		tile = null;
+		Game.getInstance().killOrangutan(this);
 	}
 }

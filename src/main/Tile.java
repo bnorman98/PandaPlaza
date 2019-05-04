@@ -109,8 +109,11 @@ public class Tile {
 	}
 	
 	public void setAnimal(Animal value) {
-		animal = value;
-		animal.setTile(this);
+		if (value != animal) {
+			animal = value;
+			if (animal != null)
+				animal.setTile(this);
+		}
 	}
 
 	public int getNumOfNeighbours(){
@@ -159,7 +162,13 @@ public class Tile {
 			}
 			switch (parts[0]){
 				case "-NeighbourID:":
-					this.addNeighbour(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
+					boolean van = false;
+					for (int j=0;j<neighbours.size();j++) {
+						if (neighbours.get(j).getID() == Integer.parseInt(parts[1]))
+							van = true;
+					}
+					if (!van)
+						this.addNeighbour(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
 					break;
 				case "-ThingID:":
 					this.setThing(Game.getInstance().getThingContained(Integer.parseInt(parts[1])));

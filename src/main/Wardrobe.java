@@ -52,10 +52,10 @@ public class Wardrobe extends Thing{
 	public void writeOut(PrintWriter pw){
 		pw.println("Wardrobe");
 		pw.println("-ID: " + this.getID());
-		pw.println("-pairID: " + pair.getID());
-		pw.println("-chance: " + this.getChance());
+		pw.println("-PairID: " + pair.getID());
+		pw.println("-Chance: " + this.getChance());
 		if (this.getTile() != null){
-			pw.println("-tileID: " + this.getID());
+			pw.println("-TileID: " + this.getID());
 		}
 	}
 
@@ -66,13 +66,13 @@ public class Wardrobe extends Thing{
 				i = lines.size();
 			}
 			switch (parts[0]){
-				case "-tileID:":
+				case "-TileID:":
 					this.setTile(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
 					break;
-				case "-chance:":
+				case "-Chance:":
 					this.chance = Integer.parseInt(parts[1]);
 					break;
-				case "-pairID:":
+				case "-PairID:":
 					this.setPair((Wardrobe)Game.getInstance().getThingContained(Integer.parseInt(parts[1]))); //szavamat adom, hogy az
 					break;
 				default: break;

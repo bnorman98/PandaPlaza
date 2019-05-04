@@ -14,13 +14,13 @@ public class JumpyPanda extends Panda {
 		pw.println("JumpyPanda");
 		pw.println("-ID:" + this.getID());
 		if (this.getTile() != null){
-			pw.println("-tileID: " + this.getTile().getID());
+			pw.println("-TileID: " + this.getTile().getID());
 		}
 		if (this.getInfluencer() != null){
-			pw.println("-influencerID: " + this.getInfluencer().getID());
+			pw.println("-InfluencerID: " + this.getInfluencer().getID());
 		}
 		if (this.getFollower() != null){
-			pw.println("-followerID: " + this.getFollower().getID());
+			pw.println("-FollowerID: " + this.getFollower().getID());
 		}
 	}
 }

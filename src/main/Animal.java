@@ -89,9 +89,11 @@ public abstract class Animal implements Steppable {
 	 * @param newTile
 	 */
 	public void setTile(Tile newTile) {
-		System.out.println("Animal.setTile called");
-		tile = newTile;
-		tile.setAnimal(this);
+		if (newTile != tile) {
+			System.out.println("Animal.setTile called");
+			tile = newTile;
+			tile.setAnimal(this);
+		}
 	}
 	
 	/**
@@ -185,14 +187,7 @@ public abstract class Animal implements Steppable {
 	 * Lets go of the followers and
 	 * removes animal from the tile it was standing on
 	 */
-	public void die() {
-		// Letting go of other animals
-		letGo();
-		
-		// Remove from tile
-		tile.setAnimal(null);
-		tile = null;
-	}
+	public void die() { }
 	
 	/**
 	 * The animal and it's toucher switches place

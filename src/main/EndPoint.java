@@ -69,7 +69,7 @@ public class EndPoint extends Tile {
 			pw.println("-ThingID: " + this.getThing().getID());
 		}
 		if (this.getStartPoint() != null){
-			pw.println("-startID: " + startPoint.getID());
+			pw.println("-StartPointID: " + startPoint.getID());
 		}
 		pw.println("-life: " + this.getLife());
 	}
@@ -90,7 +90,7 @@ public class EndPoint extends Tile {
 			}
 			//switch-casezel beállítjuk a tagváltozókat
 			switch (parts[0]){
-				case "-startID:":
+				case "-StartPointID:":
 					this.startPoint = Game.getInstance().getTileContained(Integer.parseInt(parts[1]));
 					break;
 				case "-NeighbourID:":

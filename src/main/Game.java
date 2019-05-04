@@ -2,13 +2,18 @@ package main;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Game {
 	private ArrayList<Orangutan> orangutans;
 	private ArrayList<Panda> pandas;
 	private ArrayList<Thing> things;
 	private ArrayList<Tile> tiles;
-	
+	private ArrayList<Panda> pandasToRemove;
+	private ArrayList<Orangutan> orangutansToRemove;
+	boolean endgame = false;
+
+
 	private static Game instance;
 	
 	private Game() {
@@ -16,6 +21,8 @@ public class Game {
 		pandas = new ArrayList<>();
 		things = new ArrayList<>();
 		tiles = new ArrayList<>();
+		pandasToRemove = new ArrayList<>();
+		orangutansToRemove = new ArrayList<>();
 	}
 	
 	public static Game getInstance() {
@@ -140,7 +147,7 @@ public class Game {
 	 */
 	public void runGame() {
 		// Play the game while possible
-		while(isAlive()) {
+		while(!endgame) {
 			stepAll();
 		}
 		// End the game
@@ -151,7 +158,7 @@ public class Game {
 	 * Checks if there is any animal alive in game
 	 */
 	private boolean isAlive(){
-		return (!(orangutans == null) && !(pandas == null));
+		return !(pandas.size() == 0 || orangutans.size() == 0);
 	}
 	
 	public void endGame() {
@@ -159,11 +166,11 @@ public class Game {
 		
 		// Asking user to save game's state
 		System.out.println("Game over");
-		System.out.println("Do you want to save the game's current state?");
+		System.out.println("Do you want to save the game's current state? [yes/no]");
 		try {
 			InputStreamReader isr =	new InputStreamReader(System.in);
-			BufferedReader br = new BufferedReader(isr);
-			input = br.readLine();
+			BufferedReader brg = new BufferedReader(isr);
+			input = brg.readLine();
 			
 			
 			// Printing state if user asks to
@@ -174,7 +181,7 @@ public class Game {
 				System.out.println("Write \"console\" or \"file\" to choose where to write game's state");
 				
 				// Reading users answer
-				input = br.readLine();
+				input = brg.readLine();
 				
 				// Write state to console
 				if(input.equals("console"))
@@ -182,7 +189,7 @@ public class Game {
 				// Writing state to file
 				else if(input.equals("file")) {
 					System.out.println("Enter path to file");
-					input = br.readLine();
+					input = brg.readLine();
 					serialize(input);
 				}
 				else
@@ -190,8 +197,6 @@ public class Game {
 			}
 			else
 				System.out.println("Invalid input");
-			
-			br.close();
 		}
 		catch(IOException ioe) {
 			System.out.println("IO error occurred");
@@ -207,7 +212,10 @@ public class Game {
 	 */
 	public void stepAll() {
 		// Stepping Orangutans
-		for (Orangutan orangutan : orangutans) {
+
+		Iterator<Orangutan> iterO = orangutans.iterator();
+		while (iterO.hasNext()) {
+			Orangutan orangutan = iterO.next();
 			// Reading user input
 			String input = readInput(orangutan);
 			
@@ -215,7 +223,7 @@ public class Game {
 			if(input.equals("IOError") || input.equals("ParseError"))
 				System.out.println("Error occurred");
 			else if(input.equals("endgame"))
-				endGame();
+				endgame = true;
 			else if(input.equals("letgo"))
 				orangutan.letGo();
 			else {
@@ -227,7 +235,9 @@ public class Game {
 		}
 		
 		// Stepping Pandas
-		for(Panda panda : pandas) {
+		Iterator<Panda> iterP = pandas.iterator();
+		while (iterP.hasNext()) {
+			Panda panda = iterP.next();
 			panda.step();
 		}
 		
@@ -235,7 +245,14 @@ public class Game {
 		for(Thing thing : things) {
 			thing.step();
 		}
-		
+
+		orangutans.removeAll(orangutansToRemove);
+		if (!isAlive())
+			endgame = true;
+
+		pandas.removeAll(pandasToRemove);
+		if (!isAlive())
+			endgame = true;
 	}
 	
 	/**
@@ -249,14 +266,15 @@ public class Game {
 		// User interaction
 		System.out.println("What tile do you want to go to?");
 		String line = "Enter a number from 0 to ";
-		int dirMax = orangutan.getTile().getNeighbours().size()-1;
+		int dirMax = orangutan.getTile().getNeighbours().size();
 		line += dirMax;
 		System.out.println(line);
-		System.out.println("or enter \"letgo\" to let go of followers.");
+		System.out.println("or enter \"letgo\" to let go of followers.\nEnter \"endgame\" to end the game");
 		// Print neighbours
 		int i = 0;
 		for(Tile neighbour: orangutan.getTile().getNeighbours()) {
 			System.out.println("\t" + i + ": " + neighbour.getID());
+			i++;
 		}
 		
 		// Reading input
@@ -267,16 +285,14 @@ public class Game {
 			input = br.readLine();
 			
 			// Testing direction number
-			if( !(input.equals("letgo") || input.equals("exit"))) {
+			if( !(input.equals("letgo") || input.equals("endgame"))) {
 				int dir = Integer.parseInt(input);
 				// Read input again if needed
 				if(dir < 0 || dir > dirMax) {
 					System.out.println("Incorrect direction");
-					readInput(orangutan);
+					input = readInput(orangutan);
 				}
 			}
-			
-			br.close();
 			return input;
 		}
 		catch (IOException ioe) {
@@ -479,6 +495,14 @@ public class Game {
 		int rand = (int) (Math.random() * 100);
 		System.out.println("Randomised: " + rand);
 		return rand > chance;
+	}
+
+	public void killPanda(Panda p){
+		pandasToRemove.add(p);
+	}
+
+	public void killOrangutan(Orangutan o){
+		orangutansToRemove.add(o);
 	}
 	
 }

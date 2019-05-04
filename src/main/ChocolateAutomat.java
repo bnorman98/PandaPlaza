@@ -36,7 +36,7 @@ public class ChocolateAutomat extends Thing {
 			//Ha a véletlen szám kisebb,
 			// mint amennyi esélyünk van a csilingelésre, akkor ráül a panda
 			if(t.getAnimal() != null && r.nextInt() % 100 <= chance)
-				t.getAnimal().scare();
+				t.getAnimal().jump();
 		}
 	}
 
@@ -49,9 +49,9 @@ public class ChocolateAutomat extends Thing {
 		//tagfüggvényeit és a tagfüggvények értékeit
 		pw.println("ChocolateAutomat");
 		pw.println("-ID: " + this.getID());
-		pw.println("-chance: " + this.getChance());
+		pw.println("-Chance: " + this.getChance());
 		if (this.getTile() != null){
-			pw.println("-tileID: " + this.getID());
+			pw.println("-TileID: " + this.getID());
 		}
 	}
 }

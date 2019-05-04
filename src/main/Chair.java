@@ -40,9 +40,9 @@ public class Chair extends Thing {
 		//tagfüggvényeit és a tagfüggvények értékeit
 		pw.println("Chair");
 		pw.println("-ID: " + this.getID());
-		pw.println("-chance: " + this.getChance());
+		pw.println("-Chance: " + this.getChance());
 		if (this.getTile() != null){
-			pw.println("-tileID: " + this.getID());
+			pw.println("-TileID: " + this.getID());
 		}
 	}
 }

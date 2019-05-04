@@ -15,12 +15,13 @@ public abstract class Panda extends Animal {
 			
 			// Randomising direction
 			Random rand = new Random();
-			dir = rand.nextInt(tile.getNeighbours().size());
-			
-			// Moving Panda
-			if(tile.getNeighbourAt(dir).getAnimal() == null)
-				goTo(tile.getNeighbourAt(dir));
-			else step();
+			if (tile != null && tile.getNeighbours().size() > 0) {
+				dir = rand.nextInt(tile.getNeighbours().size());
+				// Moving Panda
+				if (tile.getNeighbourAt(dir).getAnimal() == null)
+					goTo(tile.getNeighbourAt(dir));
+				else step();
+			}
 		}
 		catch(IllegalArgumentException e) {
 			e.printStackTrace();
@@ -64,13 +65,13 @@ public abstract class Panda extends Animal {
 				i = lines.size();
 			}
 			switch (parts[0]){
-				case "-tileID:":
+				case "-TileID:":
 					this.setTile(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
 					break;
-				case "-followerID:":
+				case "-FollowerID:":
 					this.setFollower(Game.getInstance().getPandaContained(Integer.parseInt(parts[1])));
 					break;
-				case "-influencerID:":
+				case "-InfluencerID:":
 					Orangutan o = Game.getInstance().getOrangutanContained(Integer.parseInt(parts[1]));
 					if (o != null){
 						this.setInfluencer(o);
@@ -84,5 +85,15 @@ public abstract class Panda extends Animal {
 				default: break;
 			}
 		}
+	}
+	public void die(){
+		System.out.println("Panda.die called");
+		// Letting go of other animals
+		letGo();
+
+		// Remove from tile
+		tile.setAnimal(null);
+		tile = null;
+		Game.getInstance().killPanda(this);
 	}
 }

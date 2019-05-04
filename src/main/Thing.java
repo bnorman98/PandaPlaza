@@ -38,10 +38,10 @@ public abstract class Thing implements Steppable {
 				i = lines.size();
 			}
 			switch (parts[0]){
-				case "-tileID:":
+				case "-TileID:":
 					this.setTile(Game.getInstance().getTileContained(Integer.parseInt(parts[1])));
 					break;
-				case "-chance:":
+				case "-Chance:":
 					this.chance = Integer.parseInt(parts[1]);
 					break;
 				default: break;

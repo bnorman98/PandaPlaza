@@ -11,7 +11,7 @@ public class Main {
 
 		// Printing basic commands
 		System.out.println("Welcome to PandaPlaza Prototype");
-		System.out.println("Type command:\n > help - to open user manual\n > exit - to close the program");
+		System.out.println("Type command:\n > load [path] - to load a game from file\n > startgame - run the actual game\n > help - to open user manual\n > exit - to close the program");
 
 		Commands skeleton = new Commands();
 		boolean exitCondition = false;

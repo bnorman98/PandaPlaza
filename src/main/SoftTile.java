@@ -11,7 +11,6 @@ public class SoftTile extends Tile {
 		this.life = life;
 	}
 	public int getLife() {
-		System.out.println("SoftTile.getLife called");
 		return life;
 	}
 	

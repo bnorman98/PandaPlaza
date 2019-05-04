@@ -23,7 +23,7 @@ public class Arcade extends Thing {
 			Random r = new Random();
 			//Ha a véletlen szám kisebb, mint amennyi esélyünk van a csilingelésre, akkor csilingel
 			if(t.getAnimal() != null && r.nextInt() % 100 <= chance)
-				t.getAnimal().jump();
+				t.getAnimal().scare();
 		}
 	}
 
@@ -36,9 +36,9 @@ public class Arcade extends Thing {
 		//tagfüggvényeit és a tagfüggvények értékeit
 		pw.println("Arcade");
 		pw.println("-ID: " + this.getID());
-		pw.println("-chance: " + this.getChance());
+		pw.println("-Chance: " + this.getChance());
 		if (this.getTile() != null){
-			pw.println("-tileID: " + this.getID());
+			pw.println("-TileID: " + this.getID());
 		}
 	}
 }
