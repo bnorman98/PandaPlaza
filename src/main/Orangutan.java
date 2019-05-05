@@ -14,10 +14,17 @@ public class Orangutan extends Animal {
 	@Override
 	public void step() {
 		System.out.println("Orangutan.step called");
+		if (penalty > 0){
+			penalty--;
+		}
 		if (tile != null && tile.getNumOfNeighbours() != 0) {
+			boolean folBeforeStep = false;
+			if (follower != null)
+				folBeforeStep = true;
 			Tile myPrevTile = tile;
 			goTo(tile.getNeighbourAt(dir));
-			if (follower != null)
+			tile.stepped();
+			if (folBeforeStep)
 				follower.follow(myPrevTile);
 		}
 	}

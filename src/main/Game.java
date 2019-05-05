@@ -222,8 +222,10 @@ public class Game {
 			// Setting direction
 			if(input.equals("IOError") || input.equals("ParseError"))
 				System.out.println("Error occurred");
-			else if(input.equals("endgame"))
+			else if(input.equals("endgame")) {
 				endgame = true;
+				return;
+			}
 			else if(input.equals("letgo"))
 				orangutan.letGo();
 			else {
@@ -264,7 +266,7 @@ public class Game {
 	 */
 	private String readInput(Orangutan orangutan) {
 		// User interaction
-		System.out.println("What tile do you want to go to?");
+		System.out.println("\nWhat tile do you want to go to?");
 		String line = "Enter a number from 0 to ";
 		int dirMax = orangutan.getTile().getNeighbours().size();
 		line += dirMax;

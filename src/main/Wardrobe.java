@@ -13,6 +13,7 @@ public class Wardrobe extends Thing{
 	 * Who enters the wardrobe appears at this wardrobe
 	 */
 	private Wardrobe pair;
+	private boolean justGot = false;
 	
 	/**
 	 * Default constructor
@@ -42,8 +43,14 @@ public class Wardrobe extends Thing{
 	@Override
 	public void step() {
 		System.out.println("Wardrobe.step called");
-		if(tile.getAnimal() != null)
+		if(tile.getAnimal() != null && !justGot) {
 			tile.getAnimal().goTo(pair.tile);
+			pair.justGot = true;
+			System.out.println(this.getTile().getID()+ " pair: "+pair.getTile().getID());
+		}
+		else if (tile.getAnimal() != null && justGot){
+			justGot = false;
+		}
 	}
 	
 	/**
@@ -55,7 +62,7 @@ public class Wardrobe extends Thing{
 		pw.println("-PairID: " + pair.getID());
 		pw.println("-Chance: " + this.getChance());
 		if (this.getTile() != null){
-			pw.println("-TileID: " + this.getID());
+			pw.println("-TileID: " + this.getTile().getID());
 		}
 	}
 

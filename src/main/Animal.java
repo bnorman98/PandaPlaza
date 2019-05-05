@@ -129,7 +129,6 @@ public abstract class Animal implements Steppable {
 		tile.setAnimal(null);
 		newTile.setAnimal(this);
 		tile = newTile;
-		tile.stepped();
 	}
 	
 	/**

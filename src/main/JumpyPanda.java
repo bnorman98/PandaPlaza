@@ -12,7 +12,7 @@ public class JumpyPanda extends Panda {
 
 	public void writeOut(PrintWriter pw){
 		pw.println("JumpyPanda");
-		pw.println("-ID:" + this.getID());
+		pw.println("-ID: " + this.getID());
 		if (this.getTile() != null){
 			pw.println("-TileID: " + this.getTile().getID());
 		}

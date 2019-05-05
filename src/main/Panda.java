@@ -18,8 +18,10 @@ public abstract class Panda extends Animal {
 			if (tile != null && tile.getNeighbours().size() > 0) {
 				dir = rand.nextInt(tile.getNeighbours().size());
 				// Moving Panda
-				if (tile.getNeighbourAt(dir).getAnimal() == null)
+				if (tile.getNeighbourAt(dir).getAnimal() == null) {
 					goTo(tile.getNeighbourAt(dir));
+					tile.stepped();
+				}
 				else step();
 			}
 		}
@@ -37,15 +39,19 @@ public abstract class Panda extends Animal {
 		}
 		Tile myPrevTile = tile;
 		goTo(nextTile);
+		tile.stepped();
 		if(follower != null)
 			follower.follow(myPrevTile);
 	}
 	
 	public void getTouched(Orangutan toucher) {
 		System.out.println("Panda.getTouched called");
-		
+
 		// Releasing paws if the Panda held any
 		letGo();
+
+		// Switching place
+		switchPlace(toucher);
 		
 		// Holding paws
 		if(toucher.follower != null) {
@@ -54,9 +60,6 @@ public abstract class Panda extends Animal {
 		}
 		influencer = toucher;
 		toucher.follower = this;
-		
-		// Switching place
-		switchPlace(toucher);
 	}
 	public void readIn(ArrayList<String> lines, int idx){
 		for (int i=idx+1;i<lines.size();i++){
