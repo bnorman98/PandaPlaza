@@ -1,5 +1,7 @@
 package main;
 
+import pGraphics.Graphics;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ public class SleepyPanda extends Panda {
 			goTo(tile.getNeighbourAt(dir));
 			tile.stepped();
 		}
+		updateGraphics(Graphics.getInstance());
 	}
 	
 	@Override

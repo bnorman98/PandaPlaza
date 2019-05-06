@@ -1,5 +1,7 @@
 package main;
 
+import pGraphics.Graphics;
+
 import java.io.PrintWriter;
 import java.util.Random;
 
@@ -29,6 +31,7 @@ public class Chair extends Thing {
 				break;
 			}
 		}
+		updateGraphics(Graphics.getInstance());
 	}
 
 	/**

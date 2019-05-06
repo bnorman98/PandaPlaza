@@ -1,11 +1,14 @@
 package main;
 
+import pGraphics.Graphics;
+import pGraphics.Viewable;
+
 import java.io.PrintWriter;
 
 /**
  * Represents all the animals
  */
-public abstract class Animal implements Steppable {
+public abstract class Animal implements Steppable, Viewable {
 	
 	/**
 	 * Moving direction
@@ -34,7 +37,14 @@ public abstract class Animal implements Steppable {
 	 * Must differ for all the animals in a game
 	 */
 	private int ID;
-	
+
+
+	private String texturePath;
+
+	public String getTexturePath(){
+		return texturePath;
+	}
+
 	/**
 	 * ID attribute's setter method
 	 */
@@ -239,5 +249,9 @@ public abstract class Animal implements Steppable {
 	 * Writes out the object to file
 	 */
 	public void writeOut(PrintWriter pw){}
-	
+
+	@Override
+	public void updateGraphics(Graphics graphics) {
+		Graphics.getInstance().drawAll();
+	}
 }

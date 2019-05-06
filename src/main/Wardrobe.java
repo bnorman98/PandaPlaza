@@ -1,5 +1,7 @@
 package main;
 
+import pGraphics.Graphics;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -51,6 +53,7 @@ public class Wardrobe extends Thing{
 		else if (tile.getAnimal() != null && justGot){
 			justGot = false;
 		}
+		updateGraphics(Graphics.getInstance());
 	}
 	
 	/**

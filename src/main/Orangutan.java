@@ -1,5 +1,7 @@
 package main;
 
+import pGraphics.Graphics;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class Orangutan extends Animal {
 			if (folBeforeStep)
 				follower.follow(myPrevTile);
 		}
+		updateGraphics(Graphics.getInstance());
 	}
 	
 	@Override

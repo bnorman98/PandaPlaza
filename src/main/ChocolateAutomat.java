@@ -1,5 +1,7 @@
 package main;
 
+import pGraphics.Graphics;
+
 import java.io.PrintWriter;
 import java.util.Random;
 
@@ -38,6 +40,7 @@ public class ChocolateAutomat extends Thing {
 			if(t.getAnimal() != null && r.nextInt() % 100 <= chance)
 				t.getAnimal().jump();
 		}
+		updateGraphics(Graphics.getInstance());
 	}
 
 	/**

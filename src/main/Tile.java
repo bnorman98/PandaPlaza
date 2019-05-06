@@ -1,12 +1,15 @@
 package main;
 
+import pGraphics.Graphics;
+import pGraphics.Viewable;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
  * Represents a tile in the game
  */
-public class Tile {
+public class Tile implements Viewable {
 	
 	/**
 	 * Stores he animal standing on the tile
@@ -35,6 +38,12 @@ public class Tile {
 	 * Must differ for all the tiles in a game
 	 */
 	protected int ID;
+
+	private String texturePath;
+
+	public String getTexturePath(){
+		return texturePath;
+	}
 	
 	/**
 	 * ID attribute's setter method
@@ -191,5 +200,9 @@ public class Tile {
 			}
 		}
 	}
-	
+
+	@Override
+	public void updateGraphics(Graphics graphics) {
+		Graphics.getInstance().drawAll();
+	}
 }
