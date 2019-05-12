@@ -8,7 +8,14 @@ import java.util.ArrayList;
  * They are controlled by the user
  */
 public class Orangutan extends Animal {
+	/**
+	 * The score of the Orangutan
+	 * It incr if it takes a Panda to the exit
+	 */
 	private int score = 0;
+	/**
+	 * The penalty of the Orangutan
+	 */
 	private int penalty = 0;
 
 	/**

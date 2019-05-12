@@ -11,7 +11,11 @@ import java.util.ArrayList;
  * Casues, that this SleepyPanda wont move
  */
 public class SleepyPanda extends Panda {
-	
+	/**
+	 * Its true if the Panda
+	 * felt asleep
+	 * False, if is not
+	 */
 	private boolean isSleeping = false;
 
 	/**

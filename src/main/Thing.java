@@ -10,10 +10,21 @@ import java.util.ArrayList;
  * They usually interacts with Animals, especially with Pandas
  */
 public abstract class Thing implements Steppable {
-	
+	/**
+	 * The Tile under the Thing
+	 */
 	protected Tile tile;
+	/**
+	 * The chance value of the Thing
+	 */
 	protected int chance;
+	/**
+	 * The Path to the Things graphics representation
+	 */
 	protected String texturePath;
+	/**
+	 * The ID of the Ting
+	 */
 	protected int ID;
 
 	/**

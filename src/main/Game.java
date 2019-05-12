@@ -7,18 +7,52 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Game {
+	/**
+	 * List, that cointains all the Orangutans in the game
+	 */
 	private ArrayList<Orangutan> orangutans;
+	/**
+	 * List, that cointains all the Pandas in the game
+	 */
 	private ArrayList<Panda> pandas;
+	/**
+	 * List, that cointains all the Things in the game
+	 */
 	private ArrayList<Thing> things;
+	/**
+	 * List, that cointains all the Tiles in the game
+	 */
 	private ArrayList<Tile> tiles;
+	/**
+	 * List, that cointains all the
+	 * Ready-to-Remove Pandas in the game
+	 */
 	private ArrayList<Panda> pandasToRemove;
+	/**
+	 * List, that cointains all the
+	 * Ready-to-Remove Orangutans in the game
+	 */
 	private ArrayList<Orangutan> orangutansToRemove;
+	/**
+	 * It represents the end of the game
+	 * If its true, the game has ended
+	 */
 	private boolean endgame = false;
 
+	/**
+	 * A GraphicalApplication
+	 */
 	private GraphicalApplication view;
-
+	/**
+	 * A Game, that cointais everything
+	 */
 	private static Game instance;
-	
+
+	/**
+	 * Ctor of the game class. Private
+	 * because it's singleton
+	 *
+	 */
 	private Game() {
 		orangutans = new ArrayList<>();
 		pandas = new ArrayList<>();
@@ -27,31 +61,62 @@ public class Game {
 		pandasToRemove = new ArrayList<>();
 		orangutansToRemove = new ArrayList<>();
 	}
-	
+
+	/**
+	 *
+	 * @return the instance
+	 * Game object
+	 */
 	public static Game getInstance() {
 		if (instance == null)
 			instance = new Game();
 		return instance;
 	}
 
+	/**
+	 * Sets the view
+	 * @param app The view
+	 *            that will be set
+	 */
 	public void setView(GraphicalApplication app){
 		view = app;
 	}
 
+	/**
+	 * A getter method
+	 * @return the orangutans list
+	 */
 	public ArrayList<Orangutan> getOrangutans() {
 		return orangutans;
 	}
+	/**
+	 * A getter method
+	 * @return the pandas list
+	 */
 	public ArrayList<Panda> getPandas() {
 		return pandas;
 	}
+	/**
+	 * A getter method
+	 * @return the things list
+	 */
 	public ArrayList<Thing> getThings() {
 		return things;
 	}
+	/**
+	 * A getter method
+	 * @return the tiles list
+	 */
 	public ArrayList<Tile> getTiles() {
 		return tiles;
 	}
-	
-	// Adding elements to the lists
+
+	/**
+	 * Adds a new Orangutan to the
+	 * list, that contains them
+	 * @param newOrangutan The new Orangutan, that will
+	 *                     be added
+	 */
 	public void addOrangutan(Orangutan newOrangutan) {
 		boolean isNew = true;
 		for(Orangutan orangutan : orangutans) {
@@ -63,6 +128,13 @@ public class Game {
 		if(isNew)
 			orangutans.add(newOrangutan);
 	}
+
+	/**
+	 * Adds a new Panda to the
+	 * list, that contains them
+	 * @param newPanda The new Panda, that will
+	 *                     be added
+	 */
 	public void addPanda(Panda newPanda) {
 		boolean isNew = true;
 		for(Panda panda : pandas) {
@@ -74,6 +146,12 @@ public class Game {
 		if(isNew)
 			pandas.add(newPanda);
 	}
+	/**
+	 * Adds a new Thing to the
+	 * list, that contains them
+	 * @param newThing The new Thing, that will
+	 *                     be added
+	 */
 	public void addThing(Thing newThing) {
 		boolean isNew = true;
 		for(Thing thing : things) {
@@ -85,6 +163,12 @@ public class Game {
 		if(isNew)
 			things.add(newThing);
 	}
+	/**
+	 * Adds a new Tile to the
+	 * list, that contains them
+	 * @param newTile The new Tile, that will
+	 *                     be added
+	 */
 	public void addTile(Tile newTile) {
 		// Checking if the new Tile is really new
 		boolean isNew = true;
@@ -123,6 +207,11 @@ public class Game {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param ID The ID, we want to get the Orangutan on
+	 * @return Orangutan with the given ID
+	 */
 	public Orangutan getOrangutanContained(int ID) {
 		for(Orangutan orang : orangutans) {
 			if(orang.getID() == ID)
@@ -130,7 +219,11 @@ public class Game {
 		}
 		return null;
 	}
-
+	/**
+	 *
+	 * @param ID The ID, we want to get the Panda on
+	 * @return Panda with the given ID
+	 */
 	public Panda getPandaContained(int ID) {
 		for(Panda panda : pandas) {
 			if(panda.getID() == ID)
@@ -138,7 +231,11 @@ public class Game {
 		}
 		return null;
 	}
-
+	/**
+	 *
+	 * @param ID The ID, we want to get the Thing on
+	 * @return Thing with the given ID
+	 */
 	public Thing getThingContained(int ID) {
 		for(Thing thing : things) {
 			if(thing.getID() == ID)
@@ -168,7 +265,14 @@ public class Game {
 	private boolean isAlive(){
 		return !(pandas.size() == 0 || orangutans.size() == 0);
 	}
-	
+
+	/**
+	 * Manages the end of the game
+	 * Waits for the command in the command line
+	 * How to saves, or to save the game
+	 * Makes the serialization if its the
+	 * choosen option
+	 */
 	public void endGame() {
 		String input;
 		
@@ -317,8 +421,11 @@ public class Game {
 			return "ParseError";
 		}
 	}
-	
-	// Print current state to console
+
+	/**
+	 * Prints the current state
+	 * on the console
+	 */
 	public void consoleOutput() {
 		try {
 			PrintWriter pw = new PrintWriter(System.out);
@@ -514,6 +621,12 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Generates a random number and gives back, that
+	 * is it greater or not than the given number
+	 * @param chance the number to be compared
+	 * @return true if the generated number is greater than the given
+	 */
 	public boolean generateRandom(int chance) {
 		int rand = (int) (Math.random() * 100);
 		System.out.println("Randomised: " + rand);
