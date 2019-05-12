@@ -137,6 +137,13 @@ public class Orangutan extends Animal {
 			pw.println("-FollowerID: " + this.getFollower().getID());
 	}
 
+	/**
+	 * An assistant method
+	 * Helps the deserialization
+	 * Knows the scheme of the deserialization
+	 * @param lines The lines that contain the informations about the Orangutan
+	 * @param idx Index of the Orangutan
+	 */
 	public void readIn(ArrayList<String> lines, int idx){
 		for (int i=idx+1;i<lines.size();i++){
 			String[] parts = lines.get(i).split(" ");
@@ -160,6 +167,11 @@ public class Orangutan extends Animal {
 		}
 	}
 
+	/**
+	 * Represents the death of a Panda
+	 * Removes him from the tile, he stands on
+	 * Make his followers free
+	 */
 	public void die(){
 		System.out.println("Orangutan.die called");
 		// Letting go of other animals

@@ -2,11 +2,21 @@ package main;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+/**
+ * Represents all the SleepyPandas
+ * A SleepyPanda, as its name shows, is really tired
+ * Can fall asleep really quickly
+ * If he finds a chair
+ * He takes a refreshing nap on that
+ * Casues, that this SleepyPanda wont move
+ */
 public class SleepyPanda extends Panda {
 	
 	private boolean isSleeping = false;
-	
+
+	/**
+	 * Steps the Panda
+	 */
 	@Override
 	public void step() {
 		System.out.println("SleepyPanda.step called");
@@ -19,7 +29,11 @@ public class SleepyPanda extends Panda {
 			tile.stepped();
 		}
 	}
-	
+
+	/**
+	 * Makes him sleeping
+	 * Lets his followers go if he felt asleep
+	 */
 	@Override
 	public void sleep() {
 		System.out.println("SleepyPanda.sleep called");
@@ -28,7 +42,10 @@ public class SleepyPanda extends Panda {
 		isSleeping = true;
 		letGo();
 	}
-
+	/**
+	 * Serializes itself into the given pw
+	 * @param pw The method serializes the SleepyPanda into the given PrintWriter pw
+	 */
 	public void writeOut(PrintWriter pw){
 		pw.println("SleepyPanda");
 		pw.println("-ID: " + this.getID());
@@ -47,6 +64,13 @@ public class SleepyPanda extends Panda {
 	}
 
 	@Override
+	/**
+	 * An assistant method
+	 * Helps the deserialization
+	 * Knows the scheme of the deserialization
+	 * @param lines The lines that contain the informations about the SleepyPanda
+	 * @param idx Index of the SleepyPanda
+	 */
 	public void readIn(ArrayList<String> lines, int idx){
 		for (int i=idx+1;i<lines.size();i++){
 			String[] parts = lines.get(i).split(" ");
