@@ -1,8 +1,5 @@
 package main;
 
-import pGraphics.Graphics;
-import pGraphics.Viewable;
-
 import java.awt.*;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -10,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Represents a tile in the game
  */
-public class Tile implements Viewable {
+public class Tile {
 	
 	/**
 	 * Stores he animal standing on the tile
@@ -205,10 +202,5 @@ public class Tile implements Viewable {
 				default: break;
 			}
 		}
-	}
-
-	@Override
-	public void updateGraphics(Graphics graphics) {
-		Graphics.getInstance().drawAll();
 	}
 }

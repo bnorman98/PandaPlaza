@@ -1,7 +1,5 @@
 package main;
 
-import pGraphics.Graphics;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,7 +28,6 @@ public abstract class Panda extends Animal {
 		catch(IllegalArgumentException e) {
 			e.printStackTrace();
 		}
-		updateGraphics(Graphics.getInstance());
 	}
 	
 	public void follow(Tile nextTile) {

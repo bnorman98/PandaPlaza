@@ -1,7 +1,5 @@
 package main;
 
-import pGraphics.Graphics;
-
 import java.io.PrintWriter;
 import java.util.Random;
 
@@ -30,7 +28,6 @@ public class Arcade extends Thing {
 			if(t.getAnimal() != null && r.nextInt() % 100 <= chance)
 				t.getAnimal().scare();
 		}
-		updateGraphics(Graphics.getInstance());
 	}
 
 	/**

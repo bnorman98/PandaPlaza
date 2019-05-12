@@ -1,12 +1,9 @@
 package main;
 
-import pGraphics.Graphics;
-import pGraphics.Viewable;
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public abstract class Thing implements Steppable, Viewable {
+public abstract class Thing implements Steppable {
 	
 	protected Tile tile;
 	protected int chance;
@@ -55,9 +52,5 @@ public abstract class Thing implements Steppable, Viewable {
 				default: break;
 			}
 		}
-	}
-	@Override
-	public void updateGraphics(Graphics graphics) {
-		Graphics.getInstance().drawAll();
 	}
 }

@@ -1,14 +1,11 @@
 package main;
 
-import pGraphics.Graphics;
-import pGraphics.Viewable;
-
 import java.io.PrintWriter;
 
 /**
  * Represents all the animals
  */
-public abstract class Animal implements Steppable, Viewable {
+public abstract class Animal implements Steppable {
 	
 	/**
 	 * Moving direction
@@ -249,9 +246,4 @@ public abstract class Animal implements Steppable, Viewable {
 	 * Writes out the object to file
 	 */
 	public void writeOut(PrintWriter pw){}
-
-	@Override
-	public void updateGraphics(Graphics graphics) {
-		Graphics.getInstance().drawAll();
-	}
 }
