@@ -165,7 +165,14 @@ public class Tile {
 			}
 			pw.println("-life: " + this.getLife());
 	}
-	
+
+	/**
+	 * An assistant method
+	 * Helps the deserialization
+	 * Knows the scheme of the deserialization
+	 * @param lines The lines that contain the informations about the Tile
+	 * @param idx Index of the Tile
+	 */
 	public void readIn(ArrayList<String> lines, int idx){
 		for (int i=idx+1;i<lines.size();i++){
 			String[] parts = lines.get(i).split(" ");

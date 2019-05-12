@@ -62,6 +62,13 @@ public abstract class Thing implements Steppable {
 	 */
 	public void writeOut(PrintWriter pw){}
 
+	/**
+	 * An assistant method
+	 * Helps the deserialization
+	 * Knows the scheme of the deserialization
+	 * @param lines The lines that contain the informations about the Thing
+	 * @param idx Index of the Thing
+	 */
 	public void readIn(ArrayList<String> lines, int idx){
 		for (int i=idx+1;i<lines.size();i++){
 			String[] parts = lines.get(i).split(" ");
