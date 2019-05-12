@@ -7,8 +7,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import main.*;
-
-
 import java.awt.*;
 import java.util.ArrayList;
 
