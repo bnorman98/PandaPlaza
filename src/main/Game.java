@@ -1,5 +1,6 @@
 package main;
 
+import javafx.application.Platform;
 import pGraphics.GraphicalApplication;
 
 import java.io.*;
@@ -156,7 +157,7 @@ public class Game {
 		// Play the game while possible
 		while(!endgame) {
 			stepAll();
-			view.drawGame();
+            Platform.runLater(() -> view.drawGame());
 		}
 		// End the game
 		endGame();

@@ -83,7 +83,7 @@ public class GraphicalApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        Game.getInstance().runGame();
+        new Thread(() -> Game.getInstance().runGame()).start();
     }
 
     public static void main(String[] args) {
