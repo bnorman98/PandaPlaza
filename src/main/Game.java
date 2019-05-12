@@ -343,7 +343,11 @@ public class Game {
 
 
 	}
-
+	/**
+	 * Serializes all the objects on the map
+	 * Calls for the WriteOut method
+	 * @param String where the file should be created
+	 */
 	public void serialize(String path) {
 		// TODO Serialization
 		try {
@@ -374,7 +378,12 @@ public class Game {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Deserializes all the objects from a file
+	 * Loads the objects into the game
+	 * Builds the relationships between the deserialized objects
+	 * @param String where the deserializing file should be found
+	 */
 	public void deserialize(String path) {
 		// TODO Deserialization
 		ArrayList<String> lines = new ArrayList<>();
@@ -500,17 +509,27 @@ public class Game {
 			}
 		}
 	}
-	
+
 	public boolean generateRandom(int chance) {
 		int rand = (int) (Math.random() * 100);
 		System.out.println("Randomised: " + rand);
 		return rand > chance;
 	}
 
+	/**
+	 * Kills a Panda
+	 * Adds the panda to the "Pandas to remove" list
+	 * @param Panda the Panda to be removed
+	 */
 	public void killPanda(Panda p){
 		pandasToRemove.add(p);
 	}
 
+	/**
+	 * Kills an Orangutan
+	 * Adds the Orangutan to the "Orangutans to remove" list
+	 * @param Orangutan the Orangutan to be removed
+	 */
 	public void killOrangutan(Orangutan o){
 		orangutansToRemove.add(o);
 	}

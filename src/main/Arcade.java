@@ -4,11 +4,12 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 /**
- * Játékgépet reprezentálja a játékban, csilingelni tud
+ * Represents an Arcade Game machine in the game
+ * Can "csilling" - It can ring, scare the Panda, if it is able to be scared
  */
 public class Arcade extends Thing {
 	/**
-	 * Játékgép konstruktora, minden esetben fog csilingelni
+	 * The ctor of the Game Machine, it rings always
 	 */
 	public Arcade(){
 		chance = 100;
@@ -16,7 +17,8 @@ public class Arcade extends Thing {
 	}
 
 	/**
-	 * A játékgép lép egyet
+	 * The ArcadeGameMachine steps one
+	 * It rings, if it has to
 	 */
 	@Override
 	public void step() {
@@ -31,8 +33,8 @@ public class Arcade extends Thing {
 	}
 
 	/**
-	 * Szerializálja magát a paraméterként megadott objektumba
-	 * @param pw Amibe szerializájuk az objektumot
+	 * Serializes itself into the given pw
+	 * @param pw The method serializes the Arcade into the given PrintWriter pw
 	 */
 	public void writeOut(PrintWriter pw){
 		//Println függvénnyel kiírjuk az osztály nevét,

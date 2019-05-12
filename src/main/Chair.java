@@ -4,11 +4,11 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 /**
- * Széket reprezentálja a játékban
+ * Represents a chair
  */
 public class Chair extends Thing {
 	/**
-	 * Szék konstruktora
+	 * Ctor of the chair
 	 */
 	public Chair(){
 		chance = 100;
@@ -16,7 +16,7 @@ public class Chair extends Thing {
 	}
 
 	/**
-	 * A szék lép egyet
+	 * The chair steps one
 	 */
 	@Override
 	public void step() {

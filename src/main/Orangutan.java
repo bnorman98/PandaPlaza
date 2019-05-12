@@ -2,15 +2,28 @@ package main;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+/**
+ * Represents all the Orangutans
+ * They have to catch the Pandas and take them to the exit point
+ * They are controlled by the user
+ */
 public class Orangutan extends Animal {
 	private int score = 0;
 	private int penalty = 0;
-	
+
+	/**
+	 *
+	 * @return the penalty of the Orangutan
+	 */
 	public int getPenalty() {
 		return penalty;
 	}
-	
+
+	/**
+	 * Steps the orangutan
+	 * reduces its penalty if its greater than zero
+	 *
+	 */
 	@Override
 	public void step() {
 		System.out.println("Orangutan.step called");
@@ -28,21 +41,39 @@ public class Orangutan extends Animal {
 				follower.follow(myPrevTile);
 		}
 	}
-	
+
+	/**
+	 * Increases the score of the orangutan
+	 * @param score the number, will be added to the Orangutans score
+	 */
 	@Override
 	public void addScore(int score) {
 		this.score += score;
 	}
-	
+
+	/**
+	 *
+	 * @return the score of the Orangutan
+	 */
 	public int getScore() {
 		return score;
 	}
-	
+
+	/**
+	 * A helper method for the serialization
+	 * Follows the scheme of the serialization
+	 * @return Ready-to-serialize string with the datas of the Orangutan
+	 */
 	//@Override
 	public String toString() {
 		return "Orangutan\n\tTile: " + tile.toString();	// Itt még a behúzást meg kell javítani
 	}
-	
+
+	/**
+	 * It manages the touching by an another Orangutan
+	 * Orangutans can steal one another's follower pandas
+	 * @param toucher Represents the Orangutan, who touched the Orangutan
+	 */
 	@Override
 	public void getTouched(Orangutan toucher) {
 		// Checking if toucher Orangutan can steal Pandas
@@ -64,7 +95,13 @@ public class Orangutan extends Animal {
 		penalty = 3;
 		
 	}
-	
+
+	/**
+	 * It can navigate the Orangutan to a new Tile
+	 * Calls the tile's stepped method, represents that
+	 * the someone has been left tha tile
+	 * @param newTile Destination tile
+	 */
 	@Override
 	public void goTo(Tile newTile) {
 		System.out.println("Orangutan.goTo called");
@@ -85,6 +122,10 @@ public class Orangutan extends Animal {
 		
 	}
 
+	/**
+	 * Serializes itself into the given pw
+	 * @param pw The method serializes the Arcade into the given PrintWriter pw
+	 */
 	public void writeOut(PrintWriter pw){
 		pw.println("Orangutan");
 		pw.println("-ID: " + this.getID());
