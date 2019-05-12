@@ -10,11 +10,20 @@ import main.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Represents the GraphicalApplication
+ *
+ */
 public class GraphicalApplication extends Application {
 
     Group root;
     Stage stage;
 
+    /**
+     * It draws the game onto the canvas
+     * Draws the map, then draws
+     * The objects (Pandas, Things, Tiles)
+     */
     public void drawGame(){
         ArrayList<GraphicalElement> elements = new ArrayList<>();
         Canvas canvas = new Canvas(600,600);
@@ -65,6 +74,9 @@ public class GraphicalApplication extends Application {
 
     }
 
+    /**
+     * Draws the menu
+     */
     public void DrawMenu(){
         ArrayList<GraphicalElement> elements = new ArrayList<>();
         Canvas canvas = new Canvas(600,600);
@@ -75,7 +87,10 @@ public class GraphicalApplication extends Application {
         stage.show();
     }
 
-    //Entry point
+    /**
+     * Starts the game
+     * @param primaryStage is the "main" Stage.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         //TODO: Draw menu first instead of game
@@ -94,6 +109,9 @@ public class GraphicalApplication extends Application {
         new Thread(() -> Game.getInstance().runGame()).start();
     }
 
+    /**
+     * The main method of the graphics program
+     */
     public static void main(String[] args) {
         launch(args);
     }

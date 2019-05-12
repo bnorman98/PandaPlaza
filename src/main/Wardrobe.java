@@ -13,6 +13,10 @@ public class Wardrobe extends Thing{
 	 * Who enters the wardrobe appears at this wardrobe
 	 */
 	private Wardrobe pair;
+	/**
+	 * It assists that the wardrobes wont
+	 * get into an endless circle
+	 */
 	private boolean justGot = false;
 	
 	/**

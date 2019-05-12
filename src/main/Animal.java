@@ -35,9 +35,15 @@ public abstract class Animal implements Steppable {
 	 */
 	private int ID;
 
-
+	/**
+	 * The path that shows where is its texture file
+	 */
 	private String texturePath;
 
+	/**
+	 *
+	 * @return its texturePath
+	 */
 	public String getTexturePath(){
 		return texturePath;
 	}
