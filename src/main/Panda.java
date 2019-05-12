@@ -3,9 +3,17 @@ package main;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Represents all of the ("basic") Pandas
+ */
 public abstract class Panda extends Animal {
 	
 	@Override
+	/**
+	 * Steps the Panda
+	 * Its totally random, moves the Panda from its tile to an another tile
+	 * (Ofc, the tiles has to be neighbours)
+	 */
 	public void step() {
 		System.out.println("Panda.step called");
 		try {
@@ -29,7 +37,11 @@ public abstract class Panda extends Animal {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * It makes the Panda follow someone
+	 * @param nextTile The next tile
+	 */
 	public void follow(Tile nextTile) {
 		System.out.println("Panda.follow called");
 		if(influencer == null)
@@ -43,7 +55,12 @@ public abstract class Panda extends Animal {
 		if(follower != null)
 			follower.follow(myPrevTile);
 	}
-	
+
+	/**
+	 * If a Panda has been touched by an Orangutan
+	 * This method will be called
+	 * @param toucher Represents the Orangutan, who touched the animal
+	 */
 	public void getTouched(Orangutan toucher) {
 		System.out.println("Panda.getTouched called");
 
@@ -61,6 +78,14 @@ public abstract class Panda extends Animal {
 		influencer = toucher;
 		toucher.follower = this;
 	}
+
+	/**
+	 * An assistant method
+	 * Helps the deserialization
+	 * Knows the scheme of the deserialization
+	 * @param lines The lines that contain the informations about the Panda
+	 * @param idx Index of the Panda
+	 */
 	public void readIn(ArrayList<String> lines, int idx){
 		for (int i=idx+1;i<lines.size();i++){
 			String[] parts = lines.get(i).split(" ");
@@ -89,6 +114,12 @@ public abstract class Panda extends Animal {
 			}
 		}
 	}
+
+	/**
+	 * Represents the death of a Panda
+	 * Removes him from the tile, he stands on
+	 * Make his followers free
+	 */
 	public void die(){
 		System.out.println("Panda.die called");
 		// Letting go of other animals

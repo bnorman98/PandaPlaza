@@ -67,6 +67,16 @@ public class GraphicalApplication extends Application {
 
     }
 
+    public void DrawMenu(){
+        ArrayList<GraphicalElement> elements = new ArrayList<>();
+        Canvas canvas = new Canvas(600,600);
+
+
+        root.getChildren().clear();
+        root.getChildren().add(canvas);
+        stage.show();
+    }
+
     //Entry point
     @Override
     public void start(Stage primaryStage) throws Exception {
