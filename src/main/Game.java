@@ -2,7 +2,6 @@ package main;
 
 import javafx.application.Platform;
 import pGraphics.GraphicalApplication;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -347,7 +346,7 @@ public class Game {
 	/**
 	 * Serializes all the objects on the map
 	 * Calls for the WriteOut method
-	 * @param String where the file should be created
+	 * @param path where the file should be created
 	 */
 	public void serialize(String path) {
 		// TODO Serialization
@@ -383,7 +382,7 @@ public class Game {
 	 * Deserializes all the objects from a file
 	 * Loads the objects into the game
 	 * Builds the relationships between the deserialized objects
-	 * @param String where the deserializing file should be found
+	 * @param path where the deserializing file should be found
 	 */
 	public void deserialize(String path) {
 		// TODO Deserialization
@@ -520,7 +519,7 @@ public class Game {
 	/**
 	 * Kills a Panda
 	 * Adds the panda to the "Pandas to remove" list
-	 * @param Panda the Panda to be removed
+	 * @param p the Panda to be removed
 	 */
 	public void killPanda(Panda p){
 		pandasToRemove.add(p);
@@ -529,7 +528,7 @@ public class Game {
 	/**
 	 * Kills an Orangutan
 	 * Adds the Orangutan to the "Orangutans to remove" list
-	 * @param Orangutan the Orangutan to be removed
+	 * @param o the Orangutan to be removed
 	 */
 	public void killOrangutan(Orangutan o){
 		orangutansToRemove.add(o);

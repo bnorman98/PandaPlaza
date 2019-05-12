@@ -17,5 +17,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="javafx12" level="application" />
+    <orderEntry type="library" name="javafx" level="project" />
   </component>
 </module>
