@@ -23,14 +23,19 @@ public abstract class Panda extends Animal {
 			
 			// Randomising direction
 			Random rand = new Random();
-			if (tile != null && tile.getNeighbours().size() > 0) {
-				dir = rand.nextInt(tile.getNeighbours().size());
-				// Moving Panda
-				if (tile.getNeighbourAt(dir).getAnimal() == null) {
-					goTo(tile.getNeighbourAt(dir));
-					tile.stepped();
+			ArrayList<Tile> possibleTiles = new ArrayList<>();
+			for (Tile neighbour : tile.getNeighbours()) {
+				if (neighbour.getAnimal() == null){
+					possibleTiles.add(neighbour);
 				}
-				else step();
+			}
+			if (possibleTiles.isEmpty())
+				return;
+			else{
+				//Moving Panda
+				dir = rand.nextInt(possibleTiles.size());
+				goTo(tile.getNeighbourAt(dir));
+				tile.stepped();
 			}
 		}
 		catch(IllegalArgumentException e) {
@@ -49,6 +54,8 @@ public abstract class Panda extends Animal {
 			System.out.println("Error: No one to follow.");
 			//Error
 		}
+		if (nextTile.getAnimal() != null)
+			return;
 		Tile myPrevTile = tile;
 		goTo(nextTile);
 		tile.stepped();

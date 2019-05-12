@@ -24,10 +24,8 @@ public class SleepyPanda extends Panda {
 			return;
 		if(isSleeping)
 			isSleeping = false;
-		else if (tile != null && tile.getNumOfNeighbours() != 0){
-			goTo(tile.getNeighbourAt(dir));
-			tile.stepped();
-		}
+		else
+			super.step();
 	}
 
 	/**

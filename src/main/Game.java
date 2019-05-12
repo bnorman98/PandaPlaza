@@ -277,7 +277,7 @@ public class Game {
 		// User interaction
 		System.out.println("\nWhat tile do you want to go to?");
 		String line = "Enter a number from 0 to ";
-		int dirMax = orangutan.getTile().getNeighbours().size();
+		int dirMax = orangutan.getTile().getNeighbours().size() - 1;
 		line += dirMax;
 		System.out.println(line);
 		System.out.println("or enter \"letgo\" to let go of followers.\nEnter \"endgame\" to end the game");
