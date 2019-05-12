@@ -1,7 +1,13 @@
 package prototype;
 
+/**
+ * Represents the Manual
+ */
 public class Manual {
-
+    /**
+     * This method writes the instructions
+     * to the console
+     */
     public void showInstructions() {
         System.out.println("Manual.showInstructions called");
         

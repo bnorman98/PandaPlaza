@@ -2,10 +2,20 @@ package prototype;
 
 import main.*;
 
+/**
+ * The Commands class manages the commands
+ * given in the console
+ * They can control the game
+ */
 public class Commands {
 	private Game game = Game.getInstance();
 	private Manual manual = new Manual();
-	
+
+	/**
+	 * It reads the commands
+	 * and calls the methods
+	 * @param cmd The input command
+	 */
 	public boolean commands(String[] cmd) {
 		
 		switch(cmd[0]) {

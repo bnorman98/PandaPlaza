@@ -2,6 +2,10 @@ package prototype;
 
 import java.io.*;
 
+/**
+ * The Main class of the prototype
+ * It contains the main method
+ */
 public class Main {
 	public static void main(String[] args) throws IOException {
 
