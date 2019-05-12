@@ -17,6 +17,7 @@ public class EndPoint extends Tile {
 	 */
 	public EndPoint() {
 		startPoint = null;
+		texturePath = "res/endpoint.png";
 	}
 
 	/**
@@ -24,6 +25,7 @@ public class EndPoint extends Tile {
 	 */
 	public EndPoint(Tile startPoint) {
 		this.startPoint = startPoint;
+		texturePath = "res/endpoint.png";
 	}
 
 	/**

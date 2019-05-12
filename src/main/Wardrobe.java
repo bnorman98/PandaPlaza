@@ -20,13 +20,16 @@ public class Wardrobe extends Thing{
 	/**
 	 * Default constructor
 	 */
-	public Wardrobe() {}
+	public Wardrobe() {
+		texturePath = "res/wardrobe.png";
+	}
 	
 	/**
 	 * Constructor
 	 * @param pair Wardrobe's pair
 	 */
 	public Wardrobe(Wardrobe pair) {
+		texturePath = "res/wardrobe.png";
 		this.pair = pair;
 	}
 	

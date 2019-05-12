@@ -4,7 +4,7 @@ import main.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+//TODO: Remove this class safely!! or merge with GraphicalApplication
 public class Graphics {
 
     private static Graphics instance;

@@ -12,7 +12,10 @@ public class Arcade extends Thing {
 	/**
 	 * Játékgép konstruktora, minden esetben fog csilingelni
 	 */
-	public Arcade(){chance = 100;}
+	public Arcade(){
+		chance = 100;
+		texturePath = "res/arcade.png";
+	}
 
 	/**
 	 * A játékgép lép egyet

@@ -11,7 +11,7 @@ public abstract class Thing implements Steppable, Viewable {
 	protected Tile tile;
 	protected int chance;
 
-	private String texturePath;
+	protected String texturePath;
 	
 	// Made for Prototype
 	protected int ID;

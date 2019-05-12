@@ -1,5 +1,7 @@
 package main;
 
+import pGraphics.GraphicalApplication;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,8 +13,9 @@ public class Game {
 	private ArrayList<Tile> tiles;
 	private ArrayList<Panda> pandasToRemove;
 	private ArrayList<Orangutan> orangutansToRemove;
-	boolean endgame = false;
+	private boolean endgame = false;
 
+	private GraphicalApplication view;
 
 	private static Game instance;
 	
@@ -30,7 +33,11 @@ public class Game {
 			instance = new Game();
 		return instance;
 	}
-	
+
+	public void setView(GraphicalApplication app){
+		view = app;
+	}
+
 	public ArrayList<Orangutan> getOrangutans() {
 		return orangutans;
 	}
@@ -149,6 +156,7 @@ public class Game {
 		// Play the game while possible
 		while(!endgame) {
 			stepAll();
+			view.drawGame();
 		}
 		// End the game
 		endGame();

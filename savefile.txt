@@ -1,0 +1,26 @@
+Tile
+-ID: 0
+-AnimalID: 0
+-NeighbourID: 1
+Tile
+-ID: 1
+-AnimalID: 1
+-NeighbourID: 0
+-NeighbourID: 2
+Tile
+-ID: 2
+-AnimalID: 2
+-NeighbourID: 1
+Orangutan
+-ID: 0
+-TileID: 0
+-FollowerID: 1
+SleepyPanda
+-ID: 1
+-TileID: 1
+-InfluencerID: 0
+-FollowerID: 2
+SleepyPanda
+-ID: 2
+-TileID: 2
+-InfluencerID: 1

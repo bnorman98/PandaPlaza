@@ -14,6 +14,7 @@ public class ChocolateAutomat extends Thing {
 	 */
 	public ChocolateAutomat() {
 		chance = 100;
+		texturePath = "res/chocolateautomat.png";
 	}
 
 	/**
@@ -21,9 +22,8 @@ public class ChocolateAutomat extends Thing {
 	 * @param chance mennyi eséllyel fog sípolni
 	 */
 	public ChocolateAutomat(int chance) {
-		if(chance <= 100 && chance >= 0)
-			this.chance = chance;
-		else this.chance = 100;
+		this.chance = 0 <= chance && chance <= 100 ? chance : 100;
+		texturePath = "res/chocolateautomat.png";
 	}
 
 	/**

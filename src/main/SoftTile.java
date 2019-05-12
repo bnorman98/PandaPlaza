@@ -6,14 +6,16 @@ public class SoftTile extends Tile {
 	
 	public SoftTile() {
 		life = 20;
+		texturePath = "res/softtile.png";
 	}
 	public SoftTile(int life) {
 		this.life = life;
+		texturePath = "res/softtile.png";
 	}
 	public int getLife() {
 		return life;
 	}
-	
+
 	@Override
 	public void stepped() {
 		System.out.println("SoftTile.stepped called");

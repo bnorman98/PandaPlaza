@@ -3,6 +3,7 @@ package main;
 import pGraphics.Graphics;
 import pGraphics.Viewable;
 
+import java.awt.*;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -32,6 +33,8 @@ public class Tile implements Viewable {
 	 * Stores tile's neighbours
 	 */
 	private ArrayList<Tile> neighbours = new ArrayList<>();
+
+	private Point position;
 	
 	/**
 	 * Object's own identifier
@@ -39,11 +42,14 @@ public class Tile implements Viewable {
 	 */
 	protected int ID;
 
-	private String texturePath;
+	protected String texturePath = "res/tile.png";
 
 	public String getTexturePath(){
 		return texturePath;
 	}
+
+	public Point getPosition(){ return position;}
+	public void setPosition(Point p){ position = p;}
 	
 	/**
 	 * ID attribute's setter method

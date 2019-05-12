@@ -12,7 +12,10 @@ public class Chair extends Thing {
 	/**
 	 * Szék konstruktora
 	 */
-	public Chair(){ chance = 100;}
+	public Chair(){
+		chance = 100;
+		texturePath = "res/chair.png";
+	}
 
 	/**
 	 * A szék lép egyet
