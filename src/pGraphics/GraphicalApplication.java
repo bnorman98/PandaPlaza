@@ -85,6 +85,7 @@ public class GraphicalApplication extends Application {
         Scene scene = new Scene(root,600,600);
         //TODO: This is just for testing, deserialize elsewhere
         Game.getInstance().deserialize("savefile.txt");
+        Game g = Game.getInstance();
         //
         drawGame();
         stage.setTitle("PandaPlaza");

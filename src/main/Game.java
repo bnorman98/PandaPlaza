@@ -302,6 +302,10 @@ public class Game {
 					System.out.println("Incorrect direction");
 					input = readInput(orangutan);
 				}
+				if (orangutan.getFollower() == orangutan.getTile().getNeighbourAt(dir).getAnimal()){
+					System.out.println("Panda already follows the orangutan");
+					input = readInput(orangutan);
+				}
 			}
 			return input;
 		}

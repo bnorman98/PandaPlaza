@@ -24,6 +24,8 @@ public abstract class Panda extends Animal {
 			// Randomising direction
 			Random rand = new Random();
 			ArrayList<Tile> possibleTiles = new ArrayList<>();
+			if (tile == null)
+				return;
 			for (Tile neighbour : tile.getNeighbours()) {
 				if (neighbour.getAnimal() == null){
 					possibleTiles.add(neighbour);

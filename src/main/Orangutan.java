@@ -37,7 +37,7 @@ public class Orangutan extends Animal {
 			Tile myPrevTile = tile;
 			goTo(tile.getNeighbourAt(dir));
 			tile.stepped();
-			if (folBeforeStep)
+			if (folBeforeStep && follower != null)
 				follower.follow(myPrevTile);
 		}
 	}

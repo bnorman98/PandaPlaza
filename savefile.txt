@@ -1,26 +1,34 @@
-Tile
+EndPoint
 -ID: 0
--AnimalID: 0
 -NeighbourID: 1
+-StartPointID: 4
 Tile
 -ID: 1
--AnimalID: 1
+-AnimalID: 0
 -NeighbourID: 0
 -NeighbourID: 2
 Tile
 -ID: 2
--AnimalID: 2
+-AnimalID: 1
 -NeighbourID: 1
+-NeighbourID: 3
+Tile
+-ID: 3
+-AnimalID: 2
+-NeighbourID: 2
+Tile
+-ID: 4
 Orangutan
 -ID: 0
--TileID: 0
 -FollowerID: 1
+-TileID: 1
+-Score: 0
 SleepyPanda
 -ID: 1
--TileID: 1
--InfluencerID: 0
 -FollowerID: 2
+-TileID: 2
+-InfluencerID: 0
 SleepyPanda
 -ID: 2
--TileID: 2
--InfluencerID: 1
+-TileID: 3
+-InfluencerID:1
