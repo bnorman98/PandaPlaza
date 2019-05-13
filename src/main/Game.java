@@ -8,28 +8,28 @@ import java.util.Iterator;
 
 public class Game {
 	/**
-	 * List, that cointains all the Orangutans in the game
+	 * List, that contains all the Orangutans in the game
 	 */
 	private ArrayList<Orangutan> orangutans;
 	/**
-	 * List, that cointains all the Pandas in the game
+	 * List, that contains all the Pandas in the game
 	 */
 	private ArrayList<Panda> pandas;
 	/**
-	 * List, that cointains all the Things in the game
+	 * List, that contains all the Things in the game
 	 */
 	private ArrayList<Thing> things;
 	/**
-	 * List, that cointains all the Tiles in the game
+	 * List, that contains all the Tiles in the game
 	 */
 	private ArrayList<Tile> tiles;
 	/**
-	 * List, that cointains all the
+	 * List, that contains all the
 	 * Ready-to-Remove Pandas in the game
 	 */
 	private ArrayList<Panda> pandasToRemove;
 	/**
-	 * List, that cointains all the
+	 * List, that contains all the
 	 * Ready-to-Remove Orangutans in the game
 	 */
 	private ArrayList<Orangutan> orangutansToRemove;
@@ -252,8 +252,9 @@ public class Game {
 	public void runGame() {
 		// Play the game while possible
 		while(!endgame) {
+			Platform.runLater(() -> view.drawGame());
 			stepAll();
-            Platform.runLater(() -> view.drawGame());
+			
 		}
 		// End the game
 		endGame();
@@ -284,10 +285,10 @@ public class Game {
 			BufferedReader brg = new BufferedReader(isr);
 			input = brg.readLine();
 			
-			
 			// Printing state if user asks to
 			if(input.equals("no")) {
-				// Do nothing
+				// Redraw the menu
+				Platform.runLater(() -> view.drawMenu());
 			}
 			else if(input.equals("yes")) {
 				System.out.println("Write \"console\" or \"file\" to choose where to write game's state");
@@ -346,6 +347,9 @@ public class Game {
 				// Moving Orangutan
 				orangutan.step();
 			}
+			
+			// Redraw the game
+			Platform.runLater(() -> view.drawGame());
 		}
 		
 		// Stepping Pandas
@@ -489,6 +493,20 @@ public class Game {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Clears all elements of the game
+	 */
+	public void clearGame() {
+		endgame = false;
+		orangutans.clear();
+		pandas.clear();
+		things.clear();
+		tiles.clear();
+		pandasToRemove.clear();
+		orangutansToRemove.clear();
+	}
+	
 	/**
 	 * Deserializes all the objects from a file
 	 * Loads the objects into the game
@@ -496,7 +514,7 @@ public class Game {
 	 * @param path where the deserializing file should be found
 	 */
 	public void deserialize(String path) {
-		// TODO Deserialization
+		clearGame();
 		ArrayList<String> lines = new ArrayList<>();
 
 		try {
@@ -504,10 +522,9 @@ public class Game {
 			BufferedReader br = new BufferedReader(fr);
 			while (true) {
 				String line = br.readLine();
-				if (line == null) break; //Ennek
-				//	|
-				// Saving lines				v
-				lines.add(line);        // meg ennek a sorrendj»t nem k»ne felcser»lni?
+				if (line == null) break;
+				// Saving lines
+				lines.add(line);
 
 			}
 			br.close();

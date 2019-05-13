@@ -33,7 +33,6 @@ public class Orangutan extends Animal {
 	 */
 	@Override
 	public void step() {
-		System.out.println("Orangutan.step called");
 		if (penalty > 0){
 			penalty--;
 		}
@@ -73,7 +72,7 @@ public class Orangutan extends Animal {
 	 */
 	//@Override
 	public String toString() {
-		return "Orangutan\n\tTile: " + tile.toString();	// Itt még a behúzást meg kell javítani
+		return "Orangutan\n\tTile: " + tile.toString();
 	}
 
 	/**
@@ -111,8 +110,6 @@ public class Orangutan extends Animal {
 	 */
 	@Override
 	public void goTo(Tile newTile) {
-		System.out.println("Orangutan.goTo called");
-		
 		// Touching Animal found in moving direction if not penalized
 		if(newTile.getAnimal() != null) {
 			if(penalty != 0)

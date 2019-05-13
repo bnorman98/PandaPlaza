@@ -22,7 +22,6 @@ public class Arcade extends Thing {
 	 */
 	@Override
 	public void step() {
-		System.out.println("Arcade.step called");
 		//Az összes cellát végigjárjuk
 		for (Tile t: tile.getNeighbours()) {
 			Random r = new Random();

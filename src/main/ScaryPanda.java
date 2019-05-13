@@ -16,7 +16,6 @@ public class ScaryPanda extends Panda {
 	 * Represents the "Getting scared" of the ScaryPanda
 	 */
 	public void scare() {
-		System.out.println("ScaryPanda.scare called");
 		letGo();
 	}
 

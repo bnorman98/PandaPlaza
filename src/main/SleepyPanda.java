@@ -23,7 +23,6 @@ public class SleepyPanda extends Panda {
 	 */
 	@Override
 	public void step() {
-		System.out.println("SleepyPanda.step called");
 		if (influencer != null)
 			return;
 		if(isSleeping)
@@ -38,8 +37,6 @@ public class SleepyPanda extends Panda {
 	 */
 	@Override
 	public void sleep() {
-		System.out.println("SleepyPanda.sleep called");
-		
 		// Falling asleep
 		isSleeping = true;
 		letGo();

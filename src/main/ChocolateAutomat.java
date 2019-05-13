@@ -29,7 +29,6 @@ public class ChocolateAutomat extends Thing {
 	 */
 	@Override
 	public void step() {
-		System.out.println("ChocolateAutomat.step called");
 		Random r = new Random();
 		//Az összes cellát végigjárjuk
 		for (Tile t: tile.getNeighbours()) {

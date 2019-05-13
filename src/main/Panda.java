@@ -15,7 +15,6 @@ public abstract class Panda extends Animal {
 	 * (Ofc, the tiles has to be neighbours)
 	 */
 	public void step() {
-		System.out.println("Panda.step called");
 		try {
 			// Checking if Panda can move
 			if(influencer!= null)
@@ -50,7 +49,6 @@ public abstract class Panda extends Animal {
 	 * @param nextTile The next tile
 	 */
 	public void follow(Tile nextTile) {
-		System.out.println("Panda.follow called");
 		if(influencer == null)
 		{
 			System.out.println("Error: No one to follow.");
@@ -71,8 +69,6 @@ public abstract class Panda extends Animal {
 	 * @param toucher Represents the Orangutan, who touched the animal
 	 */
 	public void getTouched(Orangutan toucher) {
-		System.out.println("Panda.getTouched called");
-
 		// Releasing paws if the Panda held any
 		letGo();
 
@@ -92,11 +88,11 @@ public abstract class Panda extends Animal {
 	 * An assistant method
 	 * Helps the deserialization
 	 * Knows the scheme of the deserialization
-	 * @param lines The lines that contain the informations about the Panda
+	 * @param lines The lines that contain the information about the Panda
 	 * @param idx Index of the Panda
 	 */
 	public void readIn(ArrayList<String> lines, int idx){
-		for (int i=idx+1;i<lines.size();i++){
+		for (int i = idx + 1; i < lines.size(); i++){
 			String[] parts = lines.get(i).split(" ");
 			if (parts[0].charAt(0) != '-'){
 				i = lines.size();
@@ -130,7 +126,6 @@ public abstract class Panda extends Animal {
 	 * Make his followers free
 	 */
 	public void die(){
-		System.out.println("Panda.die called");
 		// Letting go of other animals
 		letGo();
 

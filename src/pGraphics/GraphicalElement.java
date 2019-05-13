@@ -8,13 +8,23 @@ import javafx.scene.image.Image;
  * That are used in the GUI
  */
 public class GraphicalElement {
-
+    /**
+     * The canvas we are drawing on
+     */
     private Canvas canvas;
+    
+    /**
+     * The positions we are drawing to
+     */
     private int pixelPositionX = 0, pixelPositionY = 0;
+    
+    /**
+     * The image we are drawing on given position
+     */
     private Image image;
 
     /**
-     * The ctor of the class
+     * The constructor of the class
      */
     public GraphicalElement(Canvas _canvas, Image _image, int x, int y){
         canvas = _canvas;
@@ -28,16 +38,6 @@ public class GraphicalElement {
      */
     public void drawImage(){
         canvas.getGraphicsContext2D().drawImage(image,pixelPositionX,pixelPositionY,32,32);
-    }
-
-    /**
-     * Sets the position of the element
-     * @param x the X position, that will be set
-     * @param y the Y position, that will be set
-     */
-    public void setPosition(int x, int y){
-        pixelPositionX = x;
-        pixelPositionY = y;
     }
 
 }

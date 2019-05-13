@@ -63,7 +63,6 @@ public abstract class Thing implements Steppable {
 	 * Thing will be found on this Tile
 	 */
 	public void setTile(Tile tile) {
-		System.out.println("Thing.setTile called");
 		this.tile = tile;
 	}
 	/**
@@ -97,4 +96,5 @@ public abstract class Thing implements Steppable {
 			}
 		}
 	}
+	
 }

@@ -20,11 +20,10 @@ public class Chair extends Thing {
 	 */
 	@Override
 	public void step() {
-		System.out.println("Chair.step called");
-		//Az összes cellát végigjárjuk
+		// Az összes cellát végigjárjuk
 		for (Tile t: tile.getNeighbours()) {
 			Random r = new Random();
-			//Ha a véletlen szám kisebb,
+			// Ha a véletlen szám kisebb,
 			// mint amennyi esélyünk van a csilingelésre, akkor ráül a panda
 			if(t.getAnimal() != null && r.nextInt() % 100 <= chance){
 				t.getAnimal().goTo(tile);
@@ -39,8 +38,8 @@ public class Chair extends Thing {
 	 * @param pw Amibe szerializájuk az objektumot
 	 */
 	public void writeOut(PrintWriter pw){
-		//Println függvénnyel kiírjuk az osztály nevét,
-		//tagfüggvényeit és a tagfüggvények értékeit
+		// Println függvénnyel kiírjuk az osztály nevét,
+		// tagfüggvényeit és a tagfüggvények értékeit
 		pw.println("Chair");
 		pw.println("-ID: " + this.getID());
 		pw.println("-Chance: " + this.getChance());

@@ -41,7 +41,6 @@ public class SoftTile extends Tile {
 	 */
 	@Override
 	public void stepped() {
-		System.out.println("SoftTile.stepped called");
 		if(life > 0)
 			life--;
 		if(life == 0)
@@ -71,6 +70,5 @@ public class SoftTile extends Tile {
 		}
 		pw.println("-life: " + this.getLife());
 	}
-	
 	
 }

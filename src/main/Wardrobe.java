@@ -6,13 +6,13 @@ import java.util.ArrayList;
 /**
  * Represents a wardrobe in the game
  */
-public class Wardrobe extends Thing{
-	
+public class Wardrobe extends Thing {
 	/**
 	 * Wardrobe's pair
 	 * Who enters the wardrobe appears at this wardrobe
 	 */
 	private Wardrobe pair;
+	
 	/**
 	 * It assists that the wardrobes wont
 	 * get into an endless circle
@@ -39,7 +39,6 @@ public class Wardrobe extends Thing{
 	 * Pair attribute's setter
 	 */
 	public void setPair(Wardrobe newPair) {
-		System.out.println("Wardrobe.setPair called");
 		this.pair = newPair;
 		newPair.pair = this;
 	}
@@ -49,7 +48,6 @@ public class Wardrobe extends Thing{
 	 */
 	@Override
 	public void step() {
-		System.out.println("Wardrobe.step called");
 		if(tile.getAnimal() != null && !justGot) {
 			tile.getAnimal().goTo(pair.tile);
 			pair.justGot = true;
@@ -100,4 +98,5 @@ public class Wardrobe extends Thing{
 			}
 		}
 	}
+	
 }

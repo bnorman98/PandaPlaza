@@ -40,7 +40,6 @@ public class EndPoint extends Tile {
 	 * A kijárat lép egyet
 	 */
 	public void stepped() {
-		System.out.println("Endpoint.stepped called");
 		//Ha a kijáraton nincs állat, akkor nem történik semmi
 		if(animal.countFollowers() == 0)
 			return;

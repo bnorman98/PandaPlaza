@@ -103,7 +103,6 @@ public abstract class Animal implements Steppable {
 	 */
 	public void setTile(Tile newTile) {
 		if (newTile != tile) {
-			System.out.println("Animal.setTile called");
 			tile = newTile;
 			tile.setAnimal(this);
 		}
