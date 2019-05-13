@@ -1,13 +1,24 @@
 package pGraphics;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.*;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -16,8 +27,8 @@ import java.util.ArrayList;
  */
 public class GraphicalApplication extends Application {
 
-    Group root;
-    Stage stage;
+    private Group root;
+    private Stage stage;
 
     /**
      * It draws the game onto the canvas
@@ -25,6 +36,12 @@ public class GraphicalApplication extends Application {
      * The objects (Pandas, Things, Tiles)
      */
     public void drawGame(){
+        Game.getInstance().setView(this);
+        root = new Group();
+        Scene gameScene = new Scene(root,600,600);
+    
+        new Thread(() -> Game.getInstance().runGame()).start();
+        
         ArrayList<GraphicalElement> elements = new ArrayList<>();
         Canvas canvas = new Canvas(600,600);
         for (int i = 0; i < Game.getInstance().getTiles().size(); i++) {
@@ -70,20 +87,72 @@ public class GraphicalApplication extends Application {
         }
         root.getChildren().clear();
         root.getChildren().add(canvas);
+        
+        stage.setScene(gameScene);
         stage.show();
-
     }
 
     /**
      * Draws the menu
      */
-    public void DrawMenu(){
-        ArrayList<GraphicalElement> elements = new ArrayList<>();
-        Canvas canvas = new Canvas(600,600);
-
-
-        root.getChildren().clear();
-        root.getChildren().add(canvas);
+    private void drawMenu(){
+        // Creating buttons
+        Button bPlay = new javafx.scene.control.Button("Play");
+        bPlay.setPrefWidth(100);
+        bPlay.setStyle("-fx-font-size:16");
+    
+        Button bSettings = new javafx.scene.control.Button("Settings");
+        bSettings.setPrefWidth(100);
+        bSettings.setStyle("-fx-font-size:16");
+    
+        Button bLoad = new javafx.scene.control.Button("Load");
+        bLoad.setPrefWidth(100);
+        bLoad.setStyle("-fx-font-size:16");
+    
+        Button bDonate = new javafx.scene.control.Button("Donate a 5");
+        bDonate.setPrefWidth(100);
+        bDonate.setStyle("-fx-font-size:16");
+    
+        Button bExit = new Button("Exit");
+        bExit.setPrefWidth(100);
+        bExit.setStyle("-fx-font-size:16");
+        // Close window on exit
+        bExit.setOnAction(event -> stage.close());
+    
+        // Start game on play
+        bPlay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // Start game
+                drawGame();
+            }
+        });
+    
+        // Creating VBox for Buttons
+        VBox vbox = new VBox(bPlay, bSettings, bLoad, bDonate, bExit);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(25);
+    
+        // Creating ImageView
+        Image image = new Image("res/menu.jpg");
+        ImageView imageView = new ImageView(image);
+    
+        // Creating a StackPane
+        StackPane stackPane = new StackPane();
+    
+        // Setting margin for the Buttons
+        stackPane.setMargin(vbox, new Insets(100, 50, 20, 50));
+    
+        // Retrieving the observable list of the Stack Pane
+        ObservableList list = stackPane.getChildren();
+    
+        // Adding all the nodes to the pane
+        list.addAll(imageView, vbox);
+    
+        // Creating Scene containing the menu
+        Scene menuScene = new Scene(stackPane);
+    
+        stage.setScene(menuScene);
         stage.show();
     }
 
@@ -93,21 +162,13 @@ public class GraphicalApplication extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //TODO: Draw menu first instead of game
-        Game.getInstance().setView(this);
-        root = new Group();
-        stage = primaryStage;
-        Scene scene = new Scene(root,600,600);
         //TODO: This is just for testing, deserialize elsewhere
         Game.getInstance().deserialize("savefile.txt");
         Game g = Game.getInstance();
-        //
-        drawGame();
+        
+        Stage stage = primaryStage;
         stage.setTitle("PandaPlaza");
-        stage.setScene(scene);
-        stage.show();
-
-        new Thread(() -> Game.getInstance().runGame()).start();
+        drawMenu();
     }
 
     /**
