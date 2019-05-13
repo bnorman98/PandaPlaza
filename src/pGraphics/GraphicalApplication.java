@@ -166,7 +166,7 @@ public class GraphicalApplication extends Application {
         Game.getInstance().deserialize("savefile.txt");
         Game g = Game.getInstance();
         
-        Stage stage = primaryStage;
+        stage = primaryStage;
         stage.setTitle("PandaPlaza");
         drawMenu();
     }
